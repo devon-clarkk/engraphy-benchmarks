@@ -1,0 +1,563 @@
+{
+  "run_id": "fullrun-conv-20260916",
+  "benchmark": "locomo",
+  "space_config": {},
+  "generated_at": "2026-09-15T16:51:27.247141+00:00",
+  "engine_git_sha": "67dd41acf9e5bcd82884ffd8535d20bdd5020021",
+  "harness_git_sha": "67dd41acf9e5bcd82884ffd8535d20bdd5020021",
+  "git_tree_dirty": false,
+  "git_branch": "fix/pin-onnxruntime",
+  "transport": "in-process (engraphy.core), per design/09 §in-process decision",
+  "principal": "bench",
+  "packs": {
+    "conversational": {
+      "space_id": "bench-fullrun-conv-20260916-conversational",
+      "version": 1,
+      "file_hash": "sha256:5292819f0d09c92d2cb5d906916335c5cd34bc3e1d2792d29c55e6909fcef61d",
+      "ambient_scopes_stripped": true,
+      "node_types": [
+        "decision",
+        "event",
+        "fact",
+        "opinion",
+        "person",
+        "preference",
+        "thing"
+      ],
+      "note": "ambient_scopes removed for haystack isolation (symmetric across packs; recorded beside the untouched file hash)"
+    }
+  },
+  "band_thresholds": {
+    "source": "config table, per-space; code defaults where unset",
+    "code_defaults": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    },
+    "config_rows": {},
+    "effective": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    }
+  },
+  "band_thresholds_note": "read back from one representative pack space; every pack space is provisioned identically with no override.",
+  "reader": {
+    "governing_skill": "skills/answer-discipline.md",
+    "governing_skill_sha256": "sha256:c2afc35fd461d18b5222fd8f8c48c7aeb68a975a90e118a204724fa047ce54a4",
+    "inference_stance": "grounded",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "effort": "medium",
+    "model": "claude-opus-4-8"
+  },
+  "dataset": {
+    "path": "locomo10.json",
+    "digest": "sha256:79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "questions_in_file": 1986
+  },
+  "haystacks": [
+    "conv-26",
+    "conv-30",
+    "conv-49"
+  ],
+  "corpus": {
+    "name": "locomo[conv-26,conv-30,conv-49]",
+    "haystacks": 3,
+    "sessions": 63,
+    "turns": 1297,
+    "questions": 500,
+    "questions_per_category": {
+      "adversarial": 111,
+      "multi-hop": 80,
+      "open-domain-knowledge": 26,
+      "single-hop": 187,
+      "temporal-reasoning": 96
+    },
+    "abstain_questions": 111,
+    "notes": {
+      "source_file": "locomo10.json",
+      "dropped_image_only_turns": 0,
+      "coerced_non_string_answers": 6,
+      "category_mapping": {
+        "1": "multi-hop",
+        "2": "temporal-reasoning",
+        "3": "open-domain-knowledge",
+        "4": "single-hop",
+        "5": "adversarial"
+      },
+      "summaries_ingested": false,
+      "restricted_to_haystacks": [
+        "conv-26",
+        "conv-30",
+        "conv-49"
+      ]
+    }
+  },
+  "arms": [
+    {
+      "arm_id": "llm-conversational/search_only/always_distinct",
+      "extractor": "llm",
+      "pack": "conversational",
+      "strategy": "search_only",
+      "confirm_policy": "always_distinct",
+      "categories": "all"
+    }
+  ],
+  "role_models": {
+    "extractor": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "reader": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "adjudicator": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "judge": {
+      "provider": "claude-cli",
+      "model": "claude-sonnet-5",
+      "same_vendor": true
+    }
+  },
+  "judge_provider": "claude",
+  "judge_neutrality": "THIS RUN'S JUDGE IS SAME-VENDOR (Claude), a deliberate deviation from design/09's cross-vendor rule. The rationale for that rule -- 'a harness that grades its own vendor's answers invites the marked-its-own-homework objection' -- still stands as the recommended posture for any eventual PUBLISHED number, and the Gemini judge path is retained for exactly that. It is set aside here for two reasons: (1) the task is binary answer-matching against a supplied gold answer, which is low bias-risk for same-vendor grading -- the judge is not scoring prose quality, only whether two short facts agree; and (2) the Gemini free tier's per-model daily cap (measured at 500/day for flash-lite, 20/day for flash) makes a complete same-day run impossible, and this is an internal baseline, not a publishable figure. The judge still sees only question, gold and candidate -- never the envelope, strategy or extractor -- so it cannot condition on the arm it grades. Judge instability is measured on this run regardless of vendor.",
+  "resolved_models": {
+    "reader": [
+      "claude-opus-4-8"
+    ],
+    "judge": [
+      "claude-sonnet-5"
+    ],
+    "reader_note": "A SET, not a single id, and it legitimately contains a Haiku model alongside the requested Sonnet. The CLI runs a second model for its own internal work, and ClaudeCLIClient._resolved_model reports whichever model emitted the most output tokens in that call -- for a one-line reader answer that is sometimes the internal model rather than the one that answered. So this field bounds which models were involved; it does not prove which produced a given answer. The requested alias is recorded verbatim under role_models. Recorded as a known imprecision rather than resolved by guessing."
+  },
+  "prompt_hashes": {
+    "extract.md": "sha256:b7fdf557f7f60a9c",
+    "judge.md": "sha256:947bebcd5375e93e",
+    "adjudicate.md": "sha256:740151c30787a630"
+  },
+  "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
+  "embedding_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "llm_extractor": {
+    "retain_source_text": true,
+    "note": "When true, the LLM extractor appends the verbatim text of the turns each memory cites (source_turn_ids) to the node body, so a typed node stays word-searchable. A general recall property, not a single-hop trick; the source is the cited turns copied exactly, never re-summarised. design/09 single-hop finding, 2026-07-22."
+  },
+  "retrieval_note": "search_then_traverse seeds with the SAME search(limit, detail) as the search_only baseline and walks every seed, so the two arms differ only in the graph walk -- the multi-hop comparison isolates the graph contribution rather than confounding it with search width.",
+  "token_counter": null,
+  "token_counter_note": "Absent by construction, not by oversight. Counting Claude tokens needs the count_tokens API and therefore an API key; this harness routes Claude through the CLI on a subscription so that no API credit is spent, and the CLI reports usage for its own injected system prompt rather than for the payload. Gemini's tokenizer would be a different vendor's tokenizer measuring a Claude payload -- the same objection that ruled out tiktoken. Payload is reported in bytes of the serialized envelope; byte ratios between arms are tokenizer-independent, absolute token claims are not made.",
+  "seeds": {
+    "question_order": "dataset order (no sampling within a conversation)"
+  },
+  "dataset_licence": "CC BY-NC 4.0 — internal measurement only; commercial publication is the project owner's open question",
+  "ingest": [
+    {
+      "haystack_id": "conv-26",
+      "drafts": 127,
+      "inserted": 34,
+      "merged": 0,
+      "merged_linked": 4,
+      "needs_confirmation": 80,
+      "confirm_band_rate": 0.6299,
+      "resolved_distinct": 73,
+      "resolved_merge": 0,
+      "resolved_to_insert": 73,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 111,
+      "edges_requested": 98,
+      "edges_attached": 77,
+      "supersede_attempted": 4,
+      "supersede_target_unresolved": 0,
+      "write_errors": {
+        "CheckViolation": 5,
+        "resolve:CheckViolation": 7,
+        "ValidationError": 4
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.as_of must be a date",
+          "node_type": "fact",
+          "title_len": 60,
+          "body_len": 952,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.occurred_on must be a date"
+        },
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.as_of must be a date",
+          "node_type": "fact",
+          "title_len": 51,
+          "body_len": 487,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.as_of must be a date",
+          "node_type": "fact",
+          "title_len": 42,
+          "body_len": 368,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'event' -- cross-type supersession is a modeling error",
+          "node_type": "event",
+          "title_len": 46,
+          "body_len": 775,
+          "attr_keys": [
+            "location",
+            "occurred_on"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 44,
+      "ingest_output_tokens": 45209,
+      "embed_seconds": 30.8953,
+      "write_seconds": 2.5404,
+      "total_seconds": 612.9064,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-26-llm",
+      "space_id": "bench-fullrun-conv-20260916-conversational",
+      "done": true,
+      "sessions": 19,
+      "turns": 419
+    },
+    {
+      "haystack_id": "conv-30",
+      "drafts": 69,
+      "inserted": 15,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 45,
+      "confirm_band_rate": 0.6522,
+      "resolved_distinct": 43,
+      "resolved_merge": 0,
+      "resolved_to_insert": 43,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 59,
+      "edges_requested": 39,
+      "edges_attached": 33,
+      "supersede_attempted": 5,
+      "supersede_target_unresolved": 0,
+      "write_errors": {
+        "resolve:CheckViolation": 2,
+        "CheckViolation": 3,
+        "SupersedeUnresolvedBandError": 5
+      },
+      "write_error_samples": [
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.occurred_on must be a date"
+        },
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.occurred_on must be a date",
+          "node_type": "event",
+          "title_len": 55,
+          "body_len": 426,
+          "attr_keys": [
+            "occurred_on"
+          ]
+        },
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.occurred_on must be a date",
+          "node_type": "event",
+          "title_len": 57,
+          "body_len": 568,
+          "attr_keys": [
+            "occurred_on"
+          ]
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 56,
+          "body_len": 352,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 47,
+          "body_len": 332,
+          "attr_keys": [
+            "as_of"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 44,
+      "ingest_output_tokens": 29492,
+      "embed_seconds": 17.1196,
+      "write_seconds": 1.3326,
+      "total_seconds": 423.2684,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-30-llm",
+      "space_id": "bench-fullrun-conv-20260916-conversational",
+      "done": true,
+      "sessions": 19,
+      "turns": 369
+    },
+    {
+      "haystack_id": "conv-49",
+      "drafts": 118,
+      "inserted": 50,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 57,
+      "confirm_band_rate": 0.4831,
+      "resolved_distinct": 48,
+      "resolved_merge": 0,
+      "resolved_to_insert": 48,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 99,
+      "edges_requested": 68,
+      "edges_attached": 46,
+      "supersede_attempted": 5,
+      "supersede_target_unresolved": 0,
+      "write_errors": {
+        "CheckViolation": 5,
+        "ValidationError": 3,
+        "resolve:CheckViolation": 9,
+        "SupersedeUnresolvedBandError": 2
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.occurred_on must be a date",
+          "node_type": "event",
+          "title_len": 40,
+          "body_len": 477,
+          "attr_keys": [
+            "location",
+            "occurred_on"
+          ]
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'decision' -- cross-type supersession is a modeling error",
+          "node_type": "decision",
+          "title_len": 44,
+          "body_len": 876,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.occurred_on must be a date"
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 41,
+          "body_len": 312,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.occurred_on must be a date"
+        }
+      ],
+      "ingest_input_tokens": 52,
+      "ingest_output_tokens": 45438,
+      "embed_seconds": 31.5555,
+      "write_seconds": 2.5292,
+      "total_seconds": 649.3529,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-49-llm",
+      "space_id": "bench-fullrun-conv-20260916-conversational",
+      "done": true,
+      "sessions": 25,
+      "turns": 509
+    }
+  ],
+  "extrapolation": "Projected from this run's measured rates, not from an estimate. Ingest is per-session and answering is per-question; neither has a term that grows with corpus size, so the projection is linear by construction rather than by simplification.\n\n| stage | measured here | full suite (×10 conversations) |\n|---|---|---|\n| ingest, `llm` extractor | 28 min for 63 sessions (26.8 s/session) | **2.0 h** for 272 sessions |\n| answering (1 arms) | 500 reader calls, 6.5 s each | **1986 calls ≈ 1.2 h** at concurrency 3 |\n| judging | 389 calls (adversarial graded without the judge) | **1540 calls** |\n\n**The judge ran on Claude (Max plan) and hit no rate limit across the entire 389-call grading pass.** So unlike the Gemini route (whose per-model daily cap of 500/day is documented below as the fallback path), the constraint here is not a daily quota — it is plan headroom plus sequential wall-clock. Judging is one Claude CLI spawn per question, ~16.0s each, run sequentially: a full-suite 1540-call pass is **≈ 6.8 h** of grading wall-clock (and parallelises trivially — the calibration pass was cut from ~8 min sequential to ~2 min at 4 workers). Whether that many calls stays inside plan limits is the open question a full run would answer; this subset did, comfortably.\n\n**Fallback, for a published number.** design/09's cross-vendor posture puts the judge on Gemini, whose free tier is the real ceiling: measured at 500 requests/day for `gemini-flash-lite-latest` (and 20/day for `gemini-flash-latest`), a 1540-call full suite is **4 days** of budget. The checkpointing exists for exactly that route — designed to be stopped by quota and resumed.\n\n**Financial cost: nil.** Every role runs on the operator's existing subscriptions — extraction/reading/adjudication on the Claude CLI, and judging on either the Claude Max plan (this run) or the Gemini free tier (the cross-vendor default). No run of this harness in any configuration spends API credit.\n\nTwo caveats on the projection, both pointing the same way. The measured conversations are the smaller ones (63 of the suite's 272 sessions across 3 of 10 conversations, so ~23% of ingest for 30% of the conversations), so a full run is somewhat worse than ×10 of what is shown. And reader latency here is dominated by CLI subprocess spawn, which a deployed agent would not pay — it inflates the wall-clock projection but not the cost.",
+  "quota_stop": false,
+  "rows_graded": 500,
+  "rows_answered_but_ungraded": 0,
+  "aggregate": {
+    "llm-conversational/search_only/always_distinct": {
+      "overall": {
+        "n": 500,
+        "correct": 316,
+        "accuracy": 0.632,
+        "wilson_95": [
+          0.5889,
+          0.6731
+        ],
+        "abstained": 158,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 8865,
+        "payload_bytes_p95": 10150,
+        "payload_bytes_mean": 8822,
+        "accuracy_per_1k_bytes": 0.0716,
+        "e2e_seconds_p50": 6.106,
+        "e2e_seconds_p95": 10.538,
+        "judge_seconds_p50": 13.533
+      },
+      "overall_excl_adversarial": {
+        "n": 389,
+        "correct": 234,
+        "accuracy": 0.6015,
+        "wilson_95": [
+          0.5521,
+          0.649
+        ],
+        "abstained": 76,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 8842,
+        "payload_bytes_p95": 10078,
+        "payload_bytes_mean": 8797,
+        "accuracy_per_1k_bytes": 0.0684,
+        "e2e_seconds_p50": 6.064,
+        "e2e_seconds_p95": 10.734,
+        "judge_seconds_p50": 14.383
+      },
+      "categories": {
+        "adversarial": {
+          "n": 111,
+          "correct": 82,
+          "accuracy": 0.7387,
+          "wilson_95": [
+            0.65,
+            0.8115
+          ],
+          "abstained": 82,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8937,
+          "payload_bytes_p95": 10190,
+          "payload_bytes_mean": 8910,
+          "accuracy_per_1k_bytes": 0.0829,
+          "e2e_seconds_p50": 6.242,
+          "e2e_seconds_p95": 9.205,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 80,
+          "correct": 35,
+          "accuracy": 0.4375,
+          "wilson_95": [
+            0.3341,
+            0.5466
+          ],
+          "abstained": 9,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8759,
+          "payload_bytes_p95": 10191,
+          "payload_bytes_mean": 8680,
+          "accuracy_per_1k_bytes": 0.0504,
+          "e2e_seconds_p50": 6.148,
+          "e2e_seconds_p95": 11.43,
+          "judge_seconds_p50": 14.899
+        },
+        "open-domain-knowledge": {
+          "n": 26,
+          "correct": 15,
+          "accuracy": 0.5769,
+          "wilson_95": [
+            0.3895,
+            0.7446
+          ],
+          "abstained": 4,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8639,
+          "payload_bytes_p95": 10755,
+          "payload_bytes_mean": 8713,
+          "accuracy_per_1k_bytes": 0.0662,
+          "e2e_seconds_p50": 7.218,
+          "e2e_seconds_p95": 12.693,
+          "judge_seconds_p50": 15.228
+        },
+        "single-hop": {
+          "n": 187,
+          "correct": 119,
+          "accuracy": 0.6364,
+          "wilson_95": [
+            0.5653,
+            0.7019
+          ],
+          "abstained": 44,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8829,
+          "payload_bytes_p95": 9808,
+          "payload_bytes_mean": 8792,
+          "accuracy_per_1k_bytes": 0.0724,
+          "e2e_seconds_p50": 5.894,
+          "e2e_seconds_p95": 10.064,
+          "judge_seconds_p50": 14.081
+        },
+        "temporal-reasoning": {
+          "n": 96,
+          "correct": 65,
+          "accuracy": 0.6771,
+          "wilson_95": [
+            0.5783,
+            0.7622
+          ],
+          "abstained": 19,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8936,
+          "payload_bytes_p95": 10206,
+          "payload_bytes_mean": 8928,
+          "accuracy_per_1k_bytes": 0.0758,
+          "e2e_seconds_p50": 5.973,
+          "e2e_seconds_p95": 12.262,
+          "judge_seconds_p50": 14.285
+        }
+      }
+    }
+  },
+  "failure_modes": {
+    "llm-conversational/search_only/always_distinct": {
+      "correct": 316,
+      "extraction-miss": 30,
+      "reader-miss": 85,
+      "reader-over-answered": 29,
+      "retrieval-miss": 32,
+      "unattributed": 8
+    }
+  },
+  "judge_calibration": {
+    "items_graded_twice": 40,
+    "disagreements": 0,
+    "instability": 0.0,
+    "judge_errors": 0,
+    "disagreeing_items": [],
+    "human_agreement": null,
+    "human_agreement_note": "design/09 also specifies agreement against a committed human-labelled subset. No such labels exist yet; this half of the calibration is outstanding and is recorded as absent rather than omitted."
+  }
+}

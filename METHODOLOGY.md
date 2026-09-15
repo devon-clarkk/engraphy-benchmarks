@@ -90,13 +90,21 @@ package versions, and the Postgres and pgvector versions.
 | figure | run | engine | write path |
 |---|---|---|---|
 | 67.1% excluding adversarial | `fullrun-conv-20260809` | Engraphy development branch `bench/full-run` at `631e7be`, schema 0023 | partial dates such as `2026-05` are accepted and stored as written; a typed attribute that fails validation is moved to a `dropped` bucket and the memory is kept; a supersede that cannot complete, because the replacement is of a different type or bands against a third memory, is written as a plain new memory with the old one left active and the downgrade flagged |
-| see [results/](results/README.md) | `fullrun-conv-20260916` | public `devon-clarkk/engraphy` at `67dd41a`, schema 0024 | dates must be complete ISO dates; a memory whose typed attribute fails validation is refused; a cross-type supersede is refused (`ValidationError`); a supersede whose replacement bands against a third memory is refused (`SupersedeUnresolvedBandError`) |
+| 60.2% excluding adversarial | `fullrun-conv-20260916` | public `devon-clarkk/engraphy` at `67dd41a`, schema 0024 | dates must be complete ISO dates; a memory whose typed attribute fails validation is refused; a cross-type supersede is refused (`ValidationError`); a supersede whose replacement bands against a third memory is refused (`SupersedeUnresolvedBandError`) |
 
-The prompts, the reader skill, the pack, the dataset, the arm, the models and the
-judge are the same across both runs; the prompt and skill hashes match. The write
-path is the difference. Each run's `ingest.jsonl` counts the extracted memories,
-the memories stored, and every refusal by class, with the engine's message for a
-sample of each.
+The prompts, the reader skill, the pack, the extractor and reader settings, the
+retrieval width, the thresholds, the dataset, the arm, the models and the judge
+are the same across both runs; the two manifests record the same hashes and
+settings. The write path is the one pinned difference between the two engines.
+Each run's `ingest.jsonl` counts the extracted memories, the memories stored, and
+every refusal by class, with the engine's message for a sample of each.
+
+The extractor, reader and judge are sampled models, so two runs of one engine
+also differ question by question. Each manifest's `failure_modes` separates an
+answer that failed because its supporting memory was never stored or never
+retrieved from one that failed with the support in front of the reader, and the
+local run files carry the same signal per question. Read both, and the intervals,
+before attributing a difference between two figures to either engine.
 
 ## Comparing with other systems
 

@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-09-15T17:12:25.106490+00:00",
+  "host": {
+    "os": "Windows 11 (10.0.26100)",
+    "machine": "AMD64",
+    "cpu": "11th Gen Intel(R) Core(TM) i5-11600K @ 3.90GHz",
+    "logical_cpus": 12,
+    "ram_gb": 15.8
+  },
+  "runtime": {
+    "python": "3.14.3",
+    "packages": {
+      "onnxruntime": "1.29.0",
+      "tokenizers": "0.22.2",
+      "numpy": "2.4.4",
+      "psycopg": "3.3.4",
+      "psycopg-pool": "3.3.1",
+      "huggingface-hub": "0.36.2",
+      "pyyaml": "6.0.3"
+    },
+    "docker_server": "28.3.0",
+    "claude_cli": "2.1.252 (Claude Code)"
+  },
+  "database": {
+    "postgres": "16.14 (Debian 16.14-1.pgdg12+1)",
+    "pgvector": "0.8.5"
+  },
+  "engine": {
+    "commit": "67dd41acf9e5bcd82884ffd8535d20bdd5020021",
+    "ref": "fix/pin-onnxruntime"
+  },
+  "note": "Captured during the run, from the interpreter and database container it used. The run was launched with the engine harness in a clean checkout of the pinned commit, with the arguments config/locomo.json records."
+}
