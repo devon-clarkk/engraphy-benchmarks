@@ -76,9 +76,11 @@ def render(d: pathlib.Path, note: str = "") -> str:
         A("")
     cal = m.get("judge_calibration") or {}
     inst = cal.get("instability")
-    measured = (f"{100 * inst:.1f}% of {cal.get('n', NR)} items"
+    measured = (f"{100 * inst:.1f}% ({cal.get('disagreements', NR)} of "
+                f"{cal.get('items_graded_twice', NR)} items graded twice)"
                 if isinstance(inst, (int, float)) else NR)
-    A(f"Judge instability, one pass against another on a sample: {measured}.")
+    A(f"Per-pass judge instability, two single judge passes compared on a sample: {measured}. "
+      "The best-of-3 majority verdict changes less often than a single pass.")
     A(f"Write-yield at ingest: {_yield(m.get('ingest') or [])}.")
     A("")
 

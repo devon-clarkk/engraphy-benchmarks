@@ -16,7 +16,7 @@ Arm `llm-conversational/search_only/always_distinct`, 95% Wilson intervals in br
 | single-hop | 68.5% [61 to 75] (128/187) |
 | temporal-reasoning | 76.0% [67 to 83] (73/96) |
 
-Judge instability, one pass against another on a sample: not recorded.
+Per-pass judge instability, two single judge passes compared on a sample: not recorded. The best-of-3 majority verdict changes less often than a single pass.
 Write-yield at ingest: 99.4% (346 of 348 extracted memories stored).
 
 ## What ran
