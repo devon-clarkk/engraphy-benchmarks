@@ -16,12 +16,14 @@ import subprocess
 import time
 
 DB_NAME = "engraphy_bench"
-SUPERUSER_PASSWORD = "engraphy"
 
-# The harness derives its app-role connection by substituting this role and
-# password into the superuser URL (bench/core/run.py, APP_DB). It is the engine
-# test suite's fixed test credential, public in the engine repository, and it
-# only ever reaches a container bound to 127.0.0.1 that this script created.
+# Both passwords are fixed by the pinned engine, not chosen here. The harness
+# derives its app-role connection by replacing `postgres:engraphy@` in the
+# superuser URL with `engraphy_app:engraphy_app_test_only@` (bench/core/run.py,
+# APP_DB), so any other value breaks the run. They are the engine test suite's
+# public test credentials, and they only ever reach a container bound to
+# 127.0.0.1 that this script created and can remove with --remove-db.
+SUPERUSER_PASSWORD = "engraphy"
 APP_ROLE_PASSWORD = "engraphy_app_test_only"
 
 
