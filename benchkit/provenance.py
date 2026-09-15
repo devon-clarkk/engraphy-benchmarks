@@ -85,6 +85,30 @@ def package_versions(python: str) -> dict[str, str | None]:
         return {}
 
 
+def claude_cli_version() -> str:
+    """The version of the CLI binary the harness actually launches.
+
+    Resolved the way the engine's ClaudeCLIClient resolves it: the packaged
+    executable an npm install puts under APPDATA on Windows first, then PATH. On
+    Windows a bare `claude` is an npm shim that CreateProcess cannot launch, so
+    asking PATH alone reports nothing there.
+    """
+    candidates = []
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        candidates.append(os.path.join(appdata, "npm", "node_modules", "@anthropic-ai",
+                                       "claude-code", "bin", "claude.exe"))
+    found = shutil.which("claude")
+    if found:
+        candidates.append(found)
+    for exe in candidates:
+        if os.path.exists(exe):
+            out = _run([exe, "--version"])
+            if out:
+                return out
+    return ""
+
+
 def capture(*, python: str, db: dict, engine_commit: str, engine_ref: str) -> dict:
     return {
         "captured_at": datetime.datetime.now(datetime.UTC).isoformat(),
@@ -99,7 +123,7 @@ def capture(*, python: str, db: dict, engine_commit: str, engine_ref: str) -> di
             "python": _run([python, "-c", "import sys; print(sys.version.split()[0])"]),
             "packages": package_versions(python),
             "docker_server": _run(["docker", "version", "--format", "{{.Server.Version}}"]),
-            "claude_cli": _run(["claude", "--version"]) if shutil.which("claude") else "",
+            "claude_cli": claude_cli_version(),
         },
         "database": db,
         "engine": {"commit": engine_commit, "ref": engine_ref},

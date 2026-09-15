@@ -21,6 +21,14 @@ What it does, in order, every step resumable:
 Run the same command again to resume an interrupted run. Nothing touches a
 database this script did not start.
 
+Two ways to check a setup before committing to a full run, neither of which
+calls a model:
+
+    python reproduce.py --prepare-only   # steps 1 to 4, then print the command
+    python reproduce.py --smoke          # steps 1 to 4, then ingest one
+                                         # conversation with the verbatim
+                                         # extractor through the real harness
+
 Requires git, Docker, Python 3.12 or later, and the route named in the config.
 At the pinned engine commit that route is the Claude Code CLI (`claude` on PATH,
 signed in). See METHODOLOGY.md for what the number means and what it is
@@ -90,6 +98,34 @@ def harness_command(cfg: dict, py: pathlib.Path, run_id: str, supervised: bool) 
             "--", *core]
 
 
+def smoke_command(py: pathlib.Path, run_id: str) -> list[str]:
+    """The harness end to end on its no-model path: the verbatim extractor stores
+    each turn as a memory, so ingest runs embedding, de-duplication and every
+    database write with no LLM call at all."""
+    return [str(py), "-m", "bench.core.run",
+            "--dataset", "datasets/locomo10.json",
+            "--haystacks", "conv-30",
+            "--arm", "verbatim:search_only",
+            "--phases", "ingest",
+            "--run-id", run_id]
+
+
+def run_smoke(cfg: dict, eng: pathlib.Path, py: pathlib.Path, port: int) -> int:
+    run_id = f"smoke-{datetime.datetime.now():%Y%m%d-%H%M%S}"
+    proc = subprocess.run(smoke_command(py, run_id), cwd=eng, env=harness_env(cfg, port))
+    ingest = eng / "runs" / run_id / "ingest.jsonl"
+    rows = ([json.loads(x) for x in ingest.read_text(encoding="utf-8").splitlines() if x.strip()]
+            if ingest.exists() else [])
+    stored = sum(r.get("nodes_written") or 0 for r in rows)
+    turns = sum(r.get("turns") or 0 for r in rows)
+    if proc.returncode != 0 or not rows or not stored:
+        print("\nsmoke FAILED: the harness did not complete an ingest")
+        return proc.returncode or 1
+    print(f"\nsmoke passed: conv-30 ingested through the harness, {turns} turns, "
+          f"{stored} memories stored, no model called")
+    return 0
+
+
 def harness_env(cfg: dict, port: int) -> dict:
     env = dict(os.environ)
     # The CLI route runs on a signed-in subscription. An API key in the
@@ -145,6 +181,10 @@ def main() -> int:
                     help="run the harness directly rather than under its usage-limit supervisor")
     ap.add_argument("--dry-run", action="store_true",
                     help="print the plan and the exact command, run nothing")
+    ap.add_argument("--prepare-only", action="store_true",
+                    help="set up the engine, database and dataset, then stop")
+    ap.add_argument("--smoke", action="store_true",
+                    help="set up, then ingest one conversation with no model calls")
     ap.add_argument("--remove-db", action="store_true",
                     help="remove the Postgres container afterwards")
     args = ap.parse_args()
@@ -175,6 +215,12 @@ def main() -> int:
     _step(4, "LoCoMo from snap-research, sha256 verified")
     data_path = dataset.fetch(cfg, eng / "datasets")
     print(f"  {data_path} {cfg['dataset']['sha256']}")
+
+    if args.smoke:
+        return run_smoke(cfg, eng, py, args.port)
+    if args.prepare_only:
+        print("\nReady. The full run is:\n  " + " ".join(cmd))
+        return 0
 
     _step(5, "the harness (resumable; run this command again to continue)")
     print("  " + " ".join(cmd[cmd.index("bench.core.run") - 2:]), flush=True)
