@@ -1,0 +1,13 @@
+# The dataset is downloaded from its authors, never committed (CC BY-NC 4.0).
+/datasets/
+# The pinned engine checkout, its virtualenv and its raw run directories.
+/work/
+# Locally graded answers and rejoined audit files carry dataset text.
+/graded/
+/audit/
+*.part
+.env
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv/

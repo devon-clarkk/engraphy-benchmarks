@@ -1,0 +1,16 @@
+[project]
+name = "engraphy-benchmarks"
+version = "0.1.0"
+description = "Reproducible LoCoMo benchmark for Engraphy, and a common judge for any memory system"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

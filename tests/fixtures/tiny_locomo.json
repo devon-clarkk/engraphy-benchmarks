@@ -1,0 +1,33 @@
+[
+  {
+    "sample_id": "tiny-1",
+    "conversation": {
+      "speaker_a": "Ada",
+      "speaker_b": "Bo",
+      "session_1_date_time": "9:00 am on 1 March, 2031",
+      "session_1": [
+        {"speaker": "Ada", "dia_id": "D1:1", "text": "I repaint the lighthouse every spring."},
+        {"speaker": "Bo", "dia_id": "D1:2", "text": "The blue one on the north cliff?"}
+      ]
+    },
+    "qa": [
+      {"question": "When does Ada repaint the lighthouse each year?", "answer": "every spring", "evidence": ["D1:1"], "category": 4},
+      {"question": "Which cliff is the lighthouse Ada repaints standing on?", "answer": "the north cliff", "evidence": "D1:2", "category": 1},
+      {"question": "What colour did Bo paint his rowing boat?", "adversarial_answer": "not mentioned", "evidence": [], "category": 5}
+    ]
+  },
+  {
+    "sample_id": "tiny-2",
+    "conversation": {
+      "speaker_a": "Cy",
+      "speaker_b": "Dee",
+      "session_1_date_time": "4:30 pm on 2 March, 2031",
+      "session_1": [
+        {"speaker": "Cy", "dia_id": "D1:1", "text": "My orchard has forty pear trees now."}
+      ]
+    },
+    "qa": [
+      {"question": "How many pear trees are in Cy's orchard?", "answer": 40, "evidence": ["D1:1"], "category": 2}
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - run: pip install "ruff==0.13.0" "pytest==8.4.2"
+      - run: ruff check .
+      # Hermetic: a synthetic fixture in LoCoMo's shape, no dataset download, no
+      # engine checkout, no model calls.
+      - run: pytest -q
+      - name: 'guard: no dataset file is committed'
+        run: '! git ls-files | grep -E "locomo10\.json$"'

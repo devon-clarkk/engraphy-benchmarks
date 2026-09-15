@@ -1,0 +1,71 @@
+{
+  "benchmark": "locomo",
+  "config_version": 1,
+  "description": "The configuration behind every LoCoMo figure this repository publishes. reproduce.py reads this file and nothing else, so the config you are reading is the config that runs.",
+
+  "engine": {
+    "repository": "https://github.com/devon-clarkk/engraphy",
+    "commit": "67dd41acf9e5bcd82884ffd8535d20bdd5020021",
+    "ref": "fix/pin-onnxruntime",
+    "fetch_refspec": "+refs/pull/16/head:refs/remotes/origin/pr-16",
+    "note": "main at bc3dfdf plus the onnxruntime ~=1.29.0 pin (PR #16). The engine and harness trees are identical to main; only pyproject.toml and CHANGELOG.md differ. The pull-request ref keeps this commit fetchable after the branch is merged or deleted."
+  },
+
+  "dataset": {
+    "name": "LoCoMo (locomo10.json)",
+    "url": "https://raw.githubusercontent.com/snap-research/locomo/main/data/locomo10.json",
+    "license_url": "https://raw.githubusercontent.com/snap-research/locomo/main/LICENSE.txt",
+    "license": "CC BY-NC 4.0",
+    "sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "bytes": 2805274,
+    "upstream_commit": "cbfbc1dba6bc53d00625212a0f22d55ffee7c1fc",
+    "question_id_scheme": "{sample_id}:q{j}, j the 0-based index into that conversation's qa list",
+    "questions_in_file": 1986,
+    "adversarial_in_file": 446
+  },
+
+  "run": {
+    "haystacks": ["conv-26", "conv-30", "conv-49"],
+    "arm": "llm-conversational:search_only",
+    "arm_id": "llm-conversational/search_only/always_distinct",
+    "judge": "claude",
+    "reader_stance": "grounded",
+    "phases": "ingest,answer,judge,calibrate,diagnose,report",
+    "concurrency": 3,
+    "judge_concurrency": 4,
+    "calibration_sample": 40
+  },
+
+  "models": {
+    "extractor": "claude-opus-4-8",
+    "reader": "claude-opus-4-8",
+    "adjudicator": "claude-opus-4-8",
+    "judge": "claude-sonnet-5",
+    "judge_passes": 3,
+    "route": "claude-cli",
+    "route_note": "At this engine commit the harness reaches the models through the Claude Code CLI. An OpenAI-compatible route for the same model ids is in review as engraphy PR #8; once it lands, the engine pin moves to a commit carrying it and reproduce.py gains --route openai."
+  },
+
+  "embedder": {
+    "profile": "onnx-fp32",
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "graph": "onnx/model.onnx",
+    "dims": 384,
+    "onnxruntime": "~=1.29.0"
+  },
+
+  "thresholds_resolved": {
+    "note": "Read back at runtime from the pinned engine on the onnx-fp32 profile. Recorded here so a change in any of them is a visible diff to this file.",
+    "dedup_t_high": 0.95,
+    "dedup_t_low": 0.80,
+    "resonance_floor": 0.75,
+    "briefing_semantic_floor": 0.50,
+    "read_time_collapse": 0.95
+  },
+
+  "database": {
+    "image": "pgvector/pgvector:pg16",
+    "schema_version": "0024"
+  }
+}

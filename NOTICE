@@ -1,0 +1,46 @@
+engraphy-benchmarks
+Copyright 2026 Devon Clark
+
+The code in this repository is licensed under the Apache License, Version 2.0
+(see LICENSE).
+
+-------------------------------------------------------------------------------
+LoCoMo dataset
+-------------------------------------------------------------------------------
+
+This repository does NOT contain or redistribute the LoCoMo dataset. The scripts
+here download it from its authors' repository, verify it, and use it locally:
+
+  https://github.com/snap-research/locomo  (data/locomo10.json)
+
+LoCoMo is licensed by its authors under the Creative Commons
+Attribution-NonCommercial 4.0 International licence (CC BY-NC 4.0), as stated in
+that repository's LICENSE.txt. The download script saves a copy of that licence
+beside the dataset. Your use of the dataset is governed by its licence, not by
+this repository's.
+
+Results committed under results/ contain question identifiers, category labels,
+verdicts and the benchmarked system's own answers. They contain no question
+text, gold answers or conversation text from the dataset.
+
+LoCoMo was introduced in:
+
+  Adyasha Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal,
+  Francesco Barbieri, Yuwei Fang. "Evaluating Very Long-Term Conversational
+  Memory of LLM Agents." ACL 2024. arXiv:2402.17753.
+
+  @article{maharana2024evaluating,
+    title={Evaluating very long-term conversational memory of llm agents},
+    author={Maharana, Adyasha and Lee, Dong-Ho and Tulyakov, Sergey and Bansal, Mohit and Barbieri, Francesco and Fang, Yuwei},
+    journal={arXiv preprint arXiv:2402.17753},
+    year={2024}
+  }
+
+-------------------------------------------------------------------------------
+Engraphy
+-------------------------------------------------------------------------------
+
+The benchmark harness runs from a checkout of the Engraphy engine, fetched from
+https://github.com/devon-clarkk/engraphy at the commit pinned in
+config/locomo.json. The engine is licensed separately under the Business Source
+License 1.1; it is not included in this repository.
