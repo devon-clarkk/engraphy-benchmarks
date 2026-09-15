@@ -89,13 +89,14 @@ package versions, and the Postgres and pgvector versions.
 
 | figure | run | engine | write path |
 |---|---|---|---|
-| 67.1% excluding adversarial | `fullrun-conv-20260809` | Engraphy development branch `bench/full-run` at `631e7be`, schema 0023 | a typed attribute that fails validation is set aside and the memory is kept; partial dates such as `2026-05` are accepted; a cross-type supersede is written as a new memory |
-| see [results/](results/README.md) | `fullrun-conv-20260916` | public `devon-clarkk/engraphy` at `67dd41a`, schema 0024 | a memory whose typed attribute fails validation is refused; dates must be complete ISO dates |
+| 67.1% excluding adversarial | `fullrun-conv-20260809` | Engraphy development branch `bench/full-run` at `631e7be`, schema 0023 | partial dates such as `2026-05` are accepted and stored as written; a typed attribute that fails validation is moved to a `dropped` bucket and the memory is kept; a supersede that cannot complete, because the replacement is of a different type or bands against a third memory, is written as a plain new memory with the old one left active and the downgrade flagged |
+| see [results/](results/README.md) | `fullrun-conv-20260916` | public `devon-clarkk/engraphy` at `67dd41a`, schema 0024 | dates must be complete ISO dates; a memory whose typed attribute fails validation is refused; a cross-type supersede is refused (`ValidationError`); a supersede whose replacement bands against a third memory is refused (`SupersedeUnresolvedBandError`) |
 
 The prompts, the reader skill, the pack, the dataset, the arm, the models and the
 judge are the same across both runs; the prompt and skill hashes match. The write
-path is the difference, and its effect is visible in each run's `ingest.jsonl`,
-which counts how many extracted memories were stored.
+path is the difference. Each run's `ingest.jsonl` counts the extracted memories,
+the memories stored, and every refusal by class, with the engine's message for a
+sample of each.
 
 ## Comparing with other systems
 
