@@ -96,8 +96,18 @@ def test_redact_run_writes_only_committable_files(tmp_path):
     assert ingest == {"write_error_samples": [{"error": "CheckViolation"}]}
 
 
-def test_the_report_guard_finds_a_quoted_question():
+def test_the_guard_finds_a_quoted_question():
     index = dataset.question_index(FIXTURE)
     report = "Worst miss: Which cliff is the lighthouse Ada repaints standing on? (multi-hop)"
     assert redact.leaks(report, index) == ["tiny-1:q1"]
     assert redact.leaks("accuracy table only", index) == []
+
+
+def test_the_guard_covers_every_file_in_a_result(tmp_path):
+    index = dataset.question_index(FIXTURE)
+    (tmp_path / "results.jsonl").write_text('{"question_id": "tiny-1:q0"}\n', encoding="utf-8")
+    (tmp_path / "notes").mkdir()
+    (tmp_path / "notes" / "extra.md").write_text(
+        "How many pear trees are in Cy's orchard?", encoding="utf-8")
+    assert redact.check_clean(tmp_path, index) == {"notes/extra.md": ["tiny-2:q0"]} or \
+        redact.check_clean(tmp_path, index) == {"notes\\extra.md": ["tiny-2:q0"]}

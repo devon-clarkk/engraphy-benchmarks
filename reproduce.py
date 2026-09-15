@@ -120,20 +120,17 @@ def summarise(manifest: dict) -> str:
 
 def publish(cfg: dict, run_dir: pathlib.Path, dest: pathlib.Path,
             index: dict, facts: dict) -> None:
+    """Write the committable subset, then refuse it if any dataset text survived."""
     written = redact.redact_run(run_dir, dest)
-    report = run_dir / "report.md"
-    if report.exists():
-        text = report.read_text(encoding="utf-8")
-        found = redact.leaks(text, index)
-        if found:
-            print(f"  report.md not published: it quotes {len(found)} dataset questions")
-        else:
-            (dest / "report.md").write_text(text, encoding="utf-8", newline="\n")
-            written["report.md"] = "copied"
     (dest / "provenance.json").write_text(json.dumps(facts, indent=2) + "\n",
                                           encoding="utf-8", newline="\n")
     (dest / "config.json").write_text(json.dumps(cfg, indent=2) + "\n",
                                       encoding="utf-8", newline="\n")
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "render_provenance.py"), str(dest)],
+                   check=True)
+    hits = redact.check_clean(dest, index)
+    if hits:
+        raise SystemExit(f"refusing to publish {dest}: dataset questions quoted in {hits}")
     for name, what in written.items():
         print(f"  {name}: {what}")
 

@@ -1,0 +1,5 @@
+# LF in every checkout, on every platform. Results, configs and answer files are
+# compared by sha256, and a checkout that rewrote line endings would make
+# byte-identical content hash differently.
+* text=auto eol=lf
+*.png binary

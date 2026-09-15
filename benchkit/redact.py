@@ -131,9 +131,22 @@ def redact_run(run_dir: pathlib.Path, dest: pathlib.Path) -> dict:
 def leaks(text: str, index: dict[str, dict], *, min_len: int = 24) -> list[str]:
     """Question texts from the dataset that appear verbatim in `text`.
 
-    A guard for the report files, which are rendered prose rather than rows. Short
-    questions are skipped because a short question can collide with ordinary
-    words; every LoCoMo question of real length is checked.
+    Short questions are skipped because a short question can collide with
+    ordinary words; every LoCoMo question of real length is checked.
     """
     return [qid for qid, q in index.items()
             if len(q["question"]) >= min_len and q["question"] in text]
+
+
+def check_clean(dest: pathlib.Path, index: dict[str, dict]) -> dict[str, list[str]]:
+    """Every file under `dest` that quotes a dataset question, with the ids quoted.
+
+    Run over the whole directory after redaction, as the last step before
+    anything is committed. An empty result is the only publishable one.
+    """
+    hits: dict[str, list[str]] = {}
+    for f in sorted(p for p in dest.rglob("*") if p.is_file()):
+        found = leaks(f.read_text(encoding="utf-8", errors="replace"), index)
+        if found:
+            hits[str(f.relative_to(dest))] = found
+    return hits

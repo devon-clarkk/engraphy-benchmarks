@@ -6,7 +6,8 @@
 
 Keeps ids, verdicts, answers, timings and the manifest; drops every piece of
 dataset text (see benchkit/redact.py for the exact field list). With --dataset,
-report.md is copied only if it quotes no dataset question.
+every written file is checked for quoted dataset questions, and any hit fails
+the run with a non-zero exit.
 """
 
 from __future__ import annotations
@@ -28,17 +29,14 @@ def main() -> int:
     args = ap.parse_args()
 
     written = redact.redact_run(args.run_dir, args.dest)
-    report = args.run_dir / "report.md"
-    if report.exists() and args.dataset:
-        text = report.read_text(encoding="utf-8")
-        found = redact.leaks(text, dataset.question_index(args.dataset))
-        if found:
-            print(f"report.md withheld: quotes {len(found)} dataset questions, e.g. {found[:3]}")
-        else:
-            (args.dest / "report.md").write_text(text, encoding="utf-8", newline="\n")
-            written["report.md"] = "copied (no dataset questions quoted)"
     for name, what in written.items():
         print(f"{name}: {what}")
+    if args.dataset:
+        hits = redact.check_clean(args.dest, dataset.question_index(args.dataset))
+        if hits:
+            print(f"dataset questions quoted in {hits}; do not commit {args.dest}")
+            return 1
+        print("clean: no dataset question is quoted in any written file")
     return 0
 
 
