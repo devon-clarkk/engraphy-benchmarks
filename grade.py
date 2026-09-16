@@ -25,6 +25,11 @@ with no row counts as wrong, never as a correct abstention, so coverage cannot
 flatter a score. Grading is checkpointed per question; run the same command
 again to resume.
 
+`--conventions reference` grades the same answers under the conventions of the
+reference LoCoMo harness instead (its partial-credit judge, one pass, categories
+1 to 4), imported from the pinned engine's `bench.core.reference`, so a system can
+be placed on both of the figures Engraphy reports.
+
 The reader is yours, and the reader matters. Two systems graded here differ in
 their memory and in whatever model reads it; METHODOLOGY.md says what that does
 and does not let you conclude.
@@ -85,6 +90,18 @@ def _inner(args: argparse.Namespace) -> int:
 
     covered = sorted({by_id[q].haystack_id for q in answers})
     expected = [q for q in corpus.questions if q.haystack_id in covered]
+    reference = args.conventions == "reference"
+    if reference:
+        try:
+            from bench.core.reference import ReferenceJudge, conventions_manifest
+        except ImportError:
+            raise SystemExit("the pinned engine has no bench.core.reference; "
+                             "--conventions reference needs an engine that carries it") from None
+        if args.judge != "claude":
+            raise SystemExit("--conventions reference grades with the Claude judge route")
+        ref_passes = cfg["conventions"]["reference"]["judge_passes"]
+        # The reference harness scores categories 1 to 4.
+        expected = [q for q in expected if not q.abstain_expected]
 
     judge_model = (cfg["models"]["judge"] if args.judge == "claude"
                    else ROLE_MODELS["judge"]["model"])
@@ -94,7 +111,9 @@ def _inner(args: argparse.Namespace) -> int:
                   else GeminiClient(model=judge_model))
         return Judge(client)
 
-    out = args.out or (ROOT / "graded" / args.system)
+    arm = f"{args.system}/reference-conventions" if reference else args.system
+    out = args.out or (ROOT / "graded" / (f"{args.system}-reference" if reference
+                                           else args.system))
     out.mkdir(parents=True, exist_ok=True)
     graded_path = out / "graded.jsonl"
     done = {}
@@ -107,7 +126,7 @@ def _inner(args: argparse.Namespace) -> int:
     scorer = LLMJudgeScorer()
 
     def base(q) -> dict:
-        return {"arm": args.system, "question_id": q.question_id, "haystack_id": q.haystack_id,
+        return {"arm": arm, "question_id": q.question_id, "haystack_id": q.haystack_id,
                 "category": q.category, "abstain_expected": q.abstain_expected}
 
     todo = [q for q in expected if q.question_id not in done]
@@ -119,7 +138,11 @@ def _inner(args: argparse.Namespace) -> int:
             return {**base(q), "answer": None, "correct": False, "graded_by": "missing",
                     "reason": "no answer supplied", "judge_model": "", "judge_seconds": 0.0,
                     "judge_error": ""}
-        v = scorer.grade(q, answers[q.question_id], make_judge())
+        if reference:
+            v = ReferenceJudge(ClaudeCLIClient(model=judge_model)).grade_majority(
+                q, answers[q.question_id], passes=ref_passes)
+        else:
+            v = scorer.grade(q, answers[q.question_id], make_judge())
         return {**base(q), "answer": answers[q.question_id], **v.as_dict()}
 
     stopped = None
@@ -149,8 +172,11 @@ def _inner(args: argparse.Namespace) -> int:
         "answers_sha256": hashlib.sha256(args.answers.read_bytes()).hexdigest(),
         "dataset_sha256": cfg["dataset"]["sha256"],
         "engine_commit": cfg["engine"]["commit"],
-        "judge": {"route": args.judge, "model": judge_model, "passes": JUDGE_PASSES,
-                  "prompt_hash": prompt_hash("judge.md")},
+        "judge": ({"route": args.judge, "model": judge_model, "passes": ref_passes,
+                   "conventions": conventions_manifest(judge_passes=ref_passes)}
+                  if reference else
+                  {"route": args.judge, "model": judge_model, "passes": JUDGE_PASSES,
+                   "prompt_hash": prompt_hash("judge.md")}),
         "conversations": covered,
         "questions_expected": len(expected),
         "questions_answered": sum(1 for q in expected if q.question_id in answers),
@@ -158,7 +184,7 @@ def _inner(args: argparse.Namespace) -> int:
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n",
                                       encoding="utf-8", newline="\n")
-    agg = summary["aggregate"][args.system]
+    agg = summary["aggregate"][arm]
     print(f"\n{args.system}: {summary['questions_answered']}/{len(expected)} answered")
     for name, b in [("overall", agg["overall"]),
                     ("excluding adversarial", agg["overall_excl_adversarial"]),
@@ -175,6 +201,9 @@ def main() -> int:
     ap.add_argument("answers", type=pathlib.Path)
     ap.add_argument("--system", required=True, help="a name for the system being graded")
     ap.add_argument("--judge", default="claude", choices=("claude", "gemini"))
+    ap.add_argument("--conventions", default="strict", choices=("strict", "reference"),
+                    help="strict: Engraphy's judge (default). reference: the reference "
+                         "LoCoMo harness's judge and categories, for comparability")
     ap.add_argument("--concurrency", type=int, default=4)
     ap.add_argument("--out", type=pathlib.Path, default=None)
     args = ap.parse_args()

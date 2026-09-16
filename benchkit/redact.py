@@ -10,7 +10,9 @@ kept     ids, category, the system's own answer, the verdict and its best-of-3
          tally, which mechanism graded it, models, timings, payload size and its
          sha256, the failure attribution, and support fractions
 dropped  question text, gold answer, retrieved context, matched and missing gold
-         terms, judge reasoning (it restates the gold), and every `*_samples`
+         terms, judge reasoning (it restates the gold), the reader's own working
+         (its CHECK line and, under the reference conventions, its step-by-step
+         reasoning, both of which quote retrieved memory), and every `*_samples`
          list of extracted memory text in the ingest statistics
 
 Anyone holding their own copy of the dataset restores the question and gold with
@@ -36,6 +38,9 @@ DROP_ROW_FIELDS = frozenset({
     "gold_answer",
     "context",
     "evidence_text",
+    "reader_check",
+    "reader_output",
+    "source_answer",
 })
 
 # Support dicts keep their numbers and lose their words.
@@ -125,6 +130,27 @@ def redact_run(run_dir: pathlib.Path, dest: pathlib.Path) -> dict:
             json.dumps(m, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         written["manifest.json"] = "redacted"
 
+    return written
+
+
+def redact_offline_pass(pass_dir: pathlib.Path, dest: pathlib.Path) -> dict:
+    """The committable subset of an offline pass over a run, such as `reference/`.
+
+    Its rows are result rows and are redacted as such. Its manifest names the
+    conventions, the prompt hashes and the models, and carries no dataset text
+    beyond each conversation's latest session date.
+    """
+    dest.mkdir(parents=True, exist_ok=True)
+    written: dict[str, int | str] = {}
+    results = pass_dir / "results.jsonl"
+    if results.exists():
+        written["results.jsonl"] = redact_jsonl(results, dest / "results.jsonl", redact_row)
+    manifest = pass_dir / "manifest.json"
+    if manifest.exists():
+        m = redact_samples(json.loads(manifest.read_text(encoding="utf-8")))
+        (dest / "manifest.json").write_text(
+            json.dumps(m, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        written["manifest.json"] = "copied"
     return written
 
 

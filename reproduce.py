@@ -13,10 +13,13 @@ What it does, in order, every step resumable:
 4. Downloads LoCoMo from snap-research and verifies its sha256 against the pin.
 5. Runs the engine's harness with exactly the arm, conversations, models, judge
    and phases in the config, under its supervisor, which pauses across a usage
-   limit and resumes from the checkpoint.
-6. Records the host, runtime and database versions beside the run.
-7. Writes the committable subset of the run to results/locomo/<run-id>/, with
-   every piece of dataset text removed, and prints the headline table.
+   limit and resumes from the checkpoint. This produces the strict figure.
+6. Grades the same run under the reference harness conventions, with
+   `bench.reference_pass`, also supervised. This produces the second figure,
+   reported beside the strict one for comparability.
+7. Records the host, runtime and database versions beside the run.
+8. Writes the committable subset of both to results/locomo/<run-id>/, with every
+   piece of dataset text removed, and prints both headline tables.
 
 Run the same command again to resume an interrupted run. Nothing touches a
 database this script did not start.
@@ -61,7 +64,7 @@ from benchkit import (
 
 
 def _step(n: int, text: str) -> None:
-    print(f"\n[{n}/7] {text}", flush=True)
+    print(f"\n[{n}/8] {text}", flush=True)
 
 
 def preflight(cfg: dict) -> None:
@@ -85,6 +88,7 @@ def harness_command(cfg: dict, py: pathlib.Path, run_id: str, supervised: bool) 
         "--arm", run["arm"],
         "--judge", run["judge"],
         "--reader-stance", run["reader_stance"],
+        *(["--reader-contract", run["reader_contract"]] if "reader_contract" in run else []),
         "--phases", run["phases"],
         "--concurrency", str(run["concurrency"]),
         "--judge-concurrency", str(run["judge_concurrency"]),
@@ -96,6 +100,22 @@ def harness_command(cfg: dict, py: pathlib.Path, run_id: str, supervised: bool) 
     return [str(py), "-m", "bench.supervise",
             "--run-dir", f"runs/{run_id}", "--log", f"runs/{run_id}.supervise.log",
             "--", *core]
+
+
+def reference_command(cfg: dict, py: pathlib.Path, run_id: str, supervised: bool) -> list[str]:
+    """The matched-convention pass over a completed run, or [] if the config has none."""
+    ref = (cfg.get("conventions") or {}).get("reference")
+    if not ref:
+        return []
+    core = [str(py), "-m", "bench.reference_pass", "--run-dir", f"runs/{run_id}",
+            "--judge-passes", str(ref["judge_passes"]),
+            "--concurrency", str(cfg["run"]["concurrency"]),
+            "--judge-concurrency", str(cfg["run"]["judge_concurrency"])]
+    if not supervised:
+        return core
+    return [str(py), "-m", "bench.supervise",
+            "--run-dir", f"runs/{run_id}/reference",
+            "--log", f"runs/{run_id}/reference.supervise.log", "--", *core]
 
 
 def smoke_command(py: pathlib.Path, run_id: str) -> list[str]:
@@ -158,6 +178,10 @@ def publish(cfg: dict, run_dir: pathlib.Path, dest: pathlib.Path,
             index: dict, facts: dict) -> None:
     """Write the committable subset, then refuse it if any dataset text survived."""
     written = redact.redact_run(run_dir, dest)
+    if (run_dir / "reference" / "manifest.json").exists():
+        for name, what in redact.redact_offline_pass(run_dir / "reference",
+                                                     dest / "reference").items():
+            written[f"reference/{name}"] = what
     (dest / "provenance.json").write_text(json.dumps(facts, indent=2) + "\n",
                                           encoding="utf-8", newline="\n")
     (dest / "config.json").write_text(json.dumps(cfg, indent=2) + "\n",
@@ -187,14 +211,19 @@ def main() -> int:
                     help="set up, then ingest one conversation with no model calls")
     ap.add_argument("--remove-db", action="store_true",
                     help="remove the Postgres container afterwards")
+    ap.add_argument("--strict-only", action="store_true",
+                    help="skip the matched-convention pass; publish the strict figure only")
     args = ap.parse_args()
 
     cfg = load_config()
     py = engine.venv_python(WORK)
     cmd = harness_command(cfg, py, args.run_id, not args.no_supervisor)
+    ref_cmd = [] if args.strict_only else reference_command(cfg, py, args.run_id,
+                                                            not args.no_supervisor)
     if args.dry_run:
         print(json.dumps({"engine": cfg["engine"], "dataset": cfg["dataset"]["sha256"],
-                          "database": database.url(args.port), "command": cmd}, indent=2))
+                          "database": database.url(args.port), "command": cmd,
+                          "reference_command": ref_cmd}, indent=2))
         return 0
 
     preflight(cfg)
@@ -236,17 +265,34 @@ def main() -> int:
               f"from runs/{args.run_id}.")
         return proc.returncode or 1
 
-    _step(6, "provenance")
+    if ref_cmd:
+        _step(6, "the same run under the reference harness conventions (resumable)")
+        print("  " + " ".join(ref_cmd[ref_cmd.index("bench.reference_pass") - 2:]), flush=True)
+        rproc = subprocess.run(ref_cmd, cwd=eng, env=harness_env(cfg, args.port))
+        ref_path = run_dir / "reference" / "manifest.json"
+        ref = json.loads(ref_path.read_text(encoding="utf-8")) if ref_path.exists() else {}
+        if rproc.returncode != 0 or ref.get("quota_stop") or not ref.get("aggregate"):
+            print("\nThe reference pass stopped before it finished. Run the same command again "
+                  f"to resume from runs/{args.run_id}/reference.")
+            return rproc.returncode or 1
+    else:
+        _step(6, "reference harness conventions skipped")
+
+    _step(7, "provenance")
     facts = provenance.capture(python=str(py), db=database.server_facts(args.container),
                                engine_commit=cfg["engine"]["commit"],
                                engine_ref=cfg["engine"]["ref"])
 
-    _step(7, "committable results")
+    _step(8, "committable results")
     dest = ROOT / "results" / "locomo" / args.run_id
     publish(cfg, run_dir, dest, dataset.question_index(data_path), facts)
     print(f"  written to {dest.relative_to(ROOT)}")
 
     print("\n" + summarise(manifest))
+    ref_path = run_dir / "reference" / "manifest.json"
+    if ref_cmd and ref_path.exists():
+        print("\nunder the reference harness conventions, for comparability:")
+        print(summarise(json.loads(ref_path.read_text(encoding="utf-8"))))
     if args.remove_db:
         database.stop(args.container)
     return 0

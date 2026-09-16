@@ -84,6 +84,46 @@ def render(d: pathlib.Path, note: str = "") -> str:
     A(f"Write-yield at ingest: {_yield(m.get('ingest') or [])}.")
     A("")
 
+    ref = _load(d / "reference" / "manifest.json")
+    if ref.get("aggregate"):
+        conv = ref.get("conventions") or {}
+        src = conv.get("source") or {}
+        A("## Under the reference harness conventions")
+        A("")
+        A(f"Measured {conv.get('label', 'under the reference harness conventions')}, over the "
+          "same run: every non-adversarial question read again from the envelope the run saved, "
+          f"under the answer prompt and judge of [{src.get('repository', NR)}]"
+          f"({src.get('repository', '')}) at `{str(src.get('commit', NR))[:12]}` "
+          f"({src.get('license', NR)}). The strict figure above is Engraphy's primary figure.")
+        A("")
+        for arm, agg in ref["aggregate"].items():
+            A(f"Arm `{arm}`, 95% Wilson intervals in brackets.")
+            A("")
+            A("| | accuracy |")
+            A("|---|---|")
+            A(f"| **excluding adversarial** | **{_pct(agg.get('overall_excl_adversarial'))}** |")
+            for cat, b in sorted((agg.get("categories") or {}).items()):
+                A(f"| {cat} | {_pct(b)} |")
+            A("")
+        rm = ref.get("role_models") or {}
+        A(f"Reader `{(rm.get('reader') or {}).get('model', NR)}`, judge "
+          f"`{(rm.get('judge') or {}).get('model', NR)}`.")
+        A("")
+        A("Reproduced from the reference harness:")
+        A("")
+        for item in conv.get("reproduced") or []:
+            A(f"- {item}")
+        A("")
+        A("Where this differs from the reference harness:")
+        A("")
+        for item in conv.get("differences") or []:
+            A(f"- {item}")
+        A("")
+        prompts = (conv.get("prompts") or {}).values()
+        for prompt in sorted(prompts, key=lambda x: str(x.get("path"))):
+            A(f"- prompt `{prompt.get('path')}`: `{prompt.get('sha256')}`")
+        A("")
+
     A("## What ran")
     A("")
     ds = m.get("dataset") or {}
@@ -155,6 +195,10 @@ def render(d: pathlib.Path, note: str = "") -> str:
         A("- `provenance.json`: host, runtime and database versions.")
     if (d / "config.json").exists():
         A("- `config.json`: the configuration this run was produced with.")
+    if (d / "reference" / "results.jsonl").exists():
+        A("- `reference/`: the same run graded under the reference harness conventions: "
+          "its manifest, with the conventions, prompt hashes and differences, and one row "
+          "per non-adversarial question.")
     A("")
     return "\n".join(L)
 
