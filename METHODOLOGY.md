@@ -90,12 +90,17 @@ package versions, and the Postgres and pgvector versions.
 | figure | run | engine | write path |
 |---|---|---|---|
 | 67.1% excluding adversarial | `fullrun-conv-20260809` | Engraphy development branch `bench/full-run` at `631e7be`, schema 0023 | partial dates such as `2026-05` are accepted and stored as written; a typed attribute that fails validation is moved to a `dropped` bucket and the memory is kept; a supersede that cannot complete, because the replacement is of a different type or bands against a third memory, is written as a plain new memory with the old one left active and the downgrade flagged |
+| 66.8% excluding adversarial | `locomo-definitive-20260917` | `devon-clarkk/engraphy` at `3df1a4d`: PR #23 plus the reader check and search width 20, schema 0028 | partial dates are stored as written; an attribute that cannot be typed is quarantined and the memory kept; a cross-type supersede and a supersede whose replacement bands against a third memory are refused |
 | 60.2% excluding adversarial | `fullrun-conv-20260916` | public `devon-clarkk/engraphy` at `67dd41a`, schema 0024 | dates must be complete ISO dates; a memory whose typed attribute fails validation is refused; a cross-type supersede is refused (`ValidationError`); a supersede whose replacement bands against a third memory is refused (`SupersedeUnresolvedBandError`) |
 
-The prompts, the reader skill, the pack, the extractor and reader settings, the
-retrieval width, the thresholds, the dataset, the arm, the models and the judge
-are the same across both runs; the two manifests record the same hashes and
-settings. The write path is the one pinned difference between the two engines.
+Between `fullrun-conv-20260809` and `fullrun-conv-20260916`, the prompts, the reader
+skill, the pack, the extractor and reader settings, the retrieval width, the
+thresholds, the dataset, the arm, the models and the judge are the same; the two
+manifests record the same hashes and settings, and the write path is the one pinned
+difference. `locomo-definitive-20260917` changes three things further, each recorded in
+its manifest: the write path of PR #23, the reader's subject-and-occasion check with the
+`verify` reply contract, and a search width of 20 in place of 10, chosen by the rule in
+`analysis/2026-09-16-levers-preregistration.md` before it was measured.
 Each run's `ingest.jsonl` counts the extracted memories, the memories stored, and
 every refusal by class, with the engine's message for a sample of each.
 

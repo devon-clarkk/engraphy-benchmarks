@@ -1,0 +1,198 @@
+{
+  "instrument": "bench.replay",
+  "name": "s1-baseline",
+  "source_run": "fullrun-conv-20260916",
+  "source_engine_git_sha": "67dd41acf9e5bcd82884ffd8535d20bdd5020021",
+  "arm": "llm-conversational/search_only/always_distinct/replay-s1-baseline",
+  "envelopes": "engraphy-fresh-bench\\runs\\fullrun-conv-20260916\\envelopes.jsonl",
+  "select": [
+    "adversarial",
+    "declined"
+  ],
+  "reader": {
+    "governing_skill": "..\\engraphy-fresh-bench\\skills\\answer-discipline.md",
+    "governing_skill_sha256": "sha256:c2afc35fd461d18b5222fd8f8c48c7aeb68a975a90e118a204724fa047ce54a4",
+    "inference_stance": "grounded",
+    "output_format": "direct",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "model": "claude-opus-4-8",
+    "system_sha256": "dd617b6b645d16c99bac513d8f0af0a74f45ac79d69cc73467b3f4fe3887653f"
+  },
+  "judge": {
+    "prompt": "bench/prompts/judge.md",
+    "passes": 3,
+    "model": "claude-sonnet-5",
+    "reuse_verdicts_for_identical_answers": true
+  },
+  "groups": {
+    "declined": 76,
+    "adversarial": 111
+  },
+  "sample_per_group": null,
+  "aggregate": {
+    "llm-conversational/search_only/always_distinct/replay-s1-baseline": {
+      "overall": {
+        "n": 187,
+        "correct": 91,
+        "accuracy": 0.4866,
+        "wilson_95": [
+          0.416,
+          0.5578
+        ],
+        "abstained": 158,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 8917,
+        "payload_bytes_p95": 10039,
+        "payload_bytes_mean": 8862,
+        "accuracy_per_1k_bytes": 0.0549,
+        "e2e_seconds_p50": 7.021,
+        "e2e_seconds_p95": 10.784,
+        "judge_seconds_p50": 0.0
+      },
+      "overall_excl_adversarial": {
+        "n": 76,
+        "correct": 3,
+        "accuracy": 0.0395,
+        "wilson_95": [
+          0.0135,
+          0.1097
+        ],
+        "abstained": 70,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 8842,
+        "payload_bytes_p95": 9968,
+        "payload_bytes_mean": 8791,
+        "accuracy_per_1k_bytes": 0.0045,
+        "e2e_seconds_p50": 7.787,
+        "e2e_seconds_p95": 13.315,
+        "judge_seconds_p50": 0.0
+      },
+      "categories": {
+        "adversarial": {
+          "n": 111,
+          "correct": 88,
+          "accuracy": 0.7928,
+          "wilson_95": [
+            0.7082,
+            0.8578
+          ],
+          "abstained": 88,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8937,
+          "payload_bytes_p95": 10190,
+          "payload_bytes_mean": 8910,
+          "accuracy_per_1k_bytes": 0.089,
+          "e2e_seconds_p50": 6.699,
+          "e2e_seconds_p95": 10.023,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 9,
+          "correct": 0,
+          "accuracy": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ],
+          "abstained": 8,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8717,
+          "payload_bytes_p95": 9584,
+          "payload_bytes_mean": 8426,
+          "accuracy_per_1k_bytes": 0.0,
+          "e2e_seconds_p50": 9.073,
+          "e2e_seconds_p95": 10.402,
+          "judge_seconds_p50": 0.0
+        },
+        "open-domain-knowledge": {
+          "n": 4,
+          "correct": 0,
+          "accuracy": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4899
+          ],
+          "abstained": 3,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8386,
+          "payload_bytes_p95": 10755,
+          "payload_bytes_mean": 9197,
+          "accuracy_per_1k_bytes": 0.0,
+          "e2e_seconds_p50": 6.96,
+          "e2e_seconds_p95": 9.073,
+          "judge_seconds_p50": 0.0
+        },
+        "single-hop": {
+          "n": 44,
+          "correct": 3,
+          "accuracy": 0.0682,
+          "wilson_95": [
+            0.0235,
+            0.1823
+          ],
+          "abstained": 40,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8976,
+          "payload_bytes_p95": 9704,
+          "payload_bytes_mean": 8775,
+          "accuracy_per_1k_bytes": 0.0078,
+          "e2e_seconds_p50": 7.205,
+          "e2e_seconds_p95": 10.848,
+          "judge_seconds_p50": 0.0
+        },
+        "temporal-reasoning": {
+          "n": 19,
+          "correct": 0,
+          "accuracy": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1682
+          ],
+          "abstained": 19,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8917,
+          "payload_bytes_p95": 10320,
+          "payload_bytes_mean": 8916,
+          "accuracy_per_1k_bytes": 0.0,
+          "e2e_seconds_p50": 8.181,
+          "e2e_seconds_p95": 16.26,
+          "judge_seconds_p50": 0.0
+        }
+      }
+    }
+  },
+  "quota_stop": false,
+  "rows_answered_but_ungraded": 0,
+  "finished_at": "2026-09-16T11:59:55.293850+00:00",
+  "transitions": {
+    "declined": {
+      "n": 76,
+      "correct_before": 0,
+      "correct_after": 3,
+      "right_to_wrong": 0,
+      "wrong_to_right": 3,
+      "declined_before": 76,
+      "declined_after": 70,
+      "verdicts_reused": 70
+    },
+    "adversarial": {
+      "n": 111,
+      "correct_before": 82,
+      "correct_after": 88,
+      "right_to_wrong": 2,
+      "wrong_to_right": 8,
+      "declined_before": 82,
+      "declined_after": 88,
+      "verdicts_reused": 0
+    }
+  }
+}

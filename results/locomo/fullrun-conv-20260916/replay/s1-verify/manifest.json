@@ -1,0 +1,198 @@
+{
+  "instrument": "bench.replay",
+  "name": "s1-verify",
+  "source_run": "fullrun-conv-20260916",
+  "source_engine_git_sha": "67dd41acf9e5bcd82884ffd8535d20bdd5020021",
+  "arm": "llm-conversational/search_only/always_distinct/replay-s1-verify",
+  "envelopes": "engraphy-fresh-bench\\runs\\fullrun-conv-20260916\\envelopes.jsonl",
+  "select": [
+    "adversarial",
+    "declined"
+  ],
+  "reader": {
+    "governing_skill": "skills/answer-discipline.md",
+    "governing_skill_sha256": "sha256:c3b00290fe684bcbf4a6c768f3596020e9feb21ae7bf6fd87ad05072a526bd4b",
+    "inference_stance": "grounded",
+    "output_format": "verify",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.\n\nLay out your reply as exactly two lines. The first line begins `CHECK:` and says, in a few words, who or what the question is about, the specific fact it asks for, and the title of the returned memory that states or supports that fact for that subject and occasion, or `none`. The second line begins `ANSWER:` and carries only your answer, in the form above; when you decline, it is exactly INSUFFICIENT. The grader sees only the text after `ANSWER:`.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "model": "claude-opus-4-8",
+    "system_sha256": "ee0aec41bb05e5238e9ca496006f1f24b2ccda67355a40efd4fbd764b576b224"
+  },
+  "judge": {
+    "prompt": "bench/prompts/judge.md",
+    "passes": 3,
+    "model": "claude-sonnet-5",
+    "reuse_verdicts_for_identical_answers": true
+  },
+  "groups": {
+    "declined": 76,
+    "adversarial": 111
+  },
+  "sample_per_group": null,
+  "aggregate": {
+    "llm-conversational/search_only/always_distinct/replay-s1-verify": {
+      "overall": {
+        "n": 187,
+        "correct": 104,
+        "accuracy": 0.5561,
+        "wilson_95": [
+          0.4845,
+          0.6255
+        ],
+        "abstained": 168,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 8917,
+        "payload_bytes_p95": 10039,
+        "payload_bytes_mean": 8862,
+        "accuracy_per_1k_bytes": 0.0628,
+        "e2e_seconds_p50": 7.714,
+        "e2e_seconds_p95": 12.338,
+        "judge_seconds_p50": 0.0
+      },
+      "overall_excl_adversarial": {
+        "n": 76,
+        "correct": 5,
+        "accuracy": 0.0658,
+        "wilson_95": [
+          0.0284,
+          0.1449
+        ],
+        "abstained": 69,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 8842,
+        "payload_bytes_p95": 9968,
+        "payload_bytes_mean": 8791,
+        "accuracy_per_1k_bytes": 0.0075,
+        "e2e_seconds_p50": 7.792,
+        "e2e_seconds_p95": 13.531,
+        "judge_seconds_p50": 0.0
+      },
+      "categories": {
+        "adversarial": {
+          "n": 111,
+          "correct": 99,
+          "accuracy": 0.8919,
+          "wilson_95": [
+            0.8205,
+            0.9371
+          ],
+          "abstained": 99,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8937,
+          "payload_bytes_p95": 10190,
+          "payload_bytes_mean": 8910,
+          "accuracy_per_1k_bytes": 0.1001,
+          "e2e_seconds_p50": 7.648,
+          "e2e_seconds_p95": 11.714,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 9,
+          "correct": 0,
+          "accuracy": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ],
+          "abstained": 9,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8717,
+          "payload_bytes_p95": 9584,
+          "payload_bytes_mean": 8426,
+          "accuracy_per_1k_bytes": 0.0,
+          "e2e_seconds_p50": 9.714,
+          "e2e_seconds_p95": 13.531,
+          "judge_seconds_p50": 0.0
+        },
+        "open-domain-knowledge": {
+          "n": 4,
+          "correct": 1,
+          "accuracy": 0.25,
+          "wilson_95": [
+            0.0456,
+            0.6994
+          ],
+          "abstained": 2,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8386,
+          "payload_bytes_p95": 10755,
+          "payload_bytes_mean": 9197,
+          "accuracy_per_1k_bytes": 0.0272,
+          "e2e_seconds_p50": 8.515,
+          "e2e_seconds_p95": 18.314,
+          "judge_seconds_p50": 0.0
+        },
+        "single-hop": {
+          "n": 44,
+          "correct": 4,
+          "accuracy": 0.0909,
+          "wilson_95": [
+            0.0359,
+            0.2116
+          ],
+          "abstained": 39,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8976,
+          "payload_bytes_p95": 9704,
+          "payload_bytes_mean": 8775,
+          "accuracy_per_1k_bytes": 0.0104,
+          "e2e_seconds_p50": 7.792,
+          "e2e_seconds_p95": 12.624,
+          "judge_seconds_p50": 0.0
+        },
+        "temporal-reasoning": {
+          "n": 19,
+          "correct": 0,
+          "accuracy": 0.0,
+          "wilson_95": [
+            0.0,
+            0.1682
+          ],
+          "abstained": 19,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 8917,
+          "payload_bytes_p95": 10320,
+          "payload_bytes_mean": 8916,
+          "accuracy_per_1k_bytes": 0.0,
+          "e2e_seconds_p50": 7.602,
+          "e2e_seconds_p95": 15.14,
+          "judge_seconds_p50": 0.0
+        }
+      }
+    }
+  },
+  "quota_stop": false,
+  "rows_answered_but_ungraded": 0,
+  "finished_at": "2026-09-17T00:18:40.443596+00:00",
+  "transitions": {
+    "declined": {
+      "n": 76,
+      "correct_before": 0,
+      "correct_after": 5,
+      "right_to_wrong": 0,
+      "wrong_to_right": 5,
+      "declined_before": 76,
+      "declined_after": 69,
+      "verdicts_reused": 69
+    },
+    "adversarial": {
+      "n": 111,
+      "correct_before": 82,
+      "correct_after": 99,
+      "right_to_wrong": 0,
+      "wrong_to_right": 17,
+      "declined_before": 82,
+      "declined_after": 99,
+      "verdicts_reused": 0
+    }
+  }
+}

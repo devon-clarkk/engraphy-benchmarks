@@ -1,0 +1,570 @@
+{
+  "run_id": "locomo-definitive-20260917",
+  "benchmark": "locomo",
+  "space_config": {},
+  "generated_at": "2026-09-17T00:18:03.602650+00:00",
+  "engine_git_sha": "3df1a4d232bbd9410d8e8e205f198c29ac83255e",
+  "harness_git_sha": "3df1a4d232bbd9410d8e8e205f198c29ac83255e",
+  "git_tree_dirty": false,
+  "git_branch": "bench/locomo-conventions-reader-width",
+  "transport": "in-process (engraphy.core), per design/09 §in-process decision",
+  "principal": "bench",
+  "packs": {
+    "conversational": {
+      "space_id": "bench-locomo-definitive-20260917-conversational",
+      "version": 1,
+      "file_hash": "sha256:5292819f0d09c92d2cb5d906916335c5cd34bc3e1d2792d29c55e6909fcef61d",
+      "ambient_scopes_stripped": true,
+      "node_types": [
+        "decision",
+        "event",
+        "fact",
+        "opinion",
+        "person",
+        "preference",
+        "thing"
+      ],
+      "note": "ambient_scopes removed for haystack isolation (symmetric across packs; recorded beside the untouched file hash)"
+    }
+  },
+  "band_thresholds": {
+    "source": "config table, per-space; code defaults where unset",
+    "code_defaults": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    },
+    "config_rows": {},
+    "effective": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    }
+  },
+  "band_thresholds_note": "read back from one representative pack space; every pack space is provisioned identically with no override.",
+  "reader": {
+    "governing_skill": "skills/answer-discipline.md",
+    "governing_skill_sha256": "sha256:c3b00290fe684bcbf4a6c768f3596020e9feb21ae7bf6fd87ad05072a526bd4b",
+    "inference_stance": "grounded",
+    "output_format": "verify",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.\n\nLay out your reply as exactly two lines. The first line begins `CHECK:` and says, in a few words, who or what the question is about, the specific fact it asks for, and the title of the returned memory that states or supports that fact for that subject and occasion, or `none`. The second line begins `ANSWER:` and carries only your answer, in the form above; when you decline, it is exactly INSUFFICIENT. The grader sees only the text after `ANSWER:`.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "effort": "medium",
+    "model": "claude-opus-4-8"
+  },
+  "dataset": {
+    "path": "locomo10.json",
+    "digest": "sha256:79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "questions_in_file": 1986
+  },
+  "haystacks": [
+    "conv-26",
+    "conv-30",
+    "conv-49"
+  ],
+  "corpus": {
+    "name": "locomo[conv-26,conv-30,conv-49]",
+    "haystacks": 3,
+    "sessions": 63,
+    "turns": 1297,
+    "questions": 500,
+    "questions_per_category": {
+      "adversarial": 111,
+      "multi-hop": 80,
+      "open-domain-knowledge": 26,
+      "single-hop": 187,
+      "temporal-reasoning": 96
+    },
+    "abstain_questions": 111,
+    "notes": {
+      "source_file": "locomo10.json",
+      "dropped_image_only_turns": 0,
+      "coerced_non_string_answers": 6,
+      "category_mapping": {
+        "1": "multi-hop",
+        "2": "temporal-reasoning",
+        "3": "open-domain-knowledge",
+        "4": "single-hop",
+        "5": "adversarial"
+      },
+      "summaries_ingested": false,
+      "restricted_to_haystacks": [
+        "conv-26",
+        "conv-30",
+        "conv-49"
+      ]
+    }
+  },
+  "arms": [
+    {
+      "arm_id": "llm-conversational/search_only/always_distinct/k20",
+      "extractor": "llm",
+      "pack": "conversational",
+      "strategy": "search_only",
+      "confirm_policy": "always_distinct",
+      "categories": "all",
+      "k": 20
+    }
+  ],
+  "retrieval_configs": {
+    "llm-conversational/search_only/always_distinct/k20": {
+      "strategy": "search_only",
+      "limit": 20,
+      "detail": "full"
+    }
+  },
+  "role_models": {
+    "extractor": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "reader": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "adjudicator": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "judge": {
+      "provider": "claude-cli",
+      "model": "claude-sonnet-5",
+      "same_vendor": true
+    }
+  },
+  "judge_provider": "claude",
+  "judge_neutrality": "THIS RUN'S JUDGE IS SAME-VENDOR (Claude), a deliberate deviation from design/09's cross-vendor rule. The rationale for that rule -- 'a harness that grades its own vendor's answers invites the marked-its-own-homework objection' -- still stands as the recommended posture for any eventual PUBLISHED number, and the Gemini judge path is retained for exactly that. It is set aside here for two reasons: (1) the task is binary answer-matching against a supplied gold answer, which is low bias-risk for same-vendor grading -- the judge is not scoring prose quality, only whether two short facts agree; and (2) the Gemini free tier's per-model daily cap (measured at 500/day for flash-lite, 20/day for flash) makes a complete same-day run impossible, and this is an internal baseline, not a publishable figure. The judge still sees only question, gold and candidate -- never the envelope, strategy or extractor -- so it cannot condition on the arm it grades. Judge instability is measured on this run regardless of vendor.",
+  "resolved_models": {
+    "reader": [
+      "claude-opus-4-8"
+    ],
+    "judge": [
+      "claude-sonnet-5"
+    ],
+    "reader_note": "A SET, not a single id, and it legitimately contains a Haiku model alongside the requested Sonnet. The CLI runs a second model for its own internal work, and ClaudeCLIClient._resolved_model reports whichever model emitted the most output tokens in that call -- for a one-line reader answer that is sometimes the internal model rather than the one that answered. So this field bounds which models were involved; it does not prove which produced a given answer. The requested alias is recorded verbatim under role_models. Recorded as a known imprecision rather than resolved by guessing."
+  },
+  "prompt_hashes": {
+    "extract.md": "sha256:b7fdf557f7f60a9c",
+    "judge.md": "sha256:947bebcd5375e93e",
+    "adjudicate.md": "sha256:740151c30787a630"
+  },
+  "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
+  "embedding_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "llm_extractor": {
+    "retain_source_text": true,
+    "note": "When true, the LLM extractor appends the verbatim text of the turns each memory cites (source_turn_ids) to the node body, so a typed node stays word-searchable. A general recall property, not a single-hop trick; the source is the cited turns copied exactly, never re-summarised. design/09 single-hop finding, 2026-07-22."
+  },
+  "retrieval_note": "search_then_traverse seeds with the SAME search(limit, detail) as the search_only baseline and walks every seed, so the two arms differ only in the graph walk -- the multi-hop comparison isolates the graph contribution rather than confounding it with search width.",
+  "token_counter": null,
+  "token_counter_note": "Absent by construction, not by oversight. Counting Claude tokens needs the count_tokens API and therefore an API key; this harness routes Claude through the CLI on a subscription so that no API credit is spent, and the CLI reports usage for its own injected system prompt rather than for the payload. Gemini's tokenizer would be a different vendor's tokenizer measuring a Claude payload -- the same objection that ruled out tiktoken. Payload is reported in bytes of the serialized envelope; byte ratios between arms are tokenizer-independent, absolute token claims are not made.",
+  "seeds": {
+    "question_order": "dataset order (no sampling within a conversation)"
+  },
+  "dataset_licence": "CC BY-NC 4.0 — internal measurement only; commercial publication is the project owner's open question",
+  "ingest": [
+    {
+      "haystack_id": "conv-26",
+      "drafts": 131,
+      "inserted": 41,
+      "merged": 0,
+      "merged_linked": 9,
+      "needs_confirmation": 78,
+      "confirm_band_rate": 0.5954,
+      "resolved_distinct": 78,
+      "resolved_merge": 0,
+      "resolved_to_insert": 78,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 128,
+      "edges_requested": 114,
+      "edges_attached": 100,
+      "supersede_attempted": 4,
+      "supersede_target_unresolved": 0,
+      "write_errors": {
+        "ValidationError": 2,
+        "SupersedeUnresolvedBandError": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'event' -- cross-type supersession is a modeling error",
+          "node_type": "event",
+          "title_len": 59,
+          "body_len": 743,
+          "attr_keys": [
+            "location",
+            "occurred_on"
+          ]
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "event",
+          "title_len": 54,
+          "body_len": 944,
+          "attr_keys": [
+            "occurred_on"
+          ]
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'event' -- cross-type supersession is a modeling error",
+          "node_type": "event",
+          "title_len": 43,
+          "body_len": 511,
+          "attr_keys": [
+            "occurred_on"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 38,
+      "ingest_output_tokens": 43284,
+      "embed_seconds": 33.5986,
+      "write_seconds": 3.3865,
+      "total_seconds": 598.181,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-26-llm",
+      "space_id": "bench-locomo-definitive-20260917-conversational",
+      "done": true,
+      "sessions": 19,
+      "turns": 419
+    },
+    {
+      "haystack_id": "conv-30",
+      "drafts": 75,
+      "inserted": 24,
+      "merged": 0,
+      "merged_linked": 3,
+      "needs_confirmation": 43,
+      "confirm_band_rate": 0.5733,
+      "resolved_distinct": 42,
+      "resolved_merge": 0,
+      "resolved_to_insert": 42,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 69,
+      "edges_requested": 50,
+      "edges_attached": 45,
+      "supersede_attempted": 5,
+      "supersede_target_unresolved": 0,
+      "write_errors": {
+        "SupersedeUnresolvedBandError": 2,
+        "ValidationError": 3,
+        "resolve:CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 39,
+          "body_len": 669,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('event'), not 'fact' -- cross-type supersession is a modeling error",
+          "node_type": "fact",
+          "title_len": 47,
+          "body_len": 495,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.as_of is not allowed (closed spec)"
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 61,
+          "body_len": 596,
+          "attr_keys": []
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'event' -- cross-type supersession is a modeling error",
+          "node_type": "event",
+          "title_len": 48,
+          "body_len": 342,
+          "attr_keys": [
+            "occurred_on"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 42,
+      "ingest_output_tokens": 32752,
+      "embed_seconds": 19.0739,
+      "write_seconds": 1.7701,
+      "total_seconds": 480.6281,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-30-llm",
+      "space_id": "bench-locomo-definitive-20260917-conversational",
+      "done": true,
+      "sessions": 19,
+      "turns": 369
+    },
+    {
+      "haystack_id": "conv-49",
+      "drafts": 128,
+      "inserted": 44,
+      "merged": 1,
+      "merged_linked": 1,
+      "needs_confirmation": 76,
+      "confirm_band_rate": 0.5938,
+      "resolved_distinct": 76,
+      "resolved_merge": 0,
+      "resolved_to_insert": 76,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 121,
+      "edges_requested": 93,
+      "edges_attached": 77,
+      "supersede_attempted": 6,
+      "supersede_target_unresolved": 0,
+      "write_errors": {
+        "ValidationError": 4,
+        "SupersedeUnresolvedBandError": 2
+      },
+      "write_error_samples": [
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'decision' -- cross-type supersession is a modeling error",
+          "node_type": "decision",
+          "title_len": 40,
+          "body_len": 977,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'decision' -- cross-type supersession is a modeling error",
+          "node_type": "decision",
+          "title_len": 41,
+          "body_len": 294,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 42,
+          "body_len": 285,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "ValidationError",
+          "detail": "ENGRAPHY_VALIDATION: type must equal the superseded node's type ('fact'), not 'decision' -- cross-type supersession is a modeling error",
+          "node_type": "decision",
+          "title_len": 50,
+          "body_len": 587,
+          "attr_keys": [
+            "as_of"
+          ]
+        },
+        {
+          "error": "SupersedeUnresolvedBandError",
+          "detail": "supersede's replacement banded 'needs_confirmation' against a node other than old_id and produced no replacement row; the plan does not define this case (QUESTIONS.md 'supersede-nonclean-band', PENDING/absorb sub-cases)",
+          "node_type": "fact",
+          "title_len": 57,
+          "body_len": 721,
+          "attr_keys": [
+            "as_of"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 60,
+      "ingest_output_tokens": 55192,
+      "embed_seconds": 33.0018,
+      "write_seconds": 2.946,
+      "total_seconds": 772.0826,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-49-llm",
+      "space_id": "bench-locomo-definitive-20260917-conversational",
+      "done": true,
+      "sessions": 25,
+      "turns": 509
+    }
+  ],
+  "extrapolation": "Projected from this run's measured rates, not from an estimate. Ingest is per-session and answering is per-question; neither has a term that grows with corpus size, so the projection is linear by construction rather than by simplification.\n\n| stage | measured here | full suite (×10 conversations) |\n|---|---|---|\n| ingest, `llm` extractor | 31 min for 63 sessions (29.4 s/session) | **2.2 h** for 272 sessions |\n| answering (1 arms) | 500 reader calls, 8.2 s each | **1986 calls ≈ 1.5 h** at concurrency 3 |\n| judging | 389 calls (adversarial graded without the judge) | **1540 calls** |\n\n**The judge ran on Claude (Max plan) and hit no rate limit across the entire 389-call grading pass.** So unlike the Gemini route (whose per-model daily cap of 500/day is documented below as the fallback path), the constraint here is not a daily quota — it is plan headroom plus sequential wall-clock. Judging is one Claude CLI spawn per question, ~16.7s each, run sequentially: a full-suite 1540-call pass is **≈ 7.1 h** of grading wall-clock (and parallelises trivially — the calibration pass was cut from ~8 min sequential to ~2 min at 4 workers). Whether that many calls stays inside plan limits is the open question a full run would answer; this subset did, comfortably.\n\n**Fallback, for a published number.** design/09's cross-vendor posture puts the judge on Gemini, whose free tier is the real ceiling: measured at 500 requests/day for `gemini-flash-lite-latest` (and 20/day for `gemini-flash-latest`), a 1540-call full suite is **4 days** of budget. The checkpointing exists for exactly that route — designed to be stopped by quota and resumed.\n\n**Financial cost: nil.** Every role runs on the operator's existing subscriptions — extraction/reading/adjudication on the Claude CLI, and judging on either the Claude Max plan (this run) or the Gemini free tier (the cross-vendor default). No run of this harness in any configuration spends API credit.\n\nTwo caveats on the projection, both pointing the same way. The measured conversations are the smaller ones (63 of the suite's 272 sessions across 3 of 10 conversations, so ~23% of ingest for 30% of the conversations), so a full run is somewhat worse than ×10 of what is shown. And reader latency here is dominated by CLI subprocess spawn, which a deployed agent would not pay — it inflates the wall-clock projection but not the cost.",
+  "quota_stop": false,
+  "rows_graded": 500,
+  "rows_answered_but_ungraded": 0,
+  "aggregate": {
+    "llm-conversational/search_only/always_distinct/k20": {
+      "overall": {
+        "n": 500,
+        "correct": 359,
+        "accuracy": 0.718,
+        "wilson_95": [
+          0.677,
+          0.7557
+        ],
+        "abstained": 144,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 16606,
+        "payload_bytes_p95": 19774,
+        "payload_bytes_mean": 16654,
+        "accuracy_per_1k_bytes": 0.0431,
+        "e2e_seconds_p50": 7.57,
+        "e2e_seconds_p95": 13.496,
+        "judge_seconds_p50": 14.264
+      },
+      "overall_excl_adversarial": {
+        "n": 389,
+        "correct": 260,
+        "accuracy": 0.6684,
+        "wilson_95": [
+          0.6201,
+          0.7133
+        ],
+        "abstained": 45,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 16556,
+        "payload_bytes_p95": 20057,
+        "payload_bytes_mean": 16610,
+        "accuracy_per_1k_bytes": 0.0402,
+        "e2e_seconds_p50": 7.413,
+        "e2e_seconds_p95": 13.852,
+        "judge_seconds_p50": 14.976
+      },
+      "categories": {
+        "adversarial": {
+          "n": 111,
+          "correct": 99,
+          "accuracy": 0.8919,
+          "wilson_95": [
+            0.8205,
+            0.9371
+          ],
+          "abstained": 99,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16762,
+          "payload_bytes_p95": 19106,
+          "payload_bytes_mean": 16809,
+          "accuracy_per_1k_bytes": 0.0531,
+          "e2e_seconds_p50": 8.082,
+          "e2e_seconds_p95": 12.586,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 80,
+          "correct": 43,
+          "accuracy": 0.5375,
+          "wilson_95": [
+            0.429,
+            0.6425
+          ],
+          "abstained": 3,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16236,
+          "payload_bytes_p95": 20187,
+          "payload_bytes_mean": 16327,
+          "accuracy_per_1k_bytes": 0.0329,
+          "e2e_seconds_p50": 7.921,
+          "e2e_seconds_p95": 14.04,
+          "judge_seconds_p50": 16.213
+        },
+        "open-domain-knowledge": {
+          "n": 26,
+          "correct": 18,
+          "accuracy": 0.6923,
+          "wilson_95": [
+            0.5001,
+            0.835
+          ],
+          "abstained": 0,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16874,
+          "payload_bytes_p95": 18788,
+          "payload_bytes_mean": 16385,
+          "accuracy_per_1k_bytes": 0.0423,
+          "e2e_seconds_p50": 9.32,
+          "e2e_seconds_p95": 14.253,
+          "judge_seconds_p50": 16.614
+        },
+        "single-hop": {
+          "n": 187,
+          "correct": 129,
+          "accuracy": 0.6898,
+          "wilson_95": [
+            0.6203,
+            0.7518
+          ],
+          "abstained": 33,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16486,
+          "payload_bytes_p95": 19402,
+          "payload_bytes_mean": 16466,
+          "accuracy_per_1k_bytes": 0.0419,
+          "e2e_seconds_p50": 7.176,
+          "e2e_seconds_p95": 14.12,
+          "judge_seconds_p50": 14.596
+        },
+        "temporal-reasoning": {
+          "n": 96,
+          "correct": 70,
+          "accuracy": 0.7292,
+          "wilson_95": [
+            0.6327,
+            0.808
+          ],
+          "abstained": 9,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16960,
+          "payload_bytes_p95": 20466,
+          "payload_bytes_mean": 17187,
+          "accuracy_per_1k_bytes": 0.0424,
+          "e2e_seconds_p50": 7.117,
+          "e2e_seconds_p95": 12.966,
+          "judge_seconds_p50": 14.825
+        }
+      }
+    }
+  },
+  "failure_modes": {
+    "llm-conversational/search_only/always_distinct/k20": {
+      "correct": 359,
+      "extraction-miss": 28,
+      "reader-miss": 84,
+      "reader-over-answered": 12,
+      "retrieval-miss": 12,
+      "unattributed": 5
+    }
+  },
+  "judge_calibration": {
+    "items_graded_twice": 40,
+    "disagreements": 1,
+    "instability": 0.025,
+    "judge_errors": 0,
+    "disagreeing_items": [
+      {
+        "question_id": "conv-26:q37",
+        "first": false,
+        "second": true
+      }
+    ],
+    "human_agreement": null,
+    "human_agreement_note": "design/09 also specifies agreement against a committed human-labelled subset. No such labels exist yet; this half of the calibration is outstanding and is recorded as absent rather than omitted."
+  }
+}

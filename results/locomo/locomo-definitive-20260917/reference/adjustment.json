@@ -1,0 +1,66 @@
+{
+ "categories": {
+  "single-hop": {
+   "n": 187,
+   "raw": 159,
+   "floor": 145,
+   "defensible": 151,
+   "removed": 8,
+   "kept_rubric_only": 6
+  },
+  "multi-hop": {
+   "n": 80,
+   "raw": 76,
+   "floor": 51,
+   "defensible": 75,
+   "removed": 1,
+   "kept_rubric_only": 24
+  },
+  "temporal-reasoning": {
+   "n": 96,
+   "raw": 87,
+   "floor": 76,
+   "defensible": 86,
+   "removed": 1,
+   "kept_rubric_only": 10
+  },
+  "open-domain-knowledge": {
+   "n": 26,
+   "raw": 24,
+   "floor": 22,
+   "defensible": 23,
+   "removed": 1,
+   "kept_rubric_only": 1
+  },
+  "ALL": {
+   "n": 389,
+   "raw": 346,
+   "floor": 294,
+   "defensible": 335,
+   "removed": 11,
+   "kept_rubric_only": 41
+  }
+ },
+ "mismatched": {
+  "n": 60,
+  "reference_accepts": 6,
+  "strict_accepts": 1
+ },
+ "by_evidence": {
+  "some/all": {
+   "n": 311,
+   "raw": 294,
+   "strict": 253
+  },
+  "none": {
+   "n": 76,
+   "raw": 50,
+   "strict": 39
+  },
+  "n/a": {
+   "n": 2,
+   "raw": 2,
+   "strict": 2
+  }
+ }
+}

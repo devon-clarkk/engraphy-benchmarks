@@ -1,0 +1,161 @@
+{
+  "run_dir": "engraphy-fresh-bench\\runs\\fullrun-conv-20260916",
+  "arm": "llm-conversational/search_only/always_distinct",
+  "space_id": "bench-fullrun-conv-20260916-conversational",
+  "questions_measured": 389,
+  "evidence_turn_match": "normalised 60-character prefix in a returned body",
+  "k10_matches_saved_envelopes": {
+    "same_order": 388,
+    "different": 1
+  },
+  "by_k": {
+    "10": {
+      "all": {
+        "evidence_recall": 0.6534,
+        "all_evidence": 0.5711,
+        "gold_in_context": 0.7396,
+        "rendered_chars_mean": 6555.0154,
+        "n": 387
+      },
+      "multi-hop": {
+        "evidence_recall": 0.5434,
+        "all_evidence": 0.2625,
+        "gold_in_context": 0.6885,
+        "rendered_chars_mean": 6439.275,
+        "n": 80
+      },
+      "open-domain-knowledge": {
+        "evidence_recall": 0.4392,
+        "all_evidence": 0.25,
+        "gold_in_context": 0.3837,
+        "rendered_chars_mean": 6473.0,
+        "n": 24
+      },
+      "single-hop": {
+        "evidence_recall": 0.6604,
+        "all_evidence": 0.6524,
+        "gold_in_context": 0.7767,
+        "rendered_chars_mean": 6549.2727,
+        "n": 187
+      },
+      "temporal-reasoning": {
+        "evidence_recall": 0.7847,
+        "all_evidence": 0.75,
+        "gold_in_context": 0.811,
+        "rendered_chars_mean": 6684.8646,
+        "n": 96
+      }
+    },
+    "15": {
+      "all": {
+        "evidence_recall": 0.6756,
+        "all_evidence": 0.5943,
+        "gold_in_context": 0.775,
+        "rendered_chars_mean": 9746.2159,
+        "n": 387
+      },
+      "multi-hop": {
+        "evidence_recall": 0.6302,
+        "all_evidence": 0.3625,
+        "gold_in_context": 0.7572,
+        "rendered_chars_mean": 9542.9875,
+        "n": 80
+      },
+      "open-domain-knowledge": {
+        "evidence_recall": 0.4663,
+        "all_evidence": 0.25,
+        "gold_in_context": 0.4181,
+        "rendered_chars_mean": 9364.4231,
+        "n": 24
+      },
+      "single-hop": {
+        "evidence_recall": 0.6604,
+        "all_evidence": 0.6524,
+        "gold_in_context": 0.7965,
+        "rendered_chars_mean": 9795.3743,
+        "n": 187
+      },
+      "temporal-reasoning": {
+        "evidence_recall": 0.7951,
+        "all_evidence": 0.7604,
+        "gold_in_context": 0.8517,
+        "rendered_chars_mean": 9923.2188,
+        "n": 96
+      }
+    },
+    "20": {
+      "all": {
+        "evidence_recall": 0.6832,
+        "all_evidence": 0.6021,
+        "gold_in_context": 0.7972,
+        "rendered_chars_mean": 12960.7866,
+        "n": 387
+      },
+      "multi-hop": {
+        "evidence_recall": 0.6601,
+        "all_evidence": 0.3875,
+        "gold_in_context": 0.7659,
+        "rendered_chars_mean": 12724.2625,
+        "n": 80
+      },
+      "open-domain-knowledge": {
+        "evidence_recall": 0.4688,
+        "all_evidence": 0.25,
+        "gold_in_context": 0.4885,
+        "rendered_chars_mean": 12673.3846,
+        "n": 24
+      },
+      "single-hop": {
+        "evidence_recall": 0.6631,
+        "all_evidence": 0.6578,
+        "gold_in_context": 0.8151,
+        "rendered_chars_mean": 13012.2353,
+        "n": 187
+      },
+      "temporal-reasoning": {
+        "evidence_recall": 0.7951,
+        "all_evidence": 0.7604,
+        "gold_in_context": 0.8789,
+        "rendered_chars_mean": 13135.5104,
+        "n": 96
+      }
+    },
+    "25": {
+      "all": {
+        "evidence_recall": 0.692,
+        "all_evidence": 0.6098,
+        "gold_in_context": 0.8049,
+        "rendered_chars_mean": 16178.6093,
+        "n": 387
+      },
+      "multi-hop": {
+        "evidence_recall": 0.6682,
+        "all_evidence": 0.4,
+        "gold_in_context": 0.7721,
+        "rendered_chars_mean": 15954.1375,
+        "n": 80
+      },
+      "open-domain-knowledge": {
+        "evidence_recall": 0.5223,
+        "all_evidence": 0.25,
+        "gold_in_context": 0.4908,
+        "rendered_chars_mean": 15848.2692,
+        "n": 24
+      },
+      "single-hop": {
+        "evidence_recall": 0.6684,
+        "all_evidence": 0.6631,
+        "gold_in_context": 0.8244,
+        "rendered_chars_mean": 16227.9679,
+        "n": 187
+      },
+      "temporal-reasoning": {
+        "evidence_recall": 0.8003,
+        "all_evidence": 0.7708,
+        "gold_in_context": 0.8857,
+        "rendered_chars_mean": 16358.9896,
+        "n": 96
+      }
+    }
+  }
+}

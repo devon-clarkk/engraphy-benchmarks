@@ -1,0 +1,206 @@
+{
+  "instrument": "bench.reference_pass",
+  "source_run": "locomo-definitive-20260917",
+  "source_engine_git_sha": "3df1a4d232bbd9410d8e8e205f198c29ac83255e",
+  "engine_git_sha": "3df1a4d232bbd9410d8e8e205f198c29ac83255e",
+  "arm": "llm-conversational/search_only/always_distinct/k20/reference-conventions",
+  "dataset": {
+    "path": "locomo10.json",
+    "digest": "sha256:79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "questions_in_file": 1986
+  },
+  "haystacks": [
+    "conv-26",
+    "conv-30",
+    "conv-49"
+  ],
+  "retrieval_configs": {
+    "llm-conversational/search_only/always_distinct/k20": {
+      "strategy": "search_only",
+      "limit": 20,
+      "detail": "full"
+    }
+  },
+  "reference_dates": {
+    "conv-26": "9:55 am on 22 October, 2023",
+    "conv-30": "6:46 pm on 23 July, 2023",
+    "conv-49": "9:37 pm on 11 January, 2024"
+  },
+  "role_models": {
+    "reader": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "judge": {
+      "provider": "claude-cli",
+      "model": "claude-sonnet-5"
+    }
+  },
+  "conventions": {
+    "label": "measured under the reference harness conventions, for comparability",
+    "source": {
+      "repository": "https://github.com/mem0ai/memory-benchmarks",
+      "commit": "4b61c5d31b9c668a12b4f5e78064248a02c82d2b",
+      "files": [
+        "benchmarks/locomo/prompts.py",
+        "benchmarks/locomo/run.py"
+      ],
+      "license": "Apache-2.0"
+    },
+    "prompts": {
+      "answer": {
+        "path": "bench/prompts/reference/answer.md",
+        "sha256": "sha256:79c9f09bcc8d5e9e8b7e9786af587b02a67d366ab79285fc148b73fd20f6297b"
+      },
+      "judge": {
+        "path": "bench/prompts/reference/judge.md",
+        "sha256": "sha256:d248e056d993725e28fba8d16ca7081f0b59deae272ef294f3c6b00d48eac02b"
+      },
+      "judge_system": {
+        "path": "bench/prompts/reference/judge_system.md",
+        "sha256": "sha256:36c007917faf1ab84516cdca577fb523711a9b993706fbae8ae37806e6f9adcc"
+      }
+    },
+    "reproduced": [
+      "answer prompt verbatim: commit to an answer, never decline; answer taken after the last 'ANSWER:'",
+      "at most 200 memories, oldest first, no ranks or scores",
+      "reference date: the latest session's date string",
+      "judge prompt verbatim, without evidence (the reference default): at least one gold item suffices, dates within 14 days, durations within 50%",
+      "open-domain gold cut at the first semicolon",
+      "categories 1-4 scored; adversarial excluded",
+      "1 judge pass(es) per answer (the reference uses 1)"
+    ],
+    "differences": [
+      "memories are Engraphy's, from Engraphy's search at the run's retrieval width; the reference retrieves up to 200 from its own store",
+      "each reference memory line carries its session date; Engraphy memories keep dates in their text and attributes and created_at is ingest time, so each line uses the reference's no-date form '(unknown date)'",
+      "reader and judge models are the run's, not the reference defaults",
+      "an Engraphy memory is rendered as one line: title, body and attributes"
+    ]
+  },
+  "questions": 389,
+  "questions_without_saved_envelope": [],
+  "limit": null,
+  "aggregate": {
+    "llm-conversational/search_only/always_distinct/k20/reference-conventions": {
+      "overall": {
+        "n": 389,
+        "correct": 346,
+        "accuracy": 0.8895,
+        "wilson_95": [
+          0.8544,
+          0.9169
+        ],
+        "abstained": 0,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 16556,
+        "payload_bytes_p95": 20057,
+        "payload_bytes_mean": 16610,
+        "accuracy_per_1k_bytes": 0.0535,
+        "e2e_seconds_p50": 8.665,
+        "e2e_seconds_p95": 17.111,
+        "judge_seconds_p50": 4.706
+      },
+      "overall_excl_adversarial": {
+        "n": 389,
+        "correct": 346,
+        "accuracy": 0.8895,
+        "wilson_95": [
+          0.8544,
+          0.9169
+        ],
+        "abstained": 0,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 16556,
+        "payload_bytes_p95": 20057,
+        "payload_bytes_mean": 16610,
+        "accuracy_per_1k_bytes": 0.0535,
+        "e2e_seconds_p50": 8.665,
+        "e2e_seconds_p95": 17.111,
+        "judge_seconds_p50": 4.706
+      },
+      "categories": {
+        "multi-hop": {
+          "n": 80,
+          "correct": 76,
+          "accuracy": 0.95,
+          "wilson_95": [
+            0.8784,
+            0.9804
+          ],
+          "abstained": 0,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16236,
+          "payload_bytes_p95": 20187,
+          "payload_bytes_mean": 16327,
+          "accuracy_per_1k_bytes": 0.0582,
+          "e2e_seconds_p50": 10.113,
+          "e2e_seconds_p95": 17.306,
+          "judge_seconds_p50": 4.817
+        },
+        "open-domain-knowledge": {
+          "n": 26,
+          "correct": 24,
+          "accuracy": 0.9231,
+          "wilson_95": [
+            0.7586,
+            0.9786
+          ],
+          "abstained": 0,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16874,
+          "payload_bytes_p95": 18788,
+          "payload_bytes_mean": 16385,
+          "accuracy_per_1k_bytes": 0.0563,
+          "e2e_seconds_p50": 12.76,
+          "e2e_seconds_p95": 22.367,
+          "judge_seconds_p50": 4.67
+        },
+        "single-hop": {
+          "n": 187,
+          "correct": 159,
+          "accuracy": 0.8503,
+          "wilson_95": [
+            0.7921,
+            0.8943
+          ],
+          "abstained": 0,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16486,
+          "payload_bytes_p95": 19402,
+          "payload_bytes_mean": 16466,
+          "accuracy_per_1k_bytes": 0.0516,
+          "e2e_seconds_p50": 8.21,
+          "e2e_seconds_p95": 16.535,
+          "judge_seconds_p50": 4.609
+        },
+        "temporal-reasoning": {
+          "n": 96,
+          "correct": 87,
+          "accuracy": 0.9062,
+          "wilson_95": [
+            0.8313,
+            0.9499
+          ],
+          "abstained": 0,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 16960,
+          "payload_bytes_p95": 20466,
+          "payload_bytes_mean": 17187,
+          "accuracy_per_1k_bytes": 0.0527,
+          "e2e_seconds_p50": 7.801,
+          "e2e_seconds_p95": 16.367,
+          "judge_seconds_p50": 4.779
+        }
+      }
+    }
+  },
+  "quota_stop": false,
+  "rows_answered_but_ungraded": 0,
+  "finished_at": "2026-09-17T11:10:53.820590+00:00"
+}

@@ -22,6 +22,7 @@ Arm `llm-conversational/search_only/always_distinct`, conversations `conv-26`,
 
 | run | engine | excluding adversarial | all five categories | per-pass judge instability | write-yield |
 |---|---|---|---|---|---|
+| [`locomo-definitive-20260917`](locomo/locomo-definitive-20260917/PROVENANCE.md) | `3df1a4d` (PR #23, levers 2 to 4) | 66.8% [62 to 71] (260/389) | 71.8% [68 to 76] (359/500) | 2.5% (1/40) | 95.2% (318/334) |
 | [`fullrun-conv-20260916`](locomo/fullrun-conv-20260916/PROVENANCE.md) | public `67dd41a` | 60.2% [55 to 65] (234/389) | 63.2% [59 to 67] (316/500) | 0.0% (0/40) | 85.7% (269/314) |
 | [`fullrun-conv-20260809`](locomo/fullrun-conv-20260809/PROVENANCE.md) | development `631e7be` | 67.1% [62 to 72] (261/389) | 71.6% [67 to 75] (358/500) | not measured | 99.4% (346/348) |
 

@@ -32,8 +32,16 @@ beside it. Brackets are 95% Wilson intervals.
 
 | run | engine | excluding adversarial | all five categories | provenance |
 |---|---|---|---|---|
+| **2026-09-17** | `devon-clarkk/engraphy` at `3df1a4d` (PR #23, reader check, search width 20) | **66.8% [62 to 71] (260/389)** | 71.8% [68 to 76] (359/500) | [PROVENANCE.md](results/locomo/locomo-definitive-20260917/PROVENANCE.md) |
 | 2026-09-16 | public `devon-clarkk/engraphy` at `67dd41a` | 60.2% [55 to 65] (234/389) | 63.2% [59 to 67] (316/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260916/PROVENANCE.md) |
 | 2026-08-09 | Engraphy development branch at `631e7be` | 67.1% [62 to 72] (261/389) | 71.6% [67 to 75] (358/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260809/PROVENANCE.md) |
+
+The 2026-09-17 run is also graded under the reference harness conventions, for
+comparability with published figures: 86.1% excluding adversarial, range 75.6% to
+88.9%, with its validity controls in `reference/`. `python scripts/verify_definitive.py`
+recomputes both figures from the committed files, and
+[WEBSITE-FIGURES.md](WEBSITE-FIGURES.md) states the figures for public use with their
+caveats.
 
 Each PROVENANCE.md gives the per-category figures, the models that served each
 role, the exact engine commit, dataset digest and thresholds, and the host and
@@ -66,9 +74,11 @@ python reproduce.py           # the full run
 4. downloads LoCoMo from its authors and verifies its sha256;
 5. runs the engine's harness with exactly the arm, conversations, models, judge
    and phases in the config;
-6. records the host, runtime and database versions;
-7. writes the committable subset of the run to `results/locomo/<run-id>/` and
-   prints the headline table.
+6. grades the same run under the reference harness conventions, the second
+   figure, reported beside the strict one for comparability (`--strict-only` skips it);
+7. records the host, runtime and database versions;
+8. writes the committable subset of both to `results/locomo/<run-id>/` and prints
+   both headline tables.
 
 Run the same command again to resume an interrupted run. `--prepare-only` stops
 after setup and prints the exact harness command, and `--dry-run` prints the plan
@@ -98,9 +108,13 @@ config/locomo.json      the complete run configuration; reproduce.py reads nothi
 reproduce.py            the one-command path
 grade.py                grade another system's answers with the same judge
 benchkit/               dataset fetch and verify, engine checkout, database, redaction, provenance
-scripts/                fetch, redact, rejoin, convert a run to answers, render provenance
+scripts/                fetch, redact, rejoin, convert a run to answers, render provenance,
+                        recompute the definitive figures from the committed files
 results/locomo/<run>/   committed results: manifest, per-question verdicts, ingest statistics, provenance
 METHODOLOGY.md          what is measured, what is pinned, what is comparable
+WEBSITE-FIGURES.md      the figures for public use, with their caveats
+PUBLISH.md              the publishing checklist
+analysis/               the diagnosis, the pre-registered decision rules, the definitive results
 ADAPTERS.md             the answers contract for other systems
 tests/                  run on every push, against an invented fixture
 ```

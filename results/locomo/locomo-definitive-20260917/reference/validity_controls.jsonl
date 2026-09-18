@@ -1,0 +1,406 @@
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q0", "question_id": "conv-26:q0", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q10", "question_id": "conv-26:q10", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q100", "question_id": "conv-26:q100", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q1", "question_id": "conv-26:q1", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q101", "question_id": "conv-26:q101", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q103", "question_id": "conv-26:q103", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q102", "question_id": "conv-26:q102", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q104", "question_id": "conv-26:q104", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q105", "question_id": "conv-26:q105", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q106", "question_id": "conv-26:q106", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q107", "question_id": "conv-26:q107", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q108", "question_id": "conv-26:q108", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q11", "question_id": "conv-26:q11", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q109", "question_id": "conv-26:q109", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q111", "question_id": "conv-26:q111", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q113", "question_id": "conv-26:q113", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q110", "question_id": "conv-26:q110", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q114", "question_id": "conv-26:q114", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q116", "question_id": "conv-26:q116", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q117", "question_id": "conv-26:q117", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q115", "question_id": "conv-26:q115", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q118", "question_id": "conv-26:q118", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q119", "question_id": "conv-26:q119", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q12", "question_id": "conv-26:q12", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q120", "question_id": "conv-26:q120", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q121", "question_id": "conv-26:q121", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q123", "question_id": "conv-26:q123", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q122", "question_id": "conv-26:q122", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q126", "question_id": "conv-26:q126", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q127", "question_id": "conv-26:q127", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q124", "question_id": "conv-26:q124", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q129", "question_id": "conv-26:q129", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q13", "question_id": "conv-26:q13", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q132", "question_id": "conv-26:q132", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q130", "question_id": "conv-26:q130", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q131", "question_id": "conv-26:q131", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q134", "question_id": "conv-26:q134", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q136", "question_id": "conv-26:q136", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q137", "question_id": "conv-26:q137", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q138", "question_id": "conv-26:q138", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q139", "question_id": "conv-26:q139", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q14", "question_id": "conv-26:q14", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q141", "question_id": "conv-26:q141", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q143", "question_id": "conv-26:q143", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q142", "question_id": "conv-26:q142", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q144", "question_id": "conv-26:q144", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q145", "question_id": "conv-26:q145", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q146", "question_id": "conv-26:q146", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q147", "question_id": "conv-26:q147", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q148", "question_id": "conv-26:q148", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q149", "question_id": "conv-26:q149", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q15", "question_id": "conv-26:q15", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q150", "question_id": "conv-26:q150", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q16", "question_id": "conv-26:q16", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q17", "question_id": "conv-26:q17", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q151", "question_id": "conv-26:q151", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q18", "question_id": "conv-26:q18", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q19", "question_id": "conv-26:q19", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q21", "question_id": "conv-26:q21", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q20", "question_id": "conv-26:q20", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q22", "question_id": "conv-26:q22", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q2", "question_id": "conv-26:q2", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q23", "question_id": "conv-26:q23", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q25", "question_id": "conv-26:q25", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q24", "question_id": "conv-26:q24", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q27", "question_id": "conv-26:q27", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q29", "question_id": "conv-26:q29", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q28", "question_id": "conv-26:q28", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q3", "question_id": "conv-26:q3", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q30", "question_id": "conv-26:q30", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q31", "question_id": "conv-26:q31", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q34", "question_id": "conv-26:q34", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q32", "question_id": "conv-26:q32", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q35", "question_id": "conv-26:q35", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q36", "question_id": "conv-26:q36", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q33", "question_id": "conv-26:q33", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q38", "question_id": "conv-26:q38", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q37", "question_id": "conv-26:q37", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q39", "question_id": "conv-26:q39", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q4", "question_id": "conv-26:q4", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q41", "question_id": "conv-26:q41", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q42", "question_id": "conv-26:q42", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q44", "question_id": "conv-26:q44", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q46", "question_id": "conv-26:q46", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q45", "question_id": "conv-26:q45", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q43", "question_id": "conv-26:q43", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q47", "question_id": "conv-26:q47", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q50", "question_id": "conv-26:q50", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q51", "question_id": "conv-26:q51", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q48", "question_id": "conv-26:q48", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q5", "question_id": "conv-26:q5", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q52", "question_id": "conv-26:q52", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q53", "question_id": "conv-26:q53", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q54", "question_id": "conv-26:q54", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q58", "question_id": "conv-26:q58", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q56", "question_id": "conv-26:q56", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q59", "question_id": "conv-26:q59", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q6", "question_id": "conv-26:q6", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q60", "question_id": "conv-26:q60", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q57", "question_id": "conv-26:q57", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q61", "question_id": "conv-26:q61", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q63", "question_id": "conv-26:q63", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q64", "question_id": "conv-26:q64", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q65", "question_id": "conv-26:q65", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q66", "question_id": "conv-26:q66", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q7", "question_id": "conv-26:q7", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q69", "question_id": "conv-26:q69", "category": "open-domain-knowledge", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q70", "question_id": "conv-26:q70", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q71", "question_id": "conv-26:q71", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q68", "question_id": "conv-26:q68", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q73", "question_id": "conv-26:q73", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q72", "question_id": "conv-26:q72", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q74", "question_id": "conv-26:q74", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q75", "question_id": "conv-26:q75", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q76", "question_id": "conv-26:q76", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q77", "question_id": "conv-26:q77", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q78", "question_id": "conv-26:q78", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q79", "question_id": "conv-26:q79", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q80", "question_id": "conv-26:q80", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q8", "question_id": "conv-26:q8", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q82", "question_id": "conv-26:q82", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q81", "question_id": "conv-26:q81", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q84", "question_id": "conv-26:q84", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q83", "question_id": "conv-26:q83", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q86", "question_id": "conv-26:q86", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q87", "question_id": "conv-26:q87", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q88", "question_id": "conv-26:q88", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q90", "question_id": "conv-26:q90", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q91", "question_id": "conv-26:q91", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q92", "question_id": "conv-26:q92", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q89", "question_id": "conv-26:q89", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q93", "question_id": "conv-26:q93", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q94", "question_id": "conv-26:q94", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q95", "question_id": "conv-26:q95", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q96", "question_id": "conv-26:q96", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q97", "question_id": "conv-26:q97", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q99", "question_id": "conv-26:q99", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-26:q98", "question_id": "conv-26:q98", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q0", "question_id": "conv-30:q0", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q1", "question_id": "conv-30:q1", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q10", "question_id": "conv-30:q10", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q12", "question_id": "conv-30:q12", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q13", "question_id": "conv-30:q13", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q11", "question_id": "conv-30:q11", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q14", "question_id": "conv-30:q14", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q15", "question_id": "conv-30:q15", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q16", "question_id": "conv-30:q16", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q19", "question_id": "conv-30:q19", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q18", "question_id": "conv-30:q18", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q17", "question_id": "conv-30:q17", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q2", "question_id": "conv-30:q2", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q21", "question_id": "conv-30:q21", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q20", "question_id": "conv-30:q20", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q22", "question_id": "conv-30:q22", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q23", "question_id": "conv-30:q23", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q24", "question_id": "conv-30:q24", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q25", "question_id": "conv-30:q25", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q26", "question_id": "conv-30:q26", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q27", "question_id": "conv-30:q27", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q28", "question_id": "conv-30:q28", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q29", "question_id": "conv-30:q29", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q30", "question_id": "conv-30:q30", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q3", "question_id": "conv-30:q3", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q32", "question_id": "conv-30:q32", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q34", "question_id": "conv-30:q34", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q33", "question_id": "conv-30:q33", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q35", "question_id": "conv-30:q35", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q36", "question_id": "conv-30:q36", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q31", "question_id": "conv-30:q31", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q38", "question_id": "conv-30:q38", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q39", "question_id": "conv-30:q39", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q4", "question_id": "conv-30:q4", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q40", "question_id": "conv-30:q40", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q42", "question_id": "conv-30:q42", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q41", "question_id": "conv-30:q41", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q43", "question_id": "conv-30:q43", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q46", "question_id": "conv-30:q46", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q45", "question_id": "conv-30:q45", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q48", "question_id": "conv-30:q48", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q50", "question_id": "conv-30:q50", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q49", "question_id": "conv-30:q49", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q51", "question_id": "conv-30:q51", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q5", "question_id": "conv-30:q5", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q53", "question_id": "conv-30:q53", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q54", "question_id": "conv-30:q54", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q58", "question_id": "conv-30:q58", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q55", "question_id": "conv-30:q55", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q57", "question_id": "conv-30:q57", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q59", "question_id": "conv-30:q59", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q60", "question_id": "conv-30:q60", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q6", "question_id": "conv-30:q6", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q64", "question_id": "conv-30:q64", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q61", "question_id": "conv-30:q61", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q63", "question_id": "conv-30:q63", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q65", "question_id": "conv-30:q65", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q68", "question_id": "conv-30:q68", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q66", "question_id": "conv-30:q66", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q69", "question_id": "conv-30:q69", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q67", "question_id": "conv-30:q67", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q70", "question_id": "conv-30:q70", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q7", "question_id": "conv-30:q7", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q71", "question_id": "conv-30:q71", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q72", "question_id": "conv-30:q72", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q75", "question_id": "conv-30:q75", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q74", "question_id": "conv-30:q74", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q8", "question_id": "conv-30:q8", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q76", "question_id": "conv-30:q76", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q78", "question_id": "conv-30:q78", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q80", "question_id": "conv-30:q80", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q0", "question_id": "conv-49:q0", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q81", "question_id": "conv-30:q81", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-30:q9", "question_id": "conv-30:q9", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q10", "question_id": "conv-49:q10", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q1", "question_id": "conv-49:q1", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q100", "question_id": "conv-49:q100", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q101", "question_id": "conv-49:q101", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q105", "question_id": "conv-49:q105", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q107", "question_id": "conv-49:q107", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q106", "question_id": "conv-49:q106", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q103", "question_id": "conv-49:q103", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q109", "question_id": "conv-49:q109", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q11", "question_id": "conv-49:q11", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q110", "question_id": "conv-49:q110", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q112", "question_id": "conv-49:q112", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q111", "question_id": "conv-49:q111", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q113", "question_id": "conv-49:q113", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q114", "question_id": "conv-49:q114", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q117", "question_id": "conv-49:q117", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q118", "question_id": "conv-49:q118", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q119", "question_id": "conv-49:q119", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q120", "question_id": "conv-49:q120", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q121", "question_id": "conv-49:q121", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q125", "question_id": "conv-49:q125", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q122", "question_id": "conv-49:q122", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q124", "question_id": "conv-49:q124", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q126", "question_id": "conv-49:q126", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q128", "question_id": "conv-49:q128", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q127", "question_id": "conv-49:q127", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q129", "question_id": "conv-49:q129", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q131", "question_id": "conv-49:q131", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q13", "question_id": "conv-49:q13", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q130", "question_id": "conv-49:q130", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q134", "question_id": "conv-49:q134", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q132", "question_id": "conv-49:q132", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q135", "question_id": "conv-49:q135", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q137", "question_id": "conv-49:q137", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q138", "question_id": "conv-49:q138", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q139", "question_id": "conv-49:q139", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q14", "question_id": "conv-49:q14", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q143", "question_id": "conv-49:q143", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q142", "question_id": "conv-49:q142", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q140", "question_id": "conv-49:q140", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q147", "question_id": "conv-49:q147", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q146", "question_id": "conv-49:q146", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q144", "question_id": "conv-49:q144", "category": "single-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q148", "question_id": "conv-49:q148", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q149", "question_id": "conv-49:q149", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q15", "question_id": "conv-49:q15", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q151", "question_id": "conv-49:q151", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q150", "question_id": "conv-49:q150", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q155", "question_id": "conv-49:q155", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q152", "question_id": "conv-49:q152", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q154", "question_id": "conv-49:q154", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q16", "question_id": "conv-49:q16", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q17", "question_id": "conv-49:q17", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q19", "question_id": "conv-49:q19", "category": "open-domain-knowledge", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q22", "question_id": "conv-49:q22", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q2", "question_id": "conv-49:q2", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q21", "question_id": "conv-49:q21", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q23", "question_id": "conv-49:q23", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q25", "question_id": "conv-49:q25", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q26", "question_id": "conv-49:q26", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q28", "question_id": "conv-49:q28", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q29", "question_id": "conv-49:q29", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q27", "question_id": "conv-49:q27", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q30", "question_id": "conv-49:q30", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q3", "question_id": "conv-49:q3", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q31", "question_id": "conv-49:q31", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q33", "question_id": "conv-49:q33", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q34", "question_id": "conv-49:q34", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q32", "question_id": "conv-49:q32", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q35", "question_id": "conv-49:q35", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q36", "question_id": "conv-49:q36", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q37", "question_id": "conv-49:q37", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q4", "question_id": "conv-49:q4", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q39", "question_id": "conv-49:q39", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q38", "question_id": "conv-49:q38", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q40", "question_id": "conv-49:q40", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q42", "question_id": "conv-49:q42", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q41", "question_id": "conv-49:q41", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q44", "question_id": "conv-49:q44", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q46", "question_id": "conv-49:q46", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q45", "question_id": "conv-49:q45", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q49", "question_id": "conv-49:q49", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q47", "question_id": "conv-49:q47", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q48", "question_id": "conv-49:q48", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q5", "question_id": "conv-49:q5", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q50", "question_id": "conv-49:q50", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q51", "question_id": "conv-49:q51", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q52", "question_id": "conv-49:q52", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q53", "question_id": "conv-49:q53", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q56", "question_id": "conv-49:q56", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q55", "question_id": "conv-49:q55", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q54", "question_id": "conv-49:q54", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q57", "question_id": "conv-49:q57", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q58", "question_id": "conv-49:q58", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q59", "question_id": "conv-49:q59", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q61", "question_id": "conv-49:q61", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q6", "question_id": "conv-49:q6", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q62", "question_id": "conv-49:q62", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q64", "question_id": "conv-49:q64", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q65", "question_id": "conv-49:q65", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q63", "question_id": "conv-49:q63", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q68", "question_id": "conv-49:q68", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q67", "question_id": "conv-49:q67", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q66", "question_id": "conv-49:q66", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q69", "question_id": "conv-49:q69", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q70", "question_id": "conv-49:q70", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q7", "question_id": "conv-49:q7", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q71", "question_id": "conv-49:q71", "category": "open-domain-knowledge", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q73", "question_id": "conv-49:q73", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q76", "question_id": "conv-49:q76", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q75", "question_id": "conv-49:q75", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q74", "question_id": "conv-49:q74", "category": "temporal-reasoning", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q79", "question_id": "conv-49:q79", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q78", "question_id": "conv-49:q78", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q77", "question_id": "conv-49:q77", "category": "multi-hop", "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q8", "question_id": "conv-49:q8", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q83", "question_id": "conv-49:q83", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q82", "question_id": "conv-49:q82", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q81", "question_id": "conv-49:q81", "category": "multi-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q85", "question_id": "conv-49:q85", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q86", "question_id": "conv-49:q86", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q84", "question_id": "conv-49:q84", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q88", "question_id": "conv-49:q88", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q89", "question_id": "conv-49:q89", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q87", "question_id": "conv-49:q87", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q90", "question_id": "conv-49:q90", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q91", "question_id": "conv-49:q91", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q9", "question_id": "conv-49:q9", "category": "temporal-reasoning", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q93", "question_id": "conv-49:q93", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q94", "question_id": "conv-49:q94", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q92", "question_id": "conv-49:q92", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q98", "question_id": "conv-49:q98", "category": "single-hop", "strict": true}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q95", "question_id": "conv-49:q95", "category": "single-hop", "strict": true}
+{"control": "B_mismatched", "key": "conv-26:q69<-conv-26:q62", "question_id": "conv-26:q69", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q2<-conv-26:q81", "question_id": "conv-26:q2", "category": "open-domain-knowledge", "reference": true, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q30<-conv-30:q8", "question_id": "conv-30:q30", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q11<-conv-26:q149", "question_id": "conv-26:q11", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q124<-conv-49:q80", "question_id": "conv-49:q124", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q70<-conv-26:q17", "question_id": "conv-26:q70", "category": "multi-hop", "reference": true, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q24<-conv-26:q144", "question_id": "conv-26:q24", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q49<-conv-30:q54", "question_id": "conv-30:q49", "category": "single-hop", "reference": true, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q65<-conv-49:q108", "question_id": "conv-49:q65", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q51<-conv-30:q57", "question_id": "conv-30:q51", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q121<-conv-26:q90", "question_id": "conv-26:q121", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q31<-conv-49:q2", "question_id": "conv-49:q31", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q33<-conv-30:q10", "question_id": "conv-30:q33", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q39<-conv-49:q18", "question_id": "conv-49:q39", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q23<-conv-26:q135", "question_id": "conv-26:q23", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q53<-conv-49:q41", "question_id": "conv-49:q53", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q21<-conv-30:q12", "question_id": "conv-30:q21", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q87<-conv-49:q110", "question_id": "conv-49:q87", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q15<-conv-49:q74", "question_id": "conv-49:q15", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q51<-conv-49:q7", "question_id": "conv-49:q51", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q4<-conv-26:q131", "question_id": "conv-26:q4", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q5<-conv-26:q99", "question_id": "conv-26:q5", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q81<-conv-26:q44", "question_id": "conv-26:q81", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q74<-conv-30:q22", "question_id": "conv-30:q74", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q75<-conv-49:q24", "question_id": "conv-49:q75", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q117<-conv-49:q18", "question_id": "conv-49:q117", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q68<-conv-30:q75", "question_id": "conv-30:q68", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q27<-conv-26:q71", "question_id": "conv-26:q27", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q8<-conv-49:q84", "question_id": "conv-49:q8", "category": "multi-hop", "reference": true, "strict": true}
+{"control": "B_mismatched", "key": "conv-49:q130<-conv-49:q48", "question_id": "conv-49:q130", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q27<-conv-30:q40", "question_id": "conv-30:q27", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q118<-conv-49:q126", "question_id": "conv-49:q118", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q96<-conv-26:q79", "question_id": "conv-26:q96", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q43<-conv-26:q92", "question_id": "conv-26:q43", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q92<-conv-26:q134", "question_id": "conv-26:q92", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q42<-conv-30:q11", "question_id": "conv-30:q42", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q36<-conv-26:q16", "question_id": "conv-26:q36", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q92<-conv-49:q27", "question_id": "conv-49:q92", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q13<-conv-49:q0", "question_id": "conv-49:q13", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q57<-conv-26:q108", "question_id": "conv-26:q57", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q122<-conv-26:q56", "question_id": "conv-26:q122", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q28<-conv-30:q4", "question_id": "conv-30:q28", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q100<-conv-26:q33", "question_id": "conv-26:q100", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q141<-conv-26:q19", "question_id": "conv-26:q141", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q28<-conv-49:q137", "question_id": "conv-49:q28", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q14<-conv-26:q33", "question_id": "conv-26:q14", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q60<-conv-26:q138", "question_id": "conv-26:q60", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q57<-conv-49:q44", "question_id": "conv-49:q57", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q105<-conv-49:q56", "question_id": "conv-49:q105", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q78<-conv-30:q77", "question_id": "conv-30:q78", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q21<-conv-26:q23", "question_id": "conv-26:q21", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q5<-conv-30:q45", "question_id": "conv-30:q5", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q39<-conv-26:q25", "question_id": "conv-26:q39", "category": "multi-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q71<-conv-49:q137", "question_id": "conv-49:q71", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-26:q42<-conv-26:q84", "question_id": "conv-26:q42", "category": "open-domain-knowledge", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q48<-conv-49:q90", "question_id": "conv-49:q48", "category": "multi-hop", "reference": true, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q11<-conv-49:q64", "question_id": "conv-49:q11", "category": "multi-hop", "reference": true, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q59<-conv-30:q51", "question_id": "conv-30:q59", "category": "single-hop", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-30:q36<-conv-30:q32", "question_id": "conv-30:q36", "category": "temporal-reasoning", "reference": false, "strict": false}
+{"control": "B_mismatched", "key": "conv-49:q151<-conv-49:q7", "question_id": "conv-49:q151", "category": "single-hop", "reference": false, "strict": false}
+{"control": "A_strict_on_reference_answer", "key": "conv-49:q12", "question_id": "conv-49:q12", "category": "temporal-reasoning", "strict": true}

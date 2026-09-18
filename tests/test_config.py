@@ -22,11 +22,14 @@ def test_the_dataset_is_pinned_by_digest_and_size():
 
 
 def test_the_arm_and_its_id_agree():
-    """`llm-conversational:search_only` expands to the harness's arm id with the
-    default confirm policy. A config naming one and recording the other would
-    publish a result under the wrong label."""
-    extractor_pack, strategy = CFG["run"]["arm"].split(":")
-    assert CFG["run"]["arm_id"] == f"{extractor_pack}/{strategy}/always_distinct"
+    """`llm-conversational:search_only[:k=N]` expands to the harness's arm id with
+    the default confirm policy, and a width other than the shipped 10 as a `/kN`
+    suffix. A config naming one and recording the other would publish a result
+    under the wrong label."""
+    extractor_pack, strategy, *options = CFG["run"]["arm"].split(":")
+    width = dict(o.split("=", 1) for o in options).get("k", "10")
+    suffix = "" if width == "10" else f"/k{width}"
+    assert CFG["run"]["arm_id"] == f"{extractor_pack}/{strategy}/always_distinct{suffix}"
 
 
 def test_every_role_has_a_model_and_the_judge_is_best_of_three():
