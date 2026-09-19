@@ -65,3 +65,11 @@ A single run cannot attribute a 2 point move to one lever: per-question churn
 between two runs of one configuration was 19.6% on 2026-09-16. Levers 3 and 4 are
 reported combined against the never-drop baseline run, with each lever's replay
 effect stated beside its measured churn.
+
+## Addendum, 2026-09-19: width for the next run
+
+The rule above selected k=20 for `locomo-definitive-20260917`, because evidence recall
+at 20 (68.3%) was within 1.0 point of the recall at the cap (69.2% at 25). For the next
+run the width is set to 25, the engine's result cap, by the owner's decision. It is
+recorded as a decision, not as the rule's output, and the figures measured at k=20 stay
+as published. The next run's configuration is staged in `config/locomo-next.json`.

@@ -24,10 +24,8 @@ Everything is committed and checked. Publishing is two decisions and one command
    the dataset authors (snap-research/locomo) for permission; quote the figures only in
    research-framed material; or accept the reading that reporting a benchmark score is not
    use of the data. This is the owner's decision.
-2. **Keep the engine commit fetchable.** `3df1a4d` lives on the engine branch
-   `bench/locomo-conventions-reader-width`. Open a pull request from it, or merge it, so the
-   commit survives the branch being deleted; a pull request also gives `config/locomo.json`
-   a `refs/pull/<n>/head` refspec, as PR #16 does for the earlier pin.
+2. **Engine commit fetchable: done.** `3df1a4d` merged to engine main as PR #25, and
+   `config/locomo.json` fetches it through `refs/pull/25/head`.
 3. **Choose which runs stay published.** `fullrun-conv-20260809` comes from an engine commit
    that is not in the public repository. Keep it with that noted in its provenance, or
    remove it with `git rm -r results/locomo/fullrun-conv-20260809` and its README row.

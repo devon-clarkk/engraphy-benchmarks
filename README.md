@@ -104,7 +104,8 @@ python grade.py answers.jsonl --system my-memory-system
 ## Layout
 
 ```
-config/locomo.json      the complete run configuration; reproduce.py reads nothing else
+config/locomo.json      the configuration of the published run; reproduce.py reads it by default
+config/locomo-next.json the next run, staged and held until its engine commit is pinned
 reproduce.py            the one-command path
 grade.py                grade another system's answers with the same judge
 benchkit/               dataset fetch and verify, engine checkout, database, redaction, provenance

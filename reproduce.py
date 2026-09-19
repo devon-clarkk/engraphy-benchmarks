@@ -198,6 +198,8 @@ def publish(cfg: dict, run_dir: pathlib.Path, dest: pathlib.Path,
 def main() -> int:
     ap = argparse.ArgumentParser(prog="reproduce.py", description=__doc__.split("\n\n")[0])
     ap.add_argument("--run-id", default=f"locomo-{datetime.date.today():%Y%m%d}")
+    ap.add_argument("--config", type=pathlib.Path, default=None,
+                    help="a config other than config/locomo.json, such as config/locomo-next.json")
     ap.add_argument("--port", type=int, default=5439,
                     help="loopback port for the Postgres container")
     ap.add_argument("--container", default="engraphy-benchmarks-pg")
@@ -215,7 +217,9 @@ def main() -> int:
                     help="skip the matched-convention pass; publish the strict figure only")
     args = ap.parse_args()
 
-    cfg = load_config()
+    cfg = load_config(args.config) if args.config else load_config()
+    if cfg.get("hold"):
+        raise SystemExit(f"this config is held: {cfg['hold']}")
     py = engine.venv_python(WORK)
     cmd = harness_command(cfg, py, args.run_id, not args.no_supervisor)
     ref_cmd = [] if args.strict_only else reference_command(cfg, py, args.run_id,

@@ -1,13 +1,13 @@
 {
   "benchmark": "locomo",
   "config_version": 1,
-  "description": "The configuration behind every LoCoMo figure this repository publishes. reproduce.py reads this file and nothing else, so the config you are reading is the config that runs.",
+  "description": "The configuration staged for the next LoCoMo run. It is held until the engine carrying the supersede-downgrade port is pinned; reproduce.py refuses a held config.",
   "engine": {
     "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": "3df1a4d232bbd9410d8e8e205f198c29ac83255e",
-    "ref": "bench/locomo-conventions-reader-width",
-    "fetch_refspec": "+refs/pull/25/head:refs/remotes/origin/pr-25",
-    "note": "PR #23 head 99b38a5 (partial dates stored as written, an untypeable attribute quarantined) plus the reference-convention pass, the subject-and-occasion reader check and the per-arm search width. The commit that produced results/locomo/locomo-definitive-20260917. Merged to main as PR #25; the pull-request ref keeps the commit fetchable."
+    "commit": null,
+    "ref": null,
+    "fetch_refspec": null,
+    "note": "Set to the head of the supersede-downgrade port once its pull request is up."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
@@ -25,17 +25,27 @@
     "haystacks": [
       "conv-26",
       "conv-30",
-      "conv-49"
+      "conv-41",
+      "conv-42",
+      "conv-43",
+      "conv-44",
+      "conv-47",
+      "conv-48",
+      "conv-49",
+      "conv-50"
     ],
-    "arm": "llm-conversational:search_only:k=20",
-    "arm_id": "llm-conversational/search_only/always_distinct/k20",
+    "arm": "llm-conversational:search_only:k=25",
+    "arm_id": "llm-conversational/search_only/always_distinct/k25",
     "judge": "claude",
     "reader_stance": "grounded",
     "phases": "ingest,answer,judge,calibrate,diagnose,report",
     "concurrency": 3,
     "judge_concurrency": 4,
     "calibration_sample": 40,
-    "reader_contract": "verify"
+    "reader_contract": "verify",
+    "runs": 3,
+    "runs_note": "Three independent runs of the whole pipeline, ingest included, each over all ten conversations: 1,986 questions, 1,540 of them non-adversarial. Reported as the mean and standard deviation across runs beside each run's own figure.",
+    "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25."
   },
   "models": {
     "extractor": "claude-opus-4-8",
@@ -76,5 +86,6 @@
       "commit": "4b61c5d31b9c668a12b4f5e78064248a02c82d2b",
       "note": "A second figure beside the strict one, for comparability: the reference answer prompt and judge, categories 1 to 4, one judge pass."
     }
-  }
+  },
+  "hold": "awaiting the engine branch that ports the supersede downgrade (a cross-type supersede, and a supersede whose replacement bands against a third memory, written as a plain memory with the downgrade flagged). Pin its head commit here and remove this field to run."
 }

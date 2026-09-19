@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from benchkit import load_config
+from benchkit import ROOT, load_config
 
 CFG = load_config()
 
@@ -41,3 +41,13 @@ def test_every_role_has_a_model_and_the_judge_is_best_of_three():
 def test_the_embedder_is_pinned_to_a_revision():
     assert re.fullmatch(r"[0-9a-f]{40}", CFG["embedder"]["revision"])
     assert CFG["embedder"]["profile"] == "onnx-fp32"
+
+
+def test_the_staged_next_run_is_held_until_its_engine_is_pinned():
+    """The next-run config names its coverage and width now and refuses to run
+    until the engine commit it is meant to measure is pinned."""
+    nxt = load_config(ROOT / "config" / "locomo-next.json")
+    assert nxt["hold"] and nxt["engine"]["commit"] is None
+    assert nxt["run"]["arm"].endswith(":k=25") and nxt["run"]["arm_id"].endswith("/k25")
+    assert len(nxt["run"]["haystacks"]) == 10 and nxt["run"]["runs"] >= 3
+    assert nxt["dataset"] == CFG["dataset"]
