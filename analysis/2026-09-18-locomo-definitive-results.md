@@ -27,11 +27,25 @@ The reader may decline; the judge requires every gold item. 500 of 500 answered 
 |---|---|---|---|---|
 | **excluding adversarial** | **66.8% [62 to 71] (260/389)** | 66.88 | 68.44 | 65.99 |
 | all five categories | 71.8% [68 to 76] (359/500) | | | |
-| single-hop | 69.0% [62 to 75] (129/187) | 67.13 | 65.71 | 61.70 |
-| multi-hop | 53.8% [43 to 64] (43/80) | 51.15 | 47.19 | 41.35 |
+| single-hop | 69.0% [62 to 75] (129/187) | 72.93 | 75.71 | 76.60 |
+| multi-hop | 53.8% [43 to 64] (43/80) | 67.13 | 65.71 | 61.70 |
 | temporal | **72.9% [63 to 81] (70/96)** | 55.51 | 58.13 | 49.31 |
-| open-domain | 69.2% [50 to 84] (18/26) | 72.93 | 75.71 | 76.60 |
+| open-domain | **69.2% [50 to 84] (18/26)** | 51.15 | 47.19 | 41.35 |
 | adversarial | 89.2% [82 to 94] (99/111) | not reported | not reported | not reported |
+
+Comparator figures: Chhikara et al., arXiv:2504.19413, Table 1 (LLM-as-a-Judge), aligned to LoCoMo's
+category numbers. Table 1's column headers do not name the categories they hold. The paper's
+overall score (Table 2) is the question-weighted mean of the four categories, whose sizes differ
+(282, 321, 96 and 841 questions), so each of the 24 ways to assign the four columns to the four
+categories predicts a different overall. One assignment reproduces the published overall for all
+five systems reported in both tables, to within 0.01 points; the next best misses by up to 1.06,
+and reading the headers as the dataset names them misses by 1.8 to 9.7. Under it, the paper's
+"Single-Hop" column holds LoCoMo multi-hop (category 1), "Multi-Hop" holds open-domain
+(category 3) and "Open-Domain" holds single-hop (category 4); "Temporal" is category 2 either
+way. Method and sources: `analysis/2026-09-19-locomo-open-domain-findings.md`, section 3 and
+its source list, recorded in proj-engraphy as the Fable analysis node `d7c05bc3`.
+Aligned, Engraphy leads on temporal reasoning and open-domain and trails on single-hop and
+multi-hop; the overall comparison does not depend on the alignment.
 
 ## 2. Reference-convention figure, for comparability
 
@@ -40,10 +54,12 @@ The same run, every non-adversarial question read again from its saved retrieval
 | category | raw | floor | **defensible** | Mem0 | Mem0g | Zep |
 |---|---|---|---|---|---|---|
 | **excluding adversarial** | 88.9% (346/389) | 75.6% (294/389) | **86.1% [82 to 89] (335/389)** | 66.88 | 68.44 | 65.99 |
-| single-hop | 85.0% | 77.5% | 80.7% (151/187) | 67.13 | 65.71 | 61.70 |
-| multi-hop | 95.0% | 63.7% | 93.8% (75/80) | 51.15 | 47.19 | 41.35 |
+| single-hop | 85.0% | 77.5% | 80.7% (151/187) | 72.93 | 75.71 | 76.60 |
+| multi-hop | 95.0% | 63.7% | 93.8% (75/80) | 67.13 | 65.71 | 61.70 |
 | temporal | 90.6% | 79.2% | 89.6% (86/96) | 55.51 | 58.13 | 49.31 |
-| open-domain | 92.3% | 84.6% | 88.5% (23/26) | 72.93 | 75.71 | 76.60 |
+| open-domain | 92.3% | 84.6% | 88.5% (23/26) | 51.15 | 47.19 | 41.35 |
+
+Comparator columns aligned to LoCoMo's category numbers as in section 1.
 
 ### How the raw figure was checked
 
@@ -59,7 +75,7 @@ The same run, every non-adversarial question read again from its saved retrieval
 - **Sample.** 3 of LoCoMo's 10 conversations. The published figures cover all 10.
 - **Runs.** One run. The published figures are the mean of 10. Two runs of one configuration differed on 19.6% of questions (2026-09-16).
 - **Models.** Claude Opus 4.8 reader and Claude Sonnet 5 judge. The published figures use a GPT-4o-mini reader.
-- **Category mapping.** The Mem0 paper names its categories but does not state which LoCoMo category number each covers; its evaluation code groups by number only. This report uses the dataset authors' numbering.
+- **Category alignment.** The Mem0 paper's Table 1 headers do not name the LoCoMo categories they hold. The comparisons here use the one assignment that reproduces the paper's published overall for all five systems (section 1, and `analysis/2026-09-19-locomo-open-domain-findings.md`); it is established by that arithmetic, not stated by the paper.
 - **Zep.** The Zep column is Mem0's measurement of Zep, which Zep disputes.
 - **Reconstruction.** The reference conventions are reproduced from the reference source with every difference recorded in the pass manifest; the reference harness itself was not run end to end.
 
@@ -70,7 +86,7 @@ Lead with the per-category strict table, and state both figures with their confi
 1. **66.8% excluding adversarial, under Engraphy's strict conventions**: the reader may decline and the judge requires every gold item. Level with Mem0's published 66.88.
 2. **89.2% on adversarial questions**: the category the published comparisons exclude, where declining is the correct answer.
 3. **86% excluding adversarial, measured under the reference harness conventions for comparability** (range 76% to 89%).
-4. **Temporal reasoning: 72.9% strict against the best published 58.13.** The one category that clears its comparators under the stricter judge.
+4. **Temporal reasoning: 72.9% strict against the best published 58.13, and open-domain: 69.2% strict against the best published 51.15.** Both clear their comparators under the stricter judge. Open-domain rests on 26 questions (interval 50 to 84), so it is a strong lead on this sample rather than a settled one. Single-hop and multi-hop trail.
 
 The rule for public surfaces holds: level with the leaders, never ahead of them on a single scalar. The sample, run count and model differences above mean a higher point estimate does not establish a ranking. Temporal reasoning is the claim that survives every one of them.
 
