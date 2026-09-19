@@ -1,13 +1,13 @@
 {
   "benchmark": "locomo",
   "config_version": 1,
-  "description": "The configuration staged for the next LoCoMo run. It is held until the engine carrying the supersede-downgrade port is pinned; reproduce.py refuses a held config.",
+  "description": "The configuration staged for the next LoCoMo run, pinned to the engine with the supersede-downgrade port. reproduce.py refuses it while `hold` is set.",
   "engine": {
     "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": null,
-    "ref": null,
-    "fetch_refspec": null,
-    "note": "Set to the head of the supersede-downgrade port once its pull request is up."
+    "commit": "416234c69f43c9a34949d31ed1f162ef19710896",
+    "ref": "feat/supersede-downgrade",
+    "fetch_refspec": "+refs/pull/27/head:refs/remotes/origin/pr-27",
+    "note": "PR #27 head: a supersede that cannot complete (cross-type, or a replacement banding against a third memory) is stored as a plain write with the downgrade flagged, on top of main at 299f5b3 (PRs #23, #24, #25). CI green at pinning, 2026-09-19."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
@@ -87,5 +87,5 @@
       "note": "A second figure beside the strict one, for comparability: the reference answer prompt and judge, categories 1 to 4, one judge pass."
     }
   },
-  "hold": "awaiting the engine branch that ports the supersede downgrade (a cross-type supersede, and a supersede whose replacement bands against a third memory, written as a plain memory with the downgrade flagged). Pin its head commit here and remove this field to run."
+  "hold": "staged on PR #27 head 416234c; held for the owner's go-ahead to launch. Remove this field to run."
 }

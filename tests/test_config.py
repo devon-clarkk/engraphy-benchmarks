@@ -43,11 +43,12 @@ def test_the_embedder_is_pinned_to_a_revision():
     assert CFG["embedder"]["profile"] == "onnx-fp32"
 
 
-def test_the_staged_next_run_is_held_until_its_engine_is_pinned():
-    """The next-run config names its coverage and width now and refuses to run
-    until the engine commit it is meant to measure is pinned."""
+def test_the_staged_next_run_is_pinned_and_held():
+    """The next-run config names its coverage, width and engine, and refuses to run
+    while it is held."""
     nxt = load_config(ROOT / "config" / "locomo-next.json")
-    assert nxt["hold"] and nxt["engine"]["commit"] is None
+    assert nxt["hold"]
+    assert re.fullmatch(r"[0-9a-f]{40}", nxt["engine"]["commit"])
     assert nxt["run"]["arm"].endswith(":k=25") and nxt["run"]["arm_id"].endswith("/k25")
     assert len(nxt["run"]["haystacks"]) == 10 and nxt["run"]["runs"] >= 3
     assert nxt["dataset"] == CFG["dataset"]
