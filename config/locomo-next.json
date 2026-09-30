@@ -1,13 +1,13 @@
 {
   "benchmark": "locomo",
   "config_version": 1,
-  "description": "The configuration staged for the next LoCoMo run, pinned to the engine with the supersede-downgrade port. reproduce.py refuses it while `hold` is set.",
+  "description": "The configuration of the settling multi-run measurement: engine main, width 25, all ten LoCoMo conversations, repeated runs. reproduce.py --config config/locomo-next.json runs one of them.",
   "engine": {
     "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": "416234c69f43c9a34949d31ed1f162ef19710896",
-    "ref": "feat/supersede-downgrade",
-    "fetch_refspec": "+refs/pull/27/head:refs/remotes/origin/pr-27",
-    "note": "PR #27 head: a supersede that cannot complete (cross-type, or a replacement banding against a third memory) is stored as a plain write with the downgrade flagged, on top of main at 299f5b3 (PRs #23, #24, #25). CI green at pinning, 2026-09-19."
+    "commit": "a2943842ae84512935954c9675f2650194daf2a9",
+    "ref": "main",
+    "fetch_refspec": null,
+    "note": "Engine main as of 2026-09-30: the never-drop date port and attribute quarantine (PR #23), the supersede downgrade (PR #27), the subject-and-occasion reader check with the verify reply contract and the per-arm search width (PRs #24, #25). Schema 0028."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
@@ -44,7 +44,7 @@
     "calibration_sample": 40,
     "reader_contract": "verify",
     "runs": 3,
-    "runs_note": "Three independent runs of the whole pipeline, ingest included, each over all ten conversations: 1,986 questions, 1,540 of them non-adversarial. Reported as the mean and standard deviation across runs beside each run's own figure.",
+    "runs_note": "Independent runs of the whole pipeline, ingest included, each over all ten conversations. The headline is the mean across completed runs with their standard deviation and each run's own figure beside it.",
     "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25."
   },
   "models": {
@@ -87,5 +87,5 @@
       "note": "A second figure beside the strict one, for comparability: the reference answer prompt and judge, categories 1 to 4, one judge pass."
     }
   },
-  "hold": "staged on PR #27 head 416234c; held for the owner's go-ahead to launch. Remove this field to run."
+  "arms_note": "The primary figure is the shipped default: hybrid search at width 25, no entity roster. The entity roster is measured as a default-off arm by rebuilding envelopes from the same store and re-reading them, so it cannot move the primary figure. The source-turn layer is excluded: it was measured on 2026-09-25 to cost 8 adversarial declines, and storing turns is a design non-goal."
 }
