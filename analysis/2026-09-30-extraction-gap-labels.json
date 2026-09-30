@@ -1,0 +1,28 @@
+{
+  "_categories": {
+    "A": "interpersonal act: advice, suggestion, offer or request one speaker directs at the other",
+    "B": "assessment or compliment about the other person, their work or their decision",
+    "C": "emotion or reaction stated about something that happened",
+    "D": "incidental concrete detail or one-off anecdote (an object, a place, a small event)",
+    "E": "set member dropped because a similar fact was already stored",
+    "F": "other or ambiguous: the cited evidence does not clearly carry the gold"
+  },
+  "_note": "Hand-labelled by reading each question's gold answer and its cited evidence turns. One label per question, the dominant one.",
+  "single-hop": {
+    "conv-26:q89": "B", "conv-26:q125": "D", "conv-26:q128": "D", "conv-26:q133": "F",
+    "conv-26:q142": "B", "conv-26:q144": "C", "conv-26:q149": "C",
+    "conv-30:q43": "F", "conv-30:q52": "B", "conv-30:q57": "A", "conv-30:q56": "B",
+    "conv-30:q61": "D", "conv-30:q62": "D", "conv-30:q67": "D", "conv-30:q68": "C",
+    "conv-30:q71": "B", "conv-30:q72": "C", "conv-30:q73": "B", "conv-30:q74": "C",
+    "conv-30:q78": "B",
+    "conv-49:q96": "D", "conv-49:q97": "D", "conv-49:q99": "A", "conv-49:q103": "A",
+    "conv-49:q104": "D", "conv-49:q112": "A", "conv-49:q113": "A", "conv-49:q132": "A",
+    "conv-49:q136": "A", "conv-49:q139": "A", "conv-49:q141": "A", "conv-49:q145": "A",
+    "conv-49:q150": "A", "conv-49:q152": "E"
+  },
+  "multi-hop": {
+    "conv-26:q18": "E", "conv-26:q23": "E", "conv-26:q40": "E", "conv-26:q47": "E",
+    "conv-26:q48": "E", "conv-26:q56": "E", "conv-30:q31": "F", "conv-49:q1": "E",
+    "conv-49:q26": "E", "conv-49:q36": "E", "conv-49:q44": "E", "conv-49:q82": "E"
+  }
+}
