@@ -4,10 +4,10 @@
   "description": "The configuration of the settling multi-run measurement: engine main, width 25, all ten LoCoMo conversations, repeated runs. reproduce.py --config config/locomo-next.json runs one of them.",
   "engine": {
     "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": "a2943842ae84512935954c9675f2650194daf2a9",
-    "ref": "main",
-    "fetch_refspec": null,
-    "note": "Engine main as of 2026-09-30: the never-drop date port and attribute quarantine (PR #23), the supersede downgrade (PR #27), the subject-and-occasion reader check with the verify reply contract and the per-arm search width (PRs #24, #25). Schema 0028."
+    "commit": "e78240de76cb3d83778b65080a6ca22a3e638342",
+    "ref": "bench/settle-20260930",
+    "fetch_refspec": "+refs/pull/31/head:refs/remotes/origin/pr-31",
+    "note": "Engine main a2943842 (never-drop dates and attribute quarantine, the supersede downgrade, the subject-and-occasion reader check with the verify contract, per-arm width; schema 0028) plus one harness fix, PR #31: a usage cap during ingest stops the run instead of recording an empty conversation. The runs measure this commit."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
