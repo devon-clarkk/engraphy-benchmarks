@@ -23,15 +23,12 @@
   },
   "run": {
     "haystacks": [
-      "conv-26",
-      "conv-30",
       "conv-41",
       "conv-42",
       "conv-43",
       "conv-44",
       "conv-47",
       "conv-48",
-      "conv-49",
       "conv-50"
     ],
     "arm": "llm-conversational:search_only:k=25",
@@ -43,8 +40,8 @@
     "judge_concurrency": 4,
     "calibration_sample": 40,
     "reader_contract": "verify",
-    "runs": 3,
-    "runs_note": "Independent runs of the whole pipeline, ingest included, each over all ten conversations. The headline is the mean across completed runs with their standard deviation and each run's own figure beside it.",
+    "runs": 2,
+    "runs_note": "Independent runs of the whole pipeline, ingest included, over the held-out split. The headline is the mean across completed runs with its spread and each run's own figure beside it. A third run is added if the usage budget allows.",
     "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25."
   },
   "models": {
@@ -87,5 +84,24 @@
       "note": "A second figure beside the strict one, for comparability: the reference answer prompt and judge, categories 1 to 4, one judge pass."
     }
   },
-  "arms_note": "The primary figure is the shipped default: hybrid search at width 25, no entity roster. The entity roster is measured as a default-off arm by rebuilding envelopes from the same store and re-reading them, so it cannot move the primary figure. The source-turn layer is excluded: it was measured on 2026-09-25 to cost 8 adversarial declines, and storing turns is a design non-goal."
+  "arms_note": "The primary figure is the shipped default: hybrid search at width 25, no entity roster. The entity roster is measured as a default-off arm by rebuilding envelopes from the same store and re-reading them, so it cannot move the primary figure. The source-turn layer is excluded: it was measured on 2026-09-25 to cost 8 adversarial declines, and storing turns is a design non-goal.",
+  "split": {
+    "held_out": [
+      "conv-41",
+      "conv-42",
+      "conv-43",
+      "conv-44",
+      "conv-47",
+      "conv-48",
+      "conv-50"
+    ],
+    "seen": [
+      "conv-26",
+      "conv-30",
+      "conv-49"
+    ],
+    "held_out_questions": 1486,
+    "held_out_non_adversarial": 1151,
+    "note": "The seen conversations carried every lever's tuning and subset validation: the retrieval width sweep, the reader replays and the entity-roster analysis. The reported headline is measured on the held-out conversations only, which no lever was fitted to. Figures on the seen split stay published as what they are."
+  }
 }

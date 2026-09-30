@@ -50,5 +50,10 @@ def test_the_settling_run_is_pinned_and_covers_the_whole_suite():
     assert "hold" not in nxt
     assert re.fullmatch(r"[0-9a-f]{40}", nxt["engine"]["commit"])
     assert nxt["run"]["arm"].endswith(":k=25") and nxt["run"]["arm_id"].endswith("/k25")
-    assert len(nxt["run"]["haystacks"]) == 10 and nxt["run"]["runs"] >= 2
+    assert nxt["run"]["runs"] >= 2
+    # The headline runs on the split no lever was tuned on, and the two splits
+    # together are the whole suite with nothing counted twice.
+    held, seen = nxt["split"]["held_out"], nxt["split"]["seen"]
+    assert nxt["run"]["haystacks"] == held
+    assert not set(held) & set(seen) and len(held) + len(seen) == 10
     assert nxt["dataset"] == CFG["dataset"]

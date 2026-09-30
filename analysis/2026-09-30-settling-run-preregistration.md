@@ -53,3 +53,40 @@ The standing rule holds: level with the leaders on the scalar, never ahead of
 them, unless the multi-run mean and its spread establish otherwise. Whatever the
 mean comes to is what is reported, including a figure level with or below the
 published ones.
+
+## Addendum, 2026-09-30: the held-out split and the lever rules
+
+Fixed before any run under this configuration produced a number.
+
+### The split
+
+Every lever was tuned or validated on `conv-26`, `conv-30` and `conv-49`: the
+retrieval width sweep, the reader replays, and the entity-roster analysis all used
+that store. Those three are the **seen** split.
+
+The **held-out** split is the other seven conversations, `conv-41`, `conv-42`,
+`conv-43`, `conv-44`, `conv-47`, `conv-48` and `conv-50`: 1,486 questions, 1,151 of
+them non-adversarial, 209 sessions. No lever was fitted to any of it.
+
+**The reported headline is measured on the held-out split.** Tuning and subset
+validation may use the seen split, and figures already published on the seen split
+stay as what they are: measurements on the conversations the levers were fitted to.
+
+### The levers and how each is decided
+
+| Lever | Status | Decided by |
+|---|---|---|
+| Retrieval width 25 | In the default | Owner decision, recorded 2026-09-19 |
+| Entity-complete retrieval roster | Measured, default off | Its own pre-registered rule, already applied on the seen split: it gained 5 non-adversarial questions (p 0.46) and cost no adversarial declines, which did not pass to ship |
+| Extraction improvement | Not yet delivered | Subset validation on the seen split first, then a held-out run only if it passes |
+| Source-turn layer | Excluded | Measured to cost 8 adversarial declines, and storing turns is a design non-goal |
+
+A lever is promoted into the default only when it clears both:
+
+1. **Mechanism.** Why it helps is identified and stated, not inferred from the score.
+2. **Evidence.** Its effect on the seen split is larger than the spread between runs
+   of one configuration, and it costs no significant adversarial ground.
+
+A lever that fails either is reported with its measured effect and kept off. A
+lever whose result cannot be explained is investigated against how published
+systems handle that dimension before any conclusion is drawn.
