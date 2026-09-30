@@ -27,3 +27,27 @@ WHY ADVERSARIAL INFLATED, worth keeping: the seven lost adversarial questions ar
 FAILURE-CLASS RECOVERY (questions the definitive run got wrong, now correct): single-hop evidence-never-extracted 34 questions, 1 in the control to 18 with turns; multi-hop evidence-stored-but-not-retrieved 12 questions, 1 to 3 with the roster; multi-hop evidence-already-complete 13 questions, 2 to 7 with the roster. Each mechanism moves its own class, and no read-path change moves an extraction gap.
 
 WHAT TO DO. Roster: build as an engine search option (entity_roster flag, roster_limit, additive envelope keys entities and entity_roster), default off, and measure it on the staged ten-conversation run as a second arm over the same ingest, because its claim is multi-hop-specific and that run has 282 multi-hop questions against 80 here. Turns: do not build yet. It needs the product decision first, since design/01-core-data-model.md lists storing transcripts as a non-goal, and then an attribution fix making the speaker a first-class field the reader must check. Neither belongs in the staged run as harness-only code: a harness-only retrieval path is a configuration no deployment can reproduce.
+
+---
+
+## Second node, staged 2026-09-30 (memory server still unreachable)
+
+**type:** note
+**scope:** proj-engraphy
+**title:** Extraction, not retrieval, is the single-hop ceiling: the prompt tells the extractor to prefer fewer memories, and a capped ingest used to empty the store silently
+
+**body:**
+
+Established 2026-09-30 on run locomo-definitive-20260917. Full writeup engraphy-benchmarks analysis/2026-09-30-extraction-coverage-findings.md, rules fixed first in analysis/2026-09-30-extraction-coverage-preregistration.md, prototype on devon-clarkk/engraphy branch feat/extraction-coverage (ef8ae9f, 3cf6699), pushed, not merged.
+
+THE HOLE. 318 memories from 1,297 turns, 0.25 per turn. 34 of 58 single-hop failures and 12 of 37 multi-hop failures have evidence no stored memory quotes: 46 questions, 11.8% of the non-adversarial set, unreachable by any read-path change. It is drafting loss, not write loss: dedup merged 1, the confirm band resolved 197 of 197 to insert, and the write path refused 14.
+
+WHAT IS MISSED, all 46 hand-labelled: 11 interpersonal acts (advice, offer, request), 7 assessments of the other person, 5 stated reactions, 8 incidental concrete details, 12 dropped members of a recurring set, 3 ambiguous. Single-hop misses are conversational (things said in the exchange, mostly by one speaker about the other); multi-hop misses are set members, where the store keeps one instance of a recurring activity and drops the rest.
+
+ROOT CAUSE, three clauses of bench/prompts/extract.md. "Prefer fewer, well-formed memories over many fragments" suppresses volume. "Do not extract anything whose meaning depends entirely on the immediate exchange" excludes advice, assessments and reactions, which is 23 of the 34 single-hop misses. "Do not extract a fact already covered by one of the prior titles" collapses a set to its first member. NOT the cause, both checked: the typed-attribute constraints (fact and opinion accept all of it, attrs optional) and dedup or the write band. Contributing: extraction windows up to 40 turns, so a 20-turn session is one call yielding about five memories.
+
+HOW THE LEADERS DIFFER. Graphiti extracts per message ("Extract all factual relationships between the given ENTITIES based on the CURRENT MESSAGE", preserving proper nouns, quantities, colors, materials, named locations and activities) and keeps episodes losslessly. Mem0 extracts per message pair across seven declared categories, then reconciles with ADD/UPDATE/DELETE/NOOP. Both are inclusive per message and reconcile afterwards; Engraphy is parsimonious per window and reconciles nothing, so a fact declined at drafting is gone for good.
+
+THE PROTOTYPE, written and measurement blocked by the usage cap: three general prompt edits (completeness over economy; what one person says to or about another is in scope, recorded with speaker and addressee named; a new instance of a recurring thing is a new fact). The attribution is deliberate, because the 2026-09-25 source-turn experiment gained 21 non-adversarial questions and lost 8 adversarial declines on misattribution traps, and a raw turn is the same content with the attribution missing. Estimated +4 to +7 pp excluding adversarial (46 questions is the ceiling; the source-turn experiment converted 53% of this evidence into correct answers), entirely unmeasured. Risks to measure: adversarial inflation, store bloat at 2-3x with more confirm-band traffic, higher extractor cost.
+
+HARNESS DEFECT FOUND AND FIXED, worth porting on its own. QuotaExhausted subclasses LLMError, and LLMExtractor.extract caught LLMError broadly and returned an empty window. So a usage cap during ingest was recorded as "this window contributed nothing" for every window: the run logged 0 drafts to 0 nodes per conversation, marked done: true, and exited 0 with an empty store. Fixed at 3cf6699 with three tests; QuotaExhausted now propagates to the run loop that checkpoints and resumes. Port this before the staged ten-conversation run, which ingests over three passes and is exposed to exactly this.
