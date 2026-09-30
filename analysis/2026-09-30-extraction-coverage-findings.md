@@ -158,6 +158,38 @@ carrying to the staged ten-conversation run independently of anything else here,
 because that run ingests over three passes and would have been vulnerable to
 exactly this.
 
+## 7b. The extraction ceiling, measured
+
+`bench.extraction_coverage` asks the one question retrieval cannot: is a
+question's cited evidence present in **any** stored memory of its scope? It needs
+no LLM, so it ran under the cap. On the definitive store (317 active memories):
+
+| | |
+|---|---|
+| Questions whose evidence is held somewhere in the store | 71.6% (277 of 387) |
+| Questions with some evidence held | 83.7% |
+| Questions with all evidence retrieved into context at k=25 | 66.9% |
+| The 46 extraction-gap questions held in the store | 0, by construction |
+
+So the store itself caps accuracy at 71.6%, and retrieval loses a further 4.7
+points. **Extraction is a 28-point ceiling; retrieval is a 5-point gap.** That
+ratio is the case for spending an ingest pass on this rather than more read-path
+work.
+
+## 7c. How the change is packaged, and one deviation
+
+The wider prompt is now opt-in rather than a replacement: `extract.md` is
+restored byte-identical to main (`b7fdf557f7f60a9c`) and the change lives in
+`extract-wide.md` behind a separate extractor name, `llm_wide`, with its own
+scope and arm id (commit `46a4e78`). The handoff is
+`analysis/2026-09-30-extraction-handoff.md`.
+
+**Deviation from the preregistration, disclosed:** the control arm is a fresh
+`llm` ingest rather than the definitive store. Main has moved since that run (the
+supersede downgrade and other engine work have merged), so the definitive store
+is no longer the same engine and would have confounded store-size comparisons.
+Both arms now run in one command on one engine, differing only in the prompt.
+
 ## 8. Recommendation, ranked
 
 | # | Action | Estimated gain | Effort | Risk |
