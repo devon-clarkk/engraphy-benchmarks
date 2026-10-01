@@ -2,6 +2,10 @@
 """Consolidate the settling runs into the figures the final report quotes.
 
     python scripts/consolidate.py runs/locomo-settle-a runs/locomo-settle-b ...
+    python scripts/consolidate.py --arm=<arm id> <run dir> ...
+
+Reads one arm, the combined engine by default. A run carrying a second arm
+has it reported separately, never pooled into the mean.
 
 Each argument is a finished run directory (a strict run, optionally with a
 `reference/` pass beside it). Only complete runs are counted: a run whose
@@ -75,6 +79,24 @@ def complete(manifest: pathlib.Path) -> tuple[bool, str]:
     return True, "complete"
 
 
+# The combined engine, as the harness names an arm in its rows. A run may carry a
+# second arm (run A of the settling measurement carries the shipped extraction
+# prompt beside it), and pooling two arms into one mean reports a figure no
+# configuration produced.
+DEFAULT_ARM = "llm_wide-conversational/search_only/always_distinct/k25"
+
+
+def for_arm(result_rows: list[dict], arm: str) -> list[dict]:
+    """One arm's rows, matching the reference pass's suffixed arm name too."""
+    return [r for r in result_rows
+            if r.get("arm") in (arm, arm + "/reference-conventions")]
+
+
+def arms_in(result_rows: list[dict]) -> list[str]:
+    return sorted({r["arm"].removesuffix("/reference-conventions")
+                   for r in result_rows if r.get("arm")})
+
+
 def buckets(result_rows: list[dict]) -> dict[str, tuple[int, int]]:
     out: dict[str, tuple[int, int]] = {}
     non_adv = [r for r in result_rows if not r.get("abstain_expected")]
@@ -134,18 +156,33 @@ def standing(means: dict[str, float]) -> None:
 def main() -> int:
     if len(sys.argv) < 2:
         raise SystemExit(__doc__)
+    args = [a for a in sys.argv[1:] if not a.startswith("--arm=")]
+    arm = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--arm=")),
+               DEFAULT_ARM)
+    print(f"arm: {arm}")
     strict: dict[str, dict] = {}
     ref: dict[str, dict] = {}
-    for arg in sys.argv[1:]:
+    for arg in args:
         d = pathlib.Path(arg)
         ok, why = complete(d / "manifest.json")
         print(f"{d.name}: strict {why}")
         if ok:
-            strict[d.name] = buckets(rows(d / "results.jsonl"))
+            all_rows = rows(d / "results.jsonl")
+            mine = for_arm(all_rows, arm)
+            others = [a for a in arms_in(all_rows) if a != arm]
+            if others:
+                print(f"{d.name}: reading {len(mine)} rows for this arm, "
+                      f"leaving {others} out of the mean")
+            if not mine:
+                print(f"{d.name}: NO rows for {arm}; it holds {arms_in(all_rows)}")
+            else:
+                strict[d.name] = buckets(mine)
         ok_r, why_r = complete(d / "reference" / "manifest.json")
         print(f"{d.name}: reference {why_r}")
         if ok_r:
-            ref[d.name] = buckets(rows(d / "reference" / "results.jsonl"))
+            ref_rows = for_arm(rows(d / "reference" / "results.jsonl"), arm)
+            if ref_rows:
+                ref[d.name] = buckets(ref_rows)
     if strict:
         strict_title = "strict default (reader may decline, judge requires every gold item)"
         means = report(strict_title, strict)
