@@ -198,3 +198,46 @@ compares any claim of a lead against.
 The reported headline is the combined engine's mean across the runs, on the seven
 held-out conversations, with the spread stated beside it. The matched-convention
 pass runs on each strict run, as before.
+
+### Disclosure, same day: the seen-split gain is in-sample, and how far
+
+Recorded on reading the wide prompt's provenance, before the held-out runs
+produced a number.
+
+`extract-wide.md` was written against
+`engraphy-benchmarks-completeness/analysis/2026-09-30-extraction-gap-labels.json`:
+46 questions, all of them on conv-26, conv-30 and conv-49, hand-labelled, in the
+file's own words, "by reading each question's gold answer and its cited evidence
+turns". The prompt's scope clauses restate those label classes. The labels have a
+class for an interpersonal act, advice or an offer one speaker directs at the
+other, and the prompt says what one person says to or about another is in scope
+and names those acts. The labels have a class for a recurring thing seen again,
+and the prompt says a new instance of something recurring is a new fact.
+
+Three consequences, all of which belong in the report:
+
+1. **The 9 of 46 to 28 of 46 gap-set recovery is circular.** It measures the
+   prompt against the labels it was written from. It is not cited as evidence,
+   and it stays in `coverage.json` as a description of what changed, not as a
+   result.
+2. **The seen-split coverage and accuracy gains are in-sample**, in the strong
+   sense: the prompt targets the classes of fact those questions ask about, and
+   the labels were derived from their gold answers. +12.4 points of coverage and
+   +7.46 points of accuracy are validation figures on the split the lever was
+   fitted to, and are reported as that and nothing more.
+3. **The out-of-sample number is run A's own pairing**, the combined engine
+   against the shipped prompt on the seven held-out conversations. That pairing
+   is the reason run A carries two arms, and it is what the report leads with for
+   this lever.
+
+The prompt contains no question, no gold answer and no conversation text: it is
+generic instruction, so what was fitted is the kind of fact worth storing rather
+than any particular answer. That bounds the exposure, and it does not remove it.
+The held-out split exists for exactly this, and it was not read, labelled or
+measured while the prompt was written.
+
+The promotion decision stands on the pre-registered rule, which asked for subset
+validation plus a mechanism, and the mechanism is independent of the labels: the
+wide prompt stores facts the shipped prompt discards, which is visible as 53
+questions whose cited evidence only the wide store holds. Whether that converts
+to accuracy on data nobody looked at is what run A answers.
