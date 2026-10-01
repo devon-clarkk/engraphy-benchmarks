@@ -90,3 +90,63 @@ A lever is promoted into the default only when it clears both:
 A lever that fails either is reported with its measured effect and kept off. A
 lever whose result cannot be explained is investigated against how published
 systems handle that dimension before any conclusion is drawn.
+
+## Addendum, 2026-10-01: how the wider extraction prompt is decided
+
+Fixed before the arm has been ingested once. `llm_wide` is `llm` with
+`bench/prompts/extract-wide.md` in place of `extract.md`: completeness over
+economy, what one person says to or about another in scope with both named, and a
+new instance of a recurring thing treated as a new fact.
+
+### Why this lever needs a replicate and the others did not
+
+Retrieval levers are deterministic given a store: the roster and the width sweep
+were replayed against one ingest, so their spread is the reader's, already
+measured. Extraction changes the store, and extraction is a model call, so two
+ingests of the *same* prompt differ. Comparing one `llm` ingest against one
+`llm_wide` ingest therefore cannot separate the prompt from the draw.
+
+So stage 1 ingests three stores on the seen split: `llm`, `llm_wide`, and a
+second `llm` under its own run id. The `llm`-against-`llm` pair is the noise
+floor, measured rather than assumed, and it costs no reader or judge calls.
+
+### The order, and the gate
+
+1. Ingest all three stores.
+2. **Store coverage**, no model in the loop: for each question, is the evidence
+   the benchmark cites present in any stored memory of that scope? This is the
+   ceiling on what any read path could surface, and `llm_wide` has to move it to
+   be worth anything. Store size is reported beside it.
+3. **The gate.** The answer and judge pass on the two arms is paid for only if
+   the coverage gain of `llm_wide` over `llm` both exceeds the `llm`-to-`llm`
+   replicate difference and reaches p < 0.05 on an exact McNemar test over the
+   paired per-question coverage outcomes. A gain inside the replicate spread
+   drops the lever at this step, on the stated mechanism ground that a prompt
+   which does not change what is stored cannot change what is answered.
+4. If the gate opens, answers and judging run on both arms, same reader, same
+   strict judge, paired per question.
+
+### What promotion requires
+
+Beyond the two standing conditions, mechanism and evidence:
+
+- **Coverage.** The gain survives the replicate comparison above.
+- **Accuracy.** The judged gain on the 389 non-adversarial seen questions exceeds
+  the between-run churn already measured on this split, which is where the lever
+  3 and 4 attribution landed: an adversarial move of 75.7% to 89.2% was
+  significant at p 0.0013, while the non-adversarial move sat at p 0.42 and was
+  reported as churn. A gain of that second kind is churn here too.
+- **No adversarial cost.** The adversarial decline rate does not fall
+  significantly. A wider prompt stores more, and more stored text is more for an
+  adversarial question to look true against, so this is the specific risk the
+  lever carries and it is checked rather than assumed.
+- **Store cost is reported either way**, as nodes per conversation against `llm`.
+  Coverage bought by storing everything is recorded as such.
+
+### A note on what makes this checkable
+
+Each arm's manifest records the prompt its extractor loaded, by name and hash,
+per arm (`extract_prompts`). The run-wide `prompt_hashes` block lists every
+prompt in the tree and so reads identically whichever arm selected which, which
+is not enough for a third party to confirm the two arms differed in the thing
+under test.
