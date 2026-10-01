@@ -57,3 +57,15 @@ def test_the_settling_run_is_pinned_and_covers_the_whole_suite():
     assert nxt["run"]["haystacks"] == held
     assert not set(held) & set(seen) and len(held) + len(seen) == 10
     assert nxt["dataset"] == CFG["dataset"]
+
+
+def test_the_next_run_measures_the_promoted_extraction_prompt():
+    """The config must name the engine that is actually being measured. The
+    wider prompt entered the default on 2026-10-02, so a config still naming
+    `llm` would publish a configuration nobody ran."""
+    nxt = load_config(ROOT / "config" / "locomo-next.json")
+    assert nxt["run"]["arm"].startswith("llm_wide-")
+    assert nxt["run"]["arm_id"].startswith("llm_wide-")
+    # Run A also carries the shipped prompt, so the lever is measured out of sample.
+    assert any(a.startswith("llm-") for a in nxt["run"]["arms_in_run_a"])
+    assert nxt["run"]["arm"] in nxt["run"]["arms_in_run_a"]

@@ -1,13 +1,13 @@
 {
   "benchmark": "locomo",
   "config_version": 1,
-  "description": "The configuration of the settling multi-run measurement: engine main, width 25, all ten LoCoMo conversations, repeated runs. reproduce.py --config config/locomo-next.json runs one of them.",
+  "description": "The configuration of the settling multi-run measurement: the combined engine at width 25 with the wider extraction prompt, the seven held-out LoCoMo conversations, repeated runs. reproduce.py --config config/locomo-next.json runs one of them.",
   "engine": {
     "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": "e78240de76cb3d83778b65080a6ca22a3e638342",
+    "commit": "b9a3afc10c42880614ff046b840dee221bd708a9",
     "ref": "bench/settle-20260930",
     "fetch_refspec": "+refs/pull/31/head:refs/remotes/origin/pr-31",
-    "note": "Engine main a2943842 (never-drop dates and attribute quarantine, the supersede downgrade, the subject-and-occasion reader check with the verify contract, per-arm width; schema 0028) plus one harness fix, PR #31: a usage cap during ingest stops the run instead of recording an empty conversation. The runs measure this commit."
+    "note": "Engine main a2943842 (never-drop dates and attribute quarantine, the supersede downgrade, the subject-and-occasion reader check with the verify contract, per-arm width; schema 0028) plus PR #31, which carries the harness fixes the measurement needed: a usage cap or an expired session during ingest stops the run instead of recording an empty conversation, an arm's extractor name selects its extraction prompt, each arm's manifest records that prompt by name and hash, a run is judged complete by the phases it was asked for, and every entry point prints progress as UTF-8. The runs measure this commit."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
@@ -31,8 +31,8 @@
       "conv-48",
       "conv-50"
     ],
-    "arm": "llm-conversational:search_only:k=25",
-    "arm_id": "llm-conversational/search_only/always_distinct/k25",
+    "arm": "llm_wide-conversational:search_only:k=25",
+    "arm_id": "llm_wide-conversational/search_only/always_distinct/k25",
     "judge": "claude",
     "reader_stance": "grounded",
     "phases": "ingest,answer,judge,calibrate,diagnose,report",
@@ -42,7 +42,13 @@
     "reader_contract": "verify",
     "runs": 2,
     "runs_note": "Independent runs of the whole pipeline, ingest included, over the held-out split. The headline is the mean across completed runs with its spread and each run's own figure beside it. A third run is added if the usage budget allows.",
-    "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25."
+    "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25.",
+    "extraction_note": "`llm_wide` is the wider extraction prompt (bench/prompts/extract-wide.md). It entered the default by the pre-registered rule, on the seen split only: store coverage 73.4% to 85.8% against a measured 0.8 point replicate floor (p < 0.0001), judged non-adversarial accuracy 69.15% to 76.61% (p 0.000025), adversarial unchanged at 88.29% (p 1.0), at 55% more memories stored. Measured in results/locomo/locomo-extract-ab-20261002.",
+    "arms_in_run_a": [
+      "llm_wide-conversational:search_only:k=25",
+      "llm-conversational:search_only:k=25"
+    ],
+    "arms_note": "Run A carries the shipped extraction prompt as a second arm on the same ingest, so the lever's isolated effect is measured out of sample as well. Run B carries the combined engine alone, which is what the run-to-run spread of the headline needs. The headline is the combined engine's mean across runs with its spread."
   },
   "models": {
     "extractor": "claude-opus-4-8",
@@ -84,7 +90,7 @@
       "note": "A second figure beside the strict one, for comparability: the reference answer prompt and judge, categories 1 to 4, one judge pass."
     }
   },
-  "arms_note": "The primary figure is the shipped default: hybrid search at width 25, no entity roster. The entity roster is measured as a default-off arm by rebuilding envelopes from the same store and re-reading them, so it cannot move the primary figure. The source-turn layer is excluded: it was measured on 2026-09-25 to cost 8 adversarial declines, and storing turns is a design non-goal.",
+  "arms_note": "The primary figure is the shipped default: hybrid search at width 25 with the wider extraction prompt, no entity roster. The entity roster is measured as a default-off arm by rebuilding envelopes from the same store and re-reading them, so it cannot move the primary figure; its own pre-registered rule failed on the seen split. The source-turn layer is excluded: it was measured on 2026-09-25 to cost 8 adversarial declines, and storing turns is a design non-goal.",
   "split": {
     "held_out": [
       "conv-41",
