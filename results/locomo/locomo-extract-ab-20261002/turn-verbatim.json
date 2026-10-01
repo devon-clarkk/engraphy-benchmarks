@@ -1,0 +1,79 @@
+{
+  "haystacks": [
+    "conv-26",
+    "conv-30",
+    "conv-49"
+  ],
+  "prefix_chars": 60,
+  "stores": {
+    "bench-extract-ab-seen-conversational#llm": {
+      "memories": 333,
+      "turns": 1297,
+      "held_verbatim": 492,
+      "pct": 37.9,
+      "per_conversation": {
+        "conv-26": {
+          "turns": 419,
+          "held_verbatim": 175,
+          "pct": 41.8
+        },
+        "conv-30": {
+          "turns": 369,
+          "held_verbatim": 101,
+          "pct": 27.4
+        },
+        "conv-49": {
+          "turns": 509,
+          "held_verbatim": 216,
+          "pct": 42.4
+        }
+      }
+    },
+    "bench-extract-ab-seen-conversational#llm_wide": {
+      "memories": 515,
+      "turns": 1297,
+      "held_verbatim": 650,
+      "pct": 50.1,
+      "per_conversation": {
+        "conv-26": {
+          "turns": 419,
+          "held_verbatim": 231,
+          "pct": 55.1
+        },
+        "conv-30": {
+          "turns": 369,
+          "held_verbatim": 149,
+          "pct": 40.4
+        },
+        "conv-49": {
+          "turns": 509,
+          "held_verbatim": 270,
+          "pct": 53.0
+        }
+      }
+    },
+    "bench-extract-ab-seen-rep-conversational#llm": {
+      "memories": 323,
+      "turns": 1297,
+      "held_verbatim": 489,
+      "pct": 37.7,
+      "per_conversation": {
+        "conv-26": {
+          "turns": 419,
+          "held_verbatim": 180,
+          "pct": 43.0
+        },
+        "conv-30": {
+          "turns": 369,
+          "held_verbatim": 112,
+          "pct": 30.4
+        },
+        "conv-49": {
+          "turns": 509,
+          "held_verbatim": 197,
+          "pct": 38.7
+        }
+      }
+    }
+  }
+}
