@@ -150,3 +150,51 @@ per arm (`extract_prompts`). The run-wide `prompt_hashes` block lists every
 prompt in the tree and so reads identically whichever arm selected which, which
 is not enough for a third party to confirm the two arms differed in the thing
 under test.
+
+## Addendum, 2026-10-02: the lever verdict and how the held-out runs are allocated
+
+Fixed before the held-out runs were launched, and before any held-out question
+had been answered under this configuration.
+
+### `llm_wide` is promoted into the combined engine
+
+It cleared every condition of the rule above, measured on the seen split:
+
+- **Mechanism.** It stores the evidence the shipped prompt discards. Store
+  coverage, with no model in the loop, went from 73.4% to 85.8% of 387 scorable
+  questions, discordant 5 against 53: it holds the cited evidence for 53
+  questions the control dropped and loses 5 the control kept. On the labelled
+  extraction-gap set, 9 of 46 recovered became 28 of 46.
+- **Coverage, against a measured floor.** A second ingest of the shipped prompt
+  came to 72.6%, so the floor is 0.8 points, discordant 22 against 19, p 0.76.
+  The lever's +12.4 points sits far outside it at p < 0.0001.
+- **Accuracy.** Judged non-adversarial accuracy went from 69.15% to 76.61% of
+  389 questions, discordant 9 against 38, p 0.000025. Every category rose:
+  multi-hop 57.5 to 61.25, open-domain 69.23 to 76.92, single-hop 69.52 to
+  78.61, temporal 78.12 to 85.42.
+- **No adversarial cost.** 88.29% both ways on 111 adversarial questions,
+  discordant 3 against 3, p 1.0. This was the specific risk a wider store
+  carries, and it did not materialise.
+- **Cost, reported.** 515 memories against 333, so +55%, and about 50% longer to
+  ingest.
+
+The entity-complete roster stays measured and default off: its own rule failed on
+the seen split. The source-turn layer stays excluded. Retrieval width 25 is in by
+owner decision. So the combined engine for the held-out runs is width 25 plus the
+wide extraction prompt.
+
+### The held-out runs
+
+Run A carries two arms, the combined engine and the shipped extraction prompt, on
+one ingest. That measures the lever's isolated effect out of sample as well,
+rather than only on the split it was validated against, and a lever that gains
+7.46 points in validation and nothing on held-out data is a result worth having
+rather than one to avoid asking for.
+
+Run B carries the combined engine alone. Two runs of one configuration are what
+the spread of the headline needs, and that spread is the figure the standing rule
+compares any claim of a lead against.
+
+The reported headline is the combined engine's mean across the runs, on the seven
+held-out conversations, with the spread stated beside it. The matched-convention
+pass runs on each strict run, as before.
