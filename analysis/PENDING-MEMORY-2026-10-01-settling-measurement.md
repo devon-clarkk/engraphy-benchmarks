@@ -79,3 +79,47 @@ fact in one turn and is 654 of the 1,151 held-out non-adversarial questions.
 Multi-hop is where the leaders use graph or multi-strategy retrieval; Engraphy's
 measured answer is the text-based entity roster, chosen because graph traversal
 and a node-distance reranker were both measured as net losses.
+
+## Node 4: an expired CLI session was being classified as a usage cap
+
+Found and fixed 2026-10-01, engine PR #31 (branch `bench/settle-20260930`,
+commit a182de1). `ClaudeCLIClient` read any `is_error` result it could not
+recognise as a usage cap, so `"Failed to authenticate: OAuth session expired and
+could not be refreshed"` raised `QuotaExhausted`. The supervisor's response to a
+cap is correct and is the worst possible response to this: it slept 4.5 hours at
+a time, for over ten hours, logging "usage limit" while nothing could have
+succeeded. The reason it cost a day rather than a minute is that both the harness
+log and the operator's reading of it agreed on the wrong cause.
+
+The fix adds `AuthExpired(LLMError)`, matches the authentication wordings before
+the usage ones at all three places the CLI result is classified, and gives
+`stop_class` a third answer: `halt`. A halt prints the reason and exits for an
+operator instead of waiting, because `claude login` is the only thing that clears
+it, and an agent must not do it. Tests in `bench/tests/test_provider_auth.py`
+fake `subprocess.run`, so they assert the classification with no CLI and no
+sleeping.
+
+General lesson: a stop class is a claim about what will fix the stop. Waiting,
+relaunching and fetching an operator are three different claims, and a default
+that collapses them to "wait" turns a one-minute fix into a lost day.
+
+## Node 5: an A/B's wiring has to be asserted at the seam, not in the registry
+
+Found 2026-10-01 while validating the two-arm extraction command before spending
+a run on it, fixed in engine commit a2fdc34. `llm_wide` was registered correctly
+(`EXTRACT_PROMPTS["llm_wide"] == "extract-wide.md"`), took its own scope and its
+own arm_id, and had a test asserting all of that. But `_build_extractor` called
+`LLMExtractor(client, pack)` without `prompt_name`, so the constructor default
+`extract.md` applied and the wide arm ran the shipped prompt.
+
+Nothing would have failed. Both arms would have ingested identical stores into
+two scopes, coverage and accuracy would have come out equal, and the honest
+reading of that result is "the wider prompt makes no difference", which would
+have been recorded as a measured null and dropped the lever.
+
+What the test was missing is the seam: it asserted the table that names the
+prompt, not the object that loads it. The replacement asserts
+`_build_extractor("llm_wide", pack).prompt_name` and that the two arms' system
+prompts differ. Worth generalising to any A/B in this harness: assert that the
+two arms differ in the thing under test, at the point where it is constructed,
+before paying for the comparison.
