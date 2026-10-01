@@ -1,0 +1,302 @@
+{
+  "run_id": "extract-ab-seen-rep",
+  "benchmark": "locomo",
+  "space_config": {},
+  "generated_at": "2026-10-01T16:17:56.664451+00:00",
+  "engine_git_sha": "af6c96e309d5108e6002587b84739a6b7704b25c",
+  "harness_git_sha": "af6c96e309d5108e6002587b84739a6b7704b25c",
+  "git_tree_dirty": false,
+  "git_branch": "bench/settle-20260930",
+  "transport": "in-process (engraphy.core), per design/09 §in-process decision",
+  "principal": "bench",
+  "packs": {
+    "conversational": {
+      "space_id": "bench-extract-ab-seen-rep-conversational",
+      "version": 1,
+      "file_hash": "sha256:5292819f0d09c92d2cb5d906916335c5cd34bc3e1d2792d29c55e6909fcef61d",
+      "ambient_scopes_stripped": true,
+      "node_types": [
+        "decision",
+        "event",
+        "fact",
+        "opinion",
+        "person",
+        "preference",
+        "thing"
+      ],
+      "note": "ambient_scopes removed for haystack isolation (symmetric across packs; recorded beside the untouched file hash)"
+    }
+  },
+  "band_thresholds": {
+    "source": "config table, per-space; code defaults where unset",
+    "code_defaults": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    },
+    "config_rows": {},
+    "effective": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    }
+  },
+  "band_thresholds_note": "read back from one representative pack space; every pack space is provisioned identically with no override.",
+  "reader": {
+    "governing_skill": "skills/answer-discipline.md",
+    "governing_skill_sha256": "sha256:c3b00290fe684bcbf4a6c768f3596020e9feb21ae7bf6fd87ad05072a526bd4b",
+    "inference_stance": "grounded",
+    "output_format": "verify",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.\n\nLay out your reply as exactly two lines. The first line begins `CHECK:` and says, in a few words, who or what the question is about, the specific fact it asks for, and the title of the returned memory that states or supports that fact for that subject and occasion, or `none`. The second line begins `ANSWER:` and carries only your answer, in the form above; when you decline, it is exactly INSUFFICIENT. The grader sees only the text after `ANSWER:`.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "effort": "medium",
+    "model": "claude-opus-4-8"
+  },
+  "dataset": {
+    "path": "locomo10.json",
+    "digest": "sha256:79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "questions_in_file": 1986
+  },
+  "haystacks": [
+    "conv-26",
+    "conv-30",
+    "conv-49"
+  ],
+  "corpus": {
+    "name": "locomo[conv-26,conv-30,conv-49]",
+    "haystacks": 3,
+    "sessions": 63,
+    "turns": 1297,
+    "questions": 500,
+    "questions_per_category": {
+      "adversarial": 111,
+      "multi-hop": 80,
+      "open-domain-knowledge": 26,
+      "single-hop": 187,
+      "temporal-reasoning": 96
+    },
+    "abstain_questions": 111,
+    "notes": {
+      "source_file": "locomo10.json",
+      "dropped_image_only_turns": 0,
+      "coerced_non_string_answers": 6,
+      "category_mapping": {
+        "1": "multi-hop",
+        "2": "temporal-reasoning",
+        "3": "open-domain-knowledge",
+        "4": "single-hop",
+        "5": "adversarial"
+      },
+      "summaries_ingested": false,
+      "restricted_to_haystacks": [
+        "conv-26",
+        "conv-30",
+        "conv-49"
+      ]
+    }
+  },
+  "arms": [
+    {
+      "arm_id": "llm-conversational/search_only/always_distinct/k25",
+      "extractor": "llm",
+      "pack": "conversational",
+      "strategy": "search_only",
+      "confirm_policy": "always_distinct",
+      "categories": "all",
+      "k": 25
+    }
+  ],
+  "retrieval_configs": {
+    "llm-conversational/search_only/always_distinct/k25": {
+      "strategy": "search_only",
+      "limit": 25,
+      "detail": "full"
+    }
+  },
+  "extract_prompts": {
+    "llm-conversational/search_only/always_distinct/k25": {
+      "prompt": "extract.md",
+      "sha256": "sha256:b7fdf557f7f60a9c"
+    }
+  },
+  "provider": "claude-cli",
+  "role_models": {
+    "extractor": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "reader": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "adjudicator": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "judge": {
+      "provider": "claude-cli",
+      "model": "claude-sonnet-5",
+      "same_vendor": true
+    }
+  },
+  "provider_config": {},
+  "judge_provider": "claude",
+  "judge_neutrality": "THIS RUN'S JUDGE IS SAME-VENDOR (Claude), a deliberate deviation from design/09's cross-vendor rule. The rationale for that rule -- 'a harness that grades its own vendor's answers invites the marked-its-own-homework objection' -- still stands as the recommended posture for any eventual PUBLISHED number, and the Gemini judge path is retained for exactly that. It is set aside here for two reasons: (1) the task is binary answer-matching against a supplied gold answer, which is low bias-risk for same-vendor grading -- the judge is not scoring prose quality, only whether two short facts agree; and (2) the Gemini free tier's per-model daily cap (measured at 500/day for flash-lite, 20/day for flash) makes a complete same-day run impossible, and this is an internal baseline, not a publishable figure. The judge still sees only question, gold and candidate -- never the envelope, strategy or extractor -- so it cannot condition on the arm it grades. Judge instability is measured on this run regardless of vendor.",
+  "resolved_models": {
+    "reader": [],
+    "judge": [],
+    "reader_note": "A SET, not a single id, and it legitimately contains a Haiku model alongside the requested Sonnet. The CLI runs a second model for its own internal work, and ClaudeCLIClient._resolved_model reports whichever model emitted the most output tokens in that call -- for a one-line reader answer that is sometimes the internal model rather than the one that answered. So this field bounds which models were involved; it does not prove which produced a given answer. The requested alias is recorded verbatim under role_models. Recorded as a known imprecision rather than resolved by guessing."
+  },
+  "prompt_hashes": {
+    "extract.md": "sha256:b7fdf557f7f60a9c",
+    "extract-wide.md": "sha256:2f3fa4c9e6c1a457",
+    "judge.md": "sha256:947bebcd5375e93e",
+    "adjudicate.md": "sha256:740151c30787a630"
+  },
+  "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
+  "embedding_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "llm_extractor": {
+    "retain_source_text": true,
+    "note": "When true, the LLM extractor appends the verbatim text of the turns each memory cites (source_turn_ids) to the node body, so a typed node stays word-searchable. A general recall property, not a single-hop trick; the source is the cited turns copied exactly, never re-summarised. design/09 single-hop finding, 2026-07-22."
+  },
+  "retrieval_note": "search_then_traverse seeds with the SAME search(limit, detail) as the search_only baseline and walks every seed, so the two arms differ only in the graph walk -- the multi-hop comparison isolates the graph contribution rather than confounding it with search width.",
+  "token_counter": null,
+  "token_counter_note": "Absent by construction, not by oversight. Counting Claude tokens needs the count_tokens API and therefore an API key; this harness routes Claude through the CLI on a subscription so that no API credit is spent, and the CLI reports usage for its own injected system prompt rather than for the payload. Gemini's tokenizer would be a different vendor's tokenizer measuring a Claude payload -- the same objection that ruled out tiktoken. Payload is reported in bytes of the serialized envelope; byte ratios between arms are tokenizer-independent, absolute token claims are not made.",
+  "seeds": {
+    "question_order": "dataset order (no sampling within a conversation)"
+  },
+  "dataset_licence": "CC BY-NC 4.0 — internal measurement only; commercial publication is the project owner's open question",
+  "ingest": [
+    {
+      "haystack_id": "conv-26",
+      "drafts": 130,
+      "inserted": 41,
+      "merged": 1,
+      "merged_linked": 8,
+      "needs_confirmation": 80,
+      "confirm_band_rate": 0.6154,
+      "resolved_distinct": 79,
+      "resolved_merge": 0,
+      "resolved_to_insert": 79,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 128,
+      "edges_requested": 99,
+      "edges_attached": 91,
+      "supersede_attempted": 4,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 4,
+      "write_errors": {
+        "resolve:CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.as_of is not allowed (closed spec)"
+        }
+      ],
+      "ingest_input_tokens": 40,
+      "ingest_output_tokens": 50767,
+      "embed_seconds": 31.5932,
+      "write_seconds": 2.6595,
+      "total_seconds": 701.3133,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-26-llm",
+      "space_id": "bench-extract-ab-seen-rep-conversational",
+      "done": true,
+      "sessions": 19,
+      "turns": 419
+    },
+    {
+      "haystack_id": "conv-30",
+      "drafts": 74,
+      "inserted": 23,
+      "merged": 0,
+      "merged_linked": 2,
+      "needs_confirmation": 49,
+      "confirm_band_rate": 0.6622,
+      "resolved_distinct": 49,
+      "resolved_merge": 0,
+      "resolved_to_insert": 49,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 74,
+      "edges_requested": 50,
+      "edges_attached": 47,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 2,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 44,
+      "ingest_output_tokens": 37487,
+      "embed_seconds": 17.9661,
+      "write_seconds": 1.4323,
+      "total_seconds": 543.3263,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-30-llm",
+      "space_id": "bench-extract-ab-seen-rep-conversational",
+      "done": true,
+      "sessions": 19,
+      "turns": 369
+    },
+    {
+      "haystack_id": "conv-49",
+      "drafts": 122,
+      "inserted": 54,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 67,
+      "confirm_band_rate": 0.5492,
+      "resolved_distinct": 67,
+      "resolved_merge": 0,
+      "resolved_to_insert": 67,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 122,
+      "edges_requested": 74,
+      "edges_attached": 71,
+      "supersede_attempted": 2,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 2,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 52,
+      "ingest_output_tokens": 58561,
+      "embed_seconds": 30.693,
+      "write_seconds": 2.4659,
+      "total_seconds": 818.1372,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-49-llm",
+      "space_id": "bench-extract-ab-seen-rep-conversational",
+      "done": true,
+      "sessions": 25,
+      "turns": 509
+    }
+  ],
+  "extrapolation": "",
+  "quota_stop": false,
+  "judge_calibration": {
+    "instability": null,
+    "note": "not measured on this run — the calibration phase did not run."
+  },
+  "phases_requested": [
+    "ingest"
+  ],
+  "phases_completed": [
+    "ingest"
+  ]
+}

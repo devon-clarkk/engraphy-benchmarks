@@ -1,0 +1,11 @@
+questions scored        387
+llm        coverage     73.4%  (333 memories)
+llm (rep)  coverage     72.6%  (323 memories)
+llm_wide   coverage     85.8%  (515 memories)
+
+noise floor, llm to llm +0.8 points, discordant 22/19, p 0.7552
+lever, llm to llm_wide  +12.4 points, discordant 5/53, p 0.0000
+store size change       +182 memories (+55%)
+
+GATE OPEN: the gain clears the 0.8 point noise floor and p 0.0000 < 0.05.
+Pay for the answer and judge pass on both arms.
