@@ -188,7 +188,10 @@ def main() -> int:
         means = report(strict_title, strict)
         standing(means)
     if ref:
-        report("under the reference harness conventions", ref)
+        ref_means = report("under the reference harness conventions", ref)
+        # The published figures were measured under these conventions, not under
+        # the strict default, so this is the comparable table of the two.
+        standing(ref_means)
     if not strict:
         print("\nno complete run yet; nothing is averaged")
     return 0
