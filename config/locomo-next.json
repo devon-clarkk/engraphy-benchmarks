@@ -1,13 +1,13 @@
 {
   "benchmark": "locomo",
   "config_version": 1,
-  "description": "The configuration staged for the next LoCoMo run, pinned to the engine with the supersede-downgrade port. reproduce.py refuses it while `hold` is set.",
+  "description": "The configuration of the settling multi-run measurement: the combined engine at width 25 with the wider extraction prompt, the seven held-out LoCoMo conversations, repeated runs. reproduce.py --config config/locomo-next.json runs one of them.",
   "engine": {
     "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": "416234c69f43c9a34949d31ed1f162ef19710896",
-    "ref": "feat/supersede-downgrade",
-    "fetch_refspec": "+refs/pull/27/head:refs/remotes/origin/pr-27",
-    "note": "PR #27 head: a supersede that cannot complete (cross-type, or a replacement banding against a third memory) is stored as a plain write with the downgrade flagged, on top of main at 299f5b3 (PRs #23, #24, #25). CI green at pinning, 2026-09-19."
+    "commit": "b9a3afc10c42880614ff046b840dee221bd708a9",
+    "ref": "bench/settle-20260930",
+    "fetch_refspec": "+refs/pull/31/head:refs/remotes/origin/pr-31",
+    "note": "Engine main a2943842 (never-drop dates and attribute quarantine, the supersede downgrade, the subject-and-occasion reader check with the verify contract, per-arm width; schema 0028) plus PR #31, which carries the harness fixes the measurement needed: a usage cap or an expired session during ingest stops the run instead of recording an empty conversation, an arm's extractor name selects its extraction prompt, each arm's manifest records that prompt by name and hash, a run is judged complete by the phases it was asked for, and every entry point prints progress as UTF-8. The runs measure this commit."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
@@ -23,19 +23,16 @@
   },
   "run": {
     "haystacks": [
-      "conv-26",
-      "conv-30",
       "conv-41",
       "conv-42",
       "conv-43",
       "conv-44",
       "conv-47",
       "conv-48",
-      "conv-49",
       "conv-50"
     ],
-    "arm": "llm-conversational:search_only:k=25",
-    "arm_id": "llm-conversational/search_only/always_distinct/k25",
+    "arm": "llm_wide-conversational:search_only:k=25",
+    "arm_id": "llm_wide-conversational/search_only/always_distinct/k25",
     "judge": "claude",
     "reader_stance": "grounded",
     "phases": "ingest,answer,judge,calibrate,diagnose,report",
@@ -43,9 +40,15 @@
     "judge_concurrency": 4,
     "calibration_sample": 40,
     "reader_contract": "verify",
-    "runs": 3,
-    "runs_note": "Three independent runs of the whole pipeline, ingest included, each over all ten conversations: 1,986 questions, 1,540 of them non-adversarial. Reported as the mean and standard deviation across runs beside each run's own figure.",
-    "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25."
+    "runs": 2,
+    "runs_note": "Independent runs of the whole pipeline, ingest included, over the held-out split. The headline is the mean across completed runs with its spread and each run's own figure beside it. A third run is added if the usage budget allows.",
+    "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25.",
+    "extraction_note": "`llm_wide` is the wider extraction prompt (bench/prompts/extract-wide.md). It entered the default by the pre-registered rule, on the seen split only: store coverage 73.4% to 85.8% against a measured 0.8 point replicate floor (p < 0.0001), judged non-adversarial accuracy 69.15% to 76.61% (p 0.000025), adversarial unchanged at 88.29% (p 1.0), at 55% more memories stored. Measured in results/locomo/locomo-extract-ab-20261002.",
+    "arms_in_run_a": [
+      "llm_wide-conversational:search_only:k=25",
+      "llm-conversational:search_only:k=25"
+    ],
+    "arms_note": "Run A carries the shipped extraction prompt as a second arm on the same ingest, so the lever's isolated effect is measured out of sample as well. Run B carries the combined engine alone, which is what the run-to-run spread of the headline needs. The headline is the combined engine's mean across runs with its spread."
   },
   "models": {
     "extractor": "claude-opus-4-8",
@@ -87,5 +90,24 @@
       "note": "A second figure beside the strict one, for comparability: the reference answer prompt and judge, categories 1 to 4, one judge pass."
     }
   },
-  "hold": "staged on PR #27 head 416234c; held for the owner's go-ahead to launch. Remove this field to run."
+  "arms_note": "The primary figure is the shipped default: hybrid search at width 25 with the wider extraction prompt, no entity roster. The entity roster is measured as a default-off arm by rebuilding envelopes from the same store and re-reading them, so it cannot move the primary figure; its own pre-registered rule failed on the seen split. The source-turn layer is excluded: it was measured on 2026-09-25 to cost 8 adversarial declines, and storing turns is a design non-goal.",
+  "split": {
+    "held_out": [
+      "conv-41",
+      "conv-42",
+      "conv-43",
+      "conv-44",
+      "conv-47",
+      "conv-48",
+      "conv-50"
+    ],
+    "seen": [
+      "conv-26",
+      "conv-30",
+      "conv-49"
+    ],
+    "held_out_questions": 1486,
+    "held_out_non_adversarial": 1151,
+    "note": "The seen conversations carried every lever's tuning and subset validation: the retrieval width sweep, the reader replays and the entity-roster analysis. The reported headline is measured on the held-out conversations only, which no lever was fitted to. Figures on the seen split stay published as what they are."
+  }
 }

@@ -1,0 +1,89 @@
+{
+  "results": "runs\\locomo-settle-a\\results.jsonl",
+  "arms": {
+    "llm-conversational/search_only/always_distinct/k25": {
+      "non_adversarial": {
+        "correct": 830,
+        "n": 1151,
+        "pct": 72.11
+      },
+      "adversarial": {
+        "correct": 298,
+        "n": 335,
+        "pct": 88.96
+      },
+      "by_category": {
+        "multi-hop": {
+          "correct": 112,
+          "n": 202,
+          "pct": 55.45
+        },
+        "open-domain-knowledge": {
+          "correct": 36,
+          "n": 70,
+          "pct": 51.43
+        },
+        "single-hop": {
+          "correct": 516,
+          "n": 654,
+          "pct": 78.9
+        },
+        "temporal-reasoning": {
+          "correct": 166,
+          "n": 225,
+          "pct": 73.78
+        }
+      }
+    },
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "non_adversarial": {
+        "correct": 861,
+        "n": 1151,
+        "pct": 74.8
+      },
+      "adversarial": {
+        "correct": 301,
+        "n": 335,
+        "pct": 89.85
+      },
+      "by_category": {
+        "multi-hop": {
+          "correct": 113,
+          "n": 202,
+          "pct": 55.94
+        },
+        "open-domain-knowledge": {
+          "correct": 37,
+          "n": 70,
+          "pct": 52.86
+        },
+        "single-hop": {
+          "correct": 543,
+          "n": 654,
+          "pct": 83.03
+        },
+        "temporal-reasoning": {
+          "correct": 168,
+          "n": 225,
+          "pct": 74.67
+        }
+      }
+    }
+  },
+  "pairs": {
+    "llm-conversational/search_only/always_distinct/k25 vs llm_wide-conversational/search_only/always_distinct/k25": {
+      "non_adversarial": {
+        "paired_questions": 1151,
+        "only_first": 62,
+        "only_second": 93,
+        "p_mcnemar_exact": 0.015694
+      },
+      "adversarial": {
+        "paired_questions": 335,
+        "only_first": 11,
+        "only_second": 14,
+        "p_mcnemar_exact": 0.690038
+      }
+    }
+  }
+}

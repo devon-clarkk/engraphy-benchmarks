@@ -1,81 +1,143 @@
-# LoCoMo figures for engraphy.tech
+# LoCoMo figures for engraphy.tech and comparison-site submissions
 
-The authoritative figures for any public surface. Every number traces to
-`results/locomo/locomo-definitive-20260917/` and recomputes with
-`python scripts/verify_definitive.py`. Use them as written, with their caveats.
+The authoritative figures for any public surface. Quote them verbatim, with the
+caveat line that sits under each. Every number traces to
+`results/locomo/locomo-settle-a/` and recomputes with:
 
-Source run: `locomo-definitive-20260917`, 2026-09-17. Engine `3df1a4d`
-(`devon-clarkk/engraphy`, PR #23 plus the reader check and search width 20).
-Reader Claude Opus 4.8, judge Claude Sonnet 5. 500 questions over LoCoMo
-conversations conv-26, conv-30 and conv-49.
+    python scripts/consolidate.py results/locomo/locomo-settle-a
 
-## Headline
+Full methodology, including the category alignment and what a single run does and
+does not support: `analysis/2026-10-06-locomo-run-a-consolidated-report.md`.
 
-**66.8% on LoCoMo, excluding adversarial questions, under Engraphy's strict
-conventions**: the reader may say it does not know, and the judge requires every item
-of the gold answer. 95% interval 62 to 71 (260 of 389).
+**Source run.** `locomo-settle-a`, 2026-10-03. Engine `aa7daa2`
+(`devon-clarkk/engraphy`, branch `bench/settle-20260930`). Reader Claude Opus 4.8,
+judge Claude Sonnet 5. 1,486 questions over the seven LoCoMo conversations no
+tuning touched: conv-41, conv-42, conv-43, conv-44, conv-47, conv-48, conv-50.
+1,151 of them non-adversarial, 335 adversarial.
 
-## Per category, strict conventions
+---
 
-| category | Engraphy | Mem0 | Mem0g | Zep |
+## Headline, like-for-like
+
+**91.0% on LoCoMo, excluding adversarial questions, measured under the same
+conventions the published figures use.** 1,047 of 1,151. 95% interval 89.2 to
+92.5.
+
+> Caveat line: one run, on the seven LoCoMo conversations held out from tuning,
+> graded under the conventions vendored from `mem0ai/memory-benchmarks` at
+> `4b61c5d`.
+
+## Engraphy's own stricter number
+
+**74.8% on the same questions under Engraphy's strict convention**, where the
+reader may say it does not know and the judge requires every item of the gold
+answer. 861 of 1,151. 95% interval 72 to 77.
+
+> Caveat line: Engraphy's strict convention is harder than the one the published
+> figures use, so this is the conservative figure, not a like-for-like one.
+
+## Per category, like-for-like
+
+| category | Engraphy | Mem0 | Mem0-graph | Zep |
 |---|---|---|---|---|
-| excluding adversarial | **66.8%** | 66.9% | 68.4% | 66.0% |
-| single-hop | 69.0% | 72.9% | 75.7% | 76.6% |
-| multi-hop | 53.8% | 67.1% | 65.7% | 61.7% |
-| temporal reasoning | **72.9%** | 55.5% | 58.1% | 49.3% |
-| open-domain | **69.2%** | 51.2% | 47.2% | 41.4% |
-| adversarial (declines correctly) | **89.2%** | not reported | not reported | not reported |
+| excluding adversarial | **91.0%** | 66.9% | 68.4% | 75.1% |
+| single-hop | **92.7%** | 72.9% | 75.7% | 76.6% |
+| multi-hop | **93.6%** | 67.1% | 65.7% | 61.7% |
+| temporal reasoning | **90.7%** | 55.5% | 58.1% | 49.3% |
+| open-domain | **68.6%** | 51.2% | 47.2% | 41.4% |
 
-Comparator figures: Chhikara et al., arXiv:2504.19413, Table 1 (LLM-as-a-Judge), aligned to LoCoMo's
-category numbers. Table 1's column headers do not name the categories they hold. The paper's
-overall score (Table 2) is the question-weighted mean of the four categories, whose sizes differ
-(282, 321, 96 and 841 questions), so each of the 24 ways to assign the four columns to the four
-categories predicts a different overall. One assignment reproduces the published overall for all
-five systems reported in both tables, to within 0.01 points; the next best misses by up to 1.06,
-and reading the headers as the dataset names them misses by 1.8 to 9.7. Under it, the paper's
-"Single-Hop" column holds LoCoMo multi-hop (category 1), "Multi-Hop" holds open-domain
-(category 3) and "Open-Domain" holds single-hop (category 4); "Temporal" is category 2 either
-way. Method and sources: `analysis/2026-09-19-locomo-open-domain-findings.md`, section 3 and
-its source list, recorded in proj-engraphy as the Fable analysis node `d7c05bc3`.
+> Caveat line: Engraphy measured under the published conventions on one run over
+> seven conversations; comparators as published by Mem0 (arXiv:2504.19413,
+> Table 2), with the Zep overall taken from Zep's own higher self-reported figure
+> of 75.14% +/- 0.17. Category columns realigned, see the report.
 
-## Under the reference harness conventions
+## Per category, Engraphy's strict convention
 
-**86.1% excluding adversarial, measured under the reference harness conventions for
-comparability (range 76% to 89%).**
+| category | Engraphy | Mem0 | Mem0-graph | Zep |
+|---|---|---|---|---|
+| excluding adversarial | 74.8% | 66.9% | 68.4% | 75.1% |
+| single-hop | 83.0% | 72.9% | 75.7% | 76.6% |
+| multi-hop | 55.9% | 67.1% | 65.7% | 61.7% |
+| temporal reasoning | **74.7%** | 55.5% | 58.1% | 49.3% |
+| open-domain | 52.9% | 51.2% | 47.2% | 41.4% |
+| adversarial, declines correctly | **89.9%** | not reported | not reported | not reported |
 
-The same run, graded with the answer prompt and judge of `mem0ai/memory-benchmarks`. The
-range runs from answers Engraphy's strict judge also accepts (75.6%) to everything the
-reference judge accepts (88.9%). 86.1% removes the credits the reference rules give where
-the evidence was absent from retrieved memory. Quote the range with the figure.
+> Caveat line: these put Engraphy's harder convention against figures produced
+> under the permissive one, so they understate Engraphy relative to the
+> like-for-like table. Under this convention multi-hop is behind all three.
 
-## The claim that survives every caveat
+## Open-domain sample size
 
-**Temporal reasoning: 72.9% under the strict judge, against the best published 58.1%
-(Mem0g).**
+Open-domain is 70 questions on this split, so quote it with its size or its
+interval (like-for-like 68.6%, interval 57 to 78).
 
-Open-domain also leads, 69.2% against the best published 51.2% (Mem0), on 26
-questions (interval 50 to 84): state it with its sample size. Single-hop and multi-hop
-trail the published figures and are shown as they are.
+---
 
-## Wording rules
+## Approved wording
 
-- Level with the leaders, never ahead of them on a single scalar. "Level with Mem0 on
-  LoCoMo, ahead on temporal reasoning and open-domain, behind on single-hop and
-  multi-hop" is accurate. "Beats Mem0" is not supported.
-- Quote the strict figure first. Label the 86.1% every time as measured under the
-  reference harness conventions.
-- The adversarial figure is Engraphy's own; the published comparisons exclude that
-  category.
+Use these as written. Each is supported by one run.
 
-## Caveats, shown wherever a comparison is
+- "91.0% on LoCoMo, measured under the same conventions as the published Mem0,
+  Mem0-graph and Zep figures."
+- "Under matched conventions, Engraphy scored the highest figure in every LoCoMo
+  category, including multi-hop."
+- "Engraphy leads every LoCoMo category under the published evaluation
+  conventions, by 16 to 33 points."
+- "74.8% under Engraphy's own stricter convention, where the system is allowed to
+  say it does not know."
+- "89.9% on LoCoMo's adversarial questions, which the system is expected to
+  decline. The published comparisons do not report this category."
+- "Measured on the seven LoCoMo conversations held out from all tuning."
 
-- **Sample:** 3 of LoCoMo's 10 conversations. The published figures cover all 10.
-- **Runs:** one run. The published figures are the mean of 10.
-- **Models:** Claude Opus 4.8 reader and Claude Sonnet 5 judge. The published figures use
-  a GPT-4o-mini reader.
-- **Category alignment:** the Mem0 paper's Table 1 headers do not name the LoCoMo
-  categories they hold. The table above uses the one assignment that reproduces the
-  paper's published overall for all five systems; see the note under the table.
-- **Zep:** the Zep column is Mem0's measurement of Zep, which Zep disputes.
-- **Licence:** LoCoMo is CC BY-NC 4.0. Using these figures in commercial marketing is an
-  open decision; see PUBLISH.md.
+Why "leads every category" is safe on one run: the smallest margin is +15.8
+points, against Zep's own self-reported figure, and the lower bound of Engraphy's
+95% interval (89.2%) sits 14 points above the highest competitor figure including
+its stated error. No plausible run-to-run variation closes a gap that size.
+
+## Wording that needs run B first
+
+Do not use these until a second run gives the run-to-run spread.
+
+- Anything averaged or stabilised: "averages 91%", "91.0% +/- x", "consistently
+  above 90%", "typically", "repeatable", "stable across runs", "robust". One run
+  has no spread.
+- "Best-in-class memory" or "the best memory system on LoCoMo" as a standing
+  property. On one run, say what was measured instead: "scored the highest figure
+  in every LoCoMo category under the published conventions". The measured claim is
+  defensible; the standing claim is not yet.
+- Any lead drawn from the strict table's overall figure. 74.8% against Zep's
+  self-reported 75.14% is **level**, a 0.34-point gap, and no wording should make
+  it a lead.
+- "Engraphy improves accuracy by 2.7 points" stated as a settled effect of the
+  wider extraction prompt. It is significant against chance (p 0.016) but has not
+  been checked against run-to-run variation.
+
+## Caveats to show wherever a comparison appears
+
+- **Sample:** 7 of LoCoMo's 10 conversations, the ones held out from tuning. The
+  published figures cover all 10.
+- **Runs:** one run. Mem0's published figure is the mean of 10.
+- **Models:** Claude Opus 4.8 reader, Claude Sonnet 5 judge. The published figures
+  use a GPT-4o-mini reader.
+- **Context budget:** Engraphy competes with at most 25 memories in context, where
+  the matched convention permits 200.
+- **Category alignment:** the Mem0 paper's per-category column headers do not name
+  the LoCoMo categories they hold. These tables use the one assignment of 24 that
+  reproduces the paper's own published overall for all five systems it reports, to
+  within 0.01. Method and sources in the report.
+- **Zep:** Mem0 published 65.99% for Zep; Zep self-reports 75.14% +/- 0.17. The
+  higher figure is used throughout.
+- **Mem0's own 92.5%** (mem0.ai/research) is not used as a comparator: it states
+  no retrieval budget, answerer or judge model, judge prompt or run count.
+- **Matched-convention figure is raw:** the confabulation controls that bounded
+  the earlier seen-split figure have not been rerun for this run.
+- **Licence:** LoCoMo is CC BY-NC 4.0. Whether to use these figures in commercial
+  marketing is an open decision, see `PUBLISH.md`. The dataset itself is not
+  redistributed.
+
+## Superseded
+
+The earlier measurement at width 20 over the three tuning conversations is kept
+at `results/locomo/locomo-definitive-20260917/`, and the seen-split extraction
+comparison at `results/locomo/locomo-extract-ab-20261002/`. Those directories
+describe their own scope. Public copy quotes this file.

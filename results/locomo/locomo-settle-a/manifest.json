@@ -1,0 +1,1159 @@
+{
+  "run_id": "locomo-settle-a",
+  "benchmark": "locomo",
+  "space_config": {},
+  "generated_at": "2026-10-01T23:40:47.342748+00:00",
+  "engine_git_sha": "b9a3afc10c42880614ff046b840dee221bd708a9",
+  "harness_git_sha": "b9a3afc10c42880614ff046b840dee221bd708a9",
+  "git_tree_dirty": false,
+  "git_branch": "bench/settle-20260930",
+  "transport": "in-process (engraphy.core), per design/09 §in-process decision",
+  "principal": "bench",
+  "packs": {
+    "conversational": {
+      "space_id": "bench-locomo-settle-a-conversational",
+      "version": 1,
+      "file_hash": "sha256:5292819f0d09c92d2cb5d906916335c5cd34bc3e1d2792d29c55e6909fcef61d",
+      "ambient_scopes_stripped": true,
+      "node_types": [
+        "decision",
+        "event",
+        "fact",
+        "opinion",
+        "person",
+        "preference",
+        "thing"
+      ],
+      "note": "ambient_scopes removed for haystack isolation (symmetric across packs; recorded beside the untouched file hash)"
+    }
+  },
+  "band_thresholds": {
+    "source": "config table, per-space; code defaults where unset",
+    "code_defaults": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    },
+    "config_rows": {},
+    "effective": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    }
+  },
+  "band_thresholds_note": "read back from one representative pack space; every pack space is provisioned identically with no override.",
+  "reader": {
+    "governing_skill": "skills/answer-discipline.md",
+    "governing_skill_sha256": "sha256:c3b00290fe684bcbf4a6c768f3596020e9feb21ae7bf6fd87ad05072a526bd4b",
+    "inference_stance": "grounded",
+    "output_format": "verify",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.\n\nLay out your reply as exactly two lines. The first line begins `CHECK:` and says, in a few words, who or what the question is about, the specific fact it asks for, and the title of the returned memory that states or supports that fact for that subject and occasion, or `none`. The second line begins `ANSWER:` and carries only your answer, in the form above; when you decline, it is exactly INSUFFICIENT. The grader sees only the text after `ANSWER:`.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "effort": "medium",
+    "model": "claude-opus-4-8"
+  },
+  "dataset": {
+    "path": "locomo10.json",
+    "digest": "sha256:79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "questions_in_file": 1986
+  },
+  "haystacks": [
+    "conv-41",
+    "conv-42",
+    "conv-43",
+    "conv-44",
+    "conv-47",
+    "conv-48",
+    "conv-50"
+  ],
+  "corpus": {
+    "name": "locomo[conv-41,conv-42,conv-43,conv-44,conv-47,conv-48,conv-50]",
+    "haystacks": 7,
+    "sessions": 209,
+    "turns": 4585,
+    "questions": 1486,
+    "questions_per_category": {
+      "adversarial": 335,
+      "multi-hop": 202,
+      "open-domain-knowledge": 70,
+      "single-hop": 654,
+      "temporal-reasoning": 225
+    },
+    "abstain_questions": 335,
+    "notes": {
+      "source_file": "locomo10.json",
+      "dropped_image_only_turns": 0,
+      "coerced_non_string_answers": 6,
+      "category_mapping": {
+        "1": "multi-hop",
+        "2": "temporal-reasoning",
+        "3": "open-domain-knowledge",
+        "4": "single-hop",
+        "5": "adversarial"
+      },
+      "summaries_ingested": false,
+      "restricted_to_haystacks": [
+        "conv-41",
+        "conv-42",
+        "conv-43",
+        "conv-44",
+        "conv-47",
+        "conv-48",
+        "conv-50"
+      ]
+    }
+  },
+  "arms": [
+    {
+      "arm_id": "llm_wide-conversational/search_only/always_distinct/k25",
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "strategy": "search_only",
+      "confirm_policy": "always_distinct",
+      "categories": "all",
+      "k": 25
+    },
+    {
+      "arm_id": "llm-conversational/search_only/always_distinct/k25",
+      "extractor": "llm",
+      "pack": "conversational",
+      "strategy": "search_only",
+      "confirm_policy": "always_distinct",
+      "categories": "all",
+      "k": 25
+    }
+  ],
+  "retrieval_configs": {
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "strategy": "search_only",
+      "limit": 25,
+      "detail": "full"
+    },
+    "llm-conversational/search_only/always_distinct/k25": {
+      "strategy": "search_only",
+      "limit": 25,
+      "detail": "full"
+    }
+  },
+  "extract_prompts": {
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "prompt": "extract-wide.md",
+      "sha256": "sha256:2f3fa4c9e6c1a457"
+    },
+    "llm-conversational/search_only/always_distinct/k25": {
+      "prompt": "extract.md",
+      "sha256": "sha256:b7fdf557f7f60a9c"
+    }
+  },
+  "provider": "claude-cli",
+  "role_models": {
+    "extractor": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "reader": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "adjudicator": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "judge": {
+      "provider": "claude-cli",
+      "model": "claude-sonnet-5",
+      "same_vendor": true
+    }
+  },
+  "provider_config": {},
+  "judge_provider": "claude",
+  "judge_neutrality": "THIS RUN'S JUDGE IS SAME-VENDOR (Claude), a deliberate deviation from design/09's cross-vendor rule. The rationale for that rule -- 'a harness that grades its own vendor's answers invites the marked-its-own-homework objection' -- still stands as the recommended posture for any eventual PUBLISHED number, and the Gemini judge path is retained for exactly that. It is set aside here for two reasons: (1) the task is binary answer-matching against a supplied gold answer, which is low bias-risk for same-vendor grading -- the judge is not scoring prose quality, only whether two short facts agree; and (2) the Gemini free tier's per-model daily cap (measured at 500/day for flash-lite, 20/day for flash) makes a complete same-day run impossible, and this is an internal baseline, not a publishable figure. The judge still sees only question, gold and candidate -- never the envelope, strategy or extractor -- so it cannot condition on the arm it grades. Judge instability is measured on this run regardless of vendor.",
+  "resolved_models": {
+    "reader": [
+      "claude-opus-4-8"
+    ],
+    "judge": [
+      "claude-opus-5",
+      "claude-sonnet-5"
+    ],
+    "reader_note": "A SET, not a single id, and it legitimately contains a Haiku model alongside the requested Sonnet. The CLI runs a second model for its own internal work, and ClaudeCLIClient._resolved_model reports whichever model emitted the most output tokens in that call -- for a one-line reader answer that is sometimes the internal model rather than the one that answered. So this field bounds which models were involved; it does not prove which produced a given answer. The requested alias is recorded verbatim under role_models. Recorded as a known imprecision rather than resolved by guessing."
+  },
+  "prompt_hashes": {
+    "extract.md": "sha256:b7fdf557f7f60a9c",
+    "extract-wide.md": "sha256:2f3fa4c9e6c1a457",
+    "judge.md": "sha256:947bebcd5375e93e",
+    "adjudicate.md": "sha256:740151c30787a630"
+  },
+  "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
+  "embedding_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "llm_extractor": {
+    "retain_source_text": true,
+    "note": "When true, the LLM extractor appends the verbatim text of the turns each memory cites (source_turn_ids) to the node body, so a typed node stays word-searchable. A general recall property, not a single-hop trick; the source is the cited turns copied exactly, never re-summarised. design/09 single-hop finding, 2026-07-22."
+  },
+  "retrieval_note": "search_then_traverse seeds with the SAME search(limit, detail) as the search_only baseline and walks every seed, so the two arms differ only in the graph walk -- the multi-hop comparison isolates the graph contribution rather than confounding it with search width.",
+  "token_counter": null,
+  "token_counter_note": "Absent by construction, not by oversight. Counting Claude tokens needs the count_tokens API and therefore an API key; this harness routes Claude through the CLI on a subscription so that no API credit is spent, and the CLI reports usage for its own injected system prompt rather than for the payload. Gemini's tokenizer would be a different vendor's tokenizer measuring a Claude payload -- the same objection that ruled out tiktoken. Payload is reported in bytes of the serialized envelope; byte ratios between arms are tokenizer-independent, absolute token claims are not made.",
+  "seeds": {
+    "question_order": "dataset order (no sampling within a conversation)"
+  },
+  "dataset_licence": "CC BY-NC 4.0 — internal measurement only; commercial publication is the project owner's open question",
+  "ingest": [
+    {
+      "haystack_id": "conv-41",
+      "drafts": 148,
+      "inserted": 68,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 79,
+      "confirm_band_rate": 0.5338,
+      "resolved_distinct": 79,
+      "resolved_merge": 0,
+      "resolved_to_insert": 79,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 148,
+      "edges_requested": 71,
+      "edges_attached": 66,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 1,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 66877,
+      "embed_seconds": 36.5432,
+      "write_seconds": 3.316,
+      "total_seconds": 956.7314,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-41-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 32,
+      "turns": 663
+    },
+    {
+      "haystack_id": "conv-41",
+      "drafts": 253,
+      "inserted": 68,
+      "merged": 1,
+      "merged_linked": 2,
+      "needs_confirmation": 181,
+      "confirm_band_rate": 0.7154,
+      "resolved_distinct": 181,
+      "resolved_merge": 0,
+      "resolved_to_insert": 181,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 251,
+      "edges_requested": 202,
+      "edges_attached": 183,
+      "supersede_attempted": 0,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 1,
+      "attrs_quarantined_total": 1,
+      "dropped_attr_samples": 1,
+      "supersede_downgraded": 0,
+      "write_errors": {
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.occurred_on is required",
+          "node_type": "event",
+          "title_len": 52,
+          "body_len": 554,
+          "attr_keys": [
+            "location"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 72,
+      "ingest_output_tokens": 95511,
+      "embed_seconds": 52.5724,
+      "write_seconds": 5.0324,
+      "total_seconds": 1576.0179,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-41-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 32,
+      "turns": 663
+    },
+    {
+      "haystack_id": "conv-42",
+      "drafts": 160,
+      "inserted": 47,
+      "merged": 0,
+      "merged_linked": 3,
+      "needs_confirmation": 110,
+      "confirm_band_rate": 0.6875,
+      "resolved_distinct": 108,
+      "resolved_merge": 0,
+      "resolved_to_insert": 108,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 158,
+      "edges_requested": 107,
+      "edges_attached": 101,
+      "supersede_attempted": 5,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 4,
+      "write_errors": {
+        "resolve:CheckViolation": 2
+      },
+      "write_error_samples": [
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)"
+        },
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)"
+        }
+      ],
+      "ingest_input_tokens": 62,
+      "ingest_output_tokens": 79274,
+      "embed_seconds": 36.8269,
+      "write_seconds": 3.2482,
+      "total_seconds": 1486.3574,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-42-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 29,
+      "turns": 629
+    },
+    {
+      "haystack_id": "conv-42",
+      "drafts": 238,
+      "inserted": 50,
+      "merged": 0,
+      "merged_linked": 0,
+      "needs_confirmation": 188,
+      "confirm_band_rate": 0.7899,
+      "resolved_distinct": 188,
+      "resolved_merge": 0,
+      "resolved_to_insert": 188,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 238,
+      "edges_requested": 139,
+      "edges_attached": 120,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 3,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 62,
+      "ingest_output_tokens": 91743,
+      "embed_seconds": 50.9557,
+      "write_seconds": 4.7034,
+      "total_seconds": 1290.7857,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-42-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 29,
+      "turns": 629
+    },
+    {
+      "haystack_id": "conv-43",
+      "drafts": 145,
+      "inserted": 63,
+      "merged": 0,
+      "merged_linked": 3,
+      "needs_confirmation": 78,
+      "confirm_band_rate": 0.5379,
+      "resolved_distinct": 77,
+      "resolved_merge": 0,
+      "resolved_to_insert": 77,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 143,
+      "edges_requested": 63,
+      "edges_attached": 56,
+      "supersede_attempted": 1,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 0,
+      "write_errors": {
+        "resolve:CheckViolation": 1,
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)"
+        },
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)",
+          "node_type": "fact",
+          "title_len": 48,
+          "body_len": 411,
+          "attr_keys": [
+            "location"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 62,
+      "ingest_output_tokens": 61455,
+      "embed_seconds": 35.466,
+      "write_seconds": 3.0942,
+      "total_seconds": 1115.6155,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-43-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 29,
+      "turns": 680
+    },
+    {
+      "haystack_id": "conv-43",
+      "drafts": 253,
+      "inserted": 84,
+      "merged": 3,
+      "merged_linked": 2,
+      "needs_confirmation": 163,
+      "confirm_band_rate": 0.6443,
+      "resolved_distinct": 163,
+      "resolved_merge": 0,
+      "resolved_to_insert": 163,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 249,
+      "edges_requested": 152,
+      "edges_attached": 125,
+      "supersede_attempted": 1,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 1,
+      "write_errors": {
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)",
+          "node_type": "fact",
+          "title_len": 48,
+          "body_len": 289,
+          "attr_keys": [
+            "as_of",
+            "location"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 99152,
+      "embed_seconds": 54.1319,
+      "write_seconds": 5.3228,
+      "total_seconds": 1514.5216,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-43-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 29,
+      "turns": 680
+    },
+    {
+      "haystack_id": "conv-44",
+      "drafts": 146,
+      "inserted": 41,
+      "merged": 0,
+      "merged_linked": 0,
+      "needs_confirmation": 105,
+      "confirm_band_rate": 0.7192,
+      "resolved_distinct": 105,
+      "resolved_merge": 0,
+      "resolved_to_insert": 105,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 146,
+      "edges_requested": 86,
+      "edges_attached": 74,
+      "supersede_attempted": 7,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 5,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 60,
+      "ingest_output_tokens": 67199,
+      "embed_seconds": 36.698,
+      "write_seconds": 2.9651,
+      "total_seconds": 1278.8836,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-44-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 28,
+      "turns": 675
+    },
+    {
+      "haystack_id": "conv-44",
+      "drafts": 225,
+      "inserted": 47,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 177,
+      "confirm_band_rate": 0.7867,
+      "resolved_distinct": 177,
+      "resolved_merge": 0,
+      "resolved_to_insert": 177,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 225,
+      "edges_requested": 131,
+      "edges_attached": 0,
+      "supersede_attempted": 7,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 7,
+      "write_errors": {
+        "link:CheckViolation": 1
+      },
+      "write_error_samples": [],
+      "ingest_input_tokens": 62,
+      "ingest_output_tokens": 85265,
+      "embed_seconds": 51.0415,
+      "write_seconds": 4.4771,
+      "total_seconds": 1236.0416,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-44-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 28,
+      "turns": 675
+    },
+    {
+      "haystack_id": "conv-47",
+      "drafts": 190,
+      "inserted": 79,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 110,
+      "confirm_band_rate": 0.5789,
+      "resolved_distinct": 110,
+      "resolved_merge": 0,
+      "resolved_to_insert": 110,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 190,
+      "edges_requested": 131,
+      "edges_attached": 121,
+      "supersede_attempted": 5,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 5,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 81718,
+      "embed_seconds": 44.9318,
+      "write_seconds": 4.2843,
+      "total_seconds": 1191.4004,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-47-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 31,
+      "turns": 689
+    },
+    {
+      "haystack_id": "conv-47",
+      "drafts": 293,
+      "inserted": 101,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 190,
+      "confirm_band_rate": 0.6485,
+      "resolved_distinct": 190,
+      "resolved_merge": 0,
+      "resolved_to_insert": 190,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 292,
+      "edges_requested": 230,
+      "edges_attached": 194,
+      "supersede_attempted": 6,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 6,
+      "write_errors": {
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.as_of is not allowed (closed spec)",
+          "node_type": "preference",
+          "title_len": 45,
+          "body_len": 439,
+          "attr_keys": [
+            "as_of",
+            "domain",
+            "sentiment"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 97878,
+      "embed_seconds": 59.4188,
+      "write_seconds": 6.3184,
+      "total_seconds": 1823.2429,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-47-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 31,
+      "turns": 689
+    },
+    {
+      "haystack_id": "conv-48",
+      "drafts": 168,
+      "inserted": 63,
+      "merged": 0,
+      "merged_linked": 11,
+      "needs_confirmation": 94,
+      "confirm_band_rate": 0.5595,
+      "resolved_distinct": 94,
+      "resolved_merge": 0,
+      "resolved_to_insert": 94,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 168,
+      "edges_requested": 117,
+      "edges_attached": 110,
+      "supersede_attempted": 2,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 1,
+      "attrs_quarantined_total": 1,
+      "dropped_attr_samples": 1,
+      "supersede_downgraded": 2,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 66,
+      "ingest_output_tokens": 74993,
+      "embed_seconds": 37.9798,
+      "write_seconds": 3.8872,
+      "total_seconds": 1069.5589,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-48-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 30,
+      "turns": 681
+    },
+    {
+      "haystack_id": "conv-48",
+      "drafts": 256,
+      "inserted": 70,
+      "merged": 0,
+      "merged_linked": 2,
+      "needs_confirmation": 183,
+      "confirm_band_rate": 0.7148,
+      "resolved_distinct": 183,
+      "resolved_merge": 0,
+      "resolved_to_insert": 183,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 255,
+      "edges_requested": 157,
+      "edges_attached": 136,
+      "supersede_attempted": 1,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 1,
+      "write_errors": {
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)",
+          "node_type": "fact",
+          "title_len": 39,
+          "body_len": 389,
+          "attr_keys": [
+            "location"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 64,
+      "ingest_output_tokens": 88849,
+      "embed_seconds": 51.7713,
+      "write_seconds": 5.4339,
+      "total_seconds": 1282.2022,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-48-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 30,
+      "turns": 681
+    },
+    {
+      "haystack_id": "conv-50",
+      "drafts": 138,
+      "inserted": 31,
+      "merged": 0,
+      "merged_linked": 2,
+      "needs_confirmation": 105,
+      "confirm_band_rate": 0.7609,
+      "resolved_distinct": 104,
+      "resolved_merge": 0,
+      "resolved_to_insert": 104,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 137,
+      "edges_requested": 78,
+      "edges_attached": 73,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 3,
+      "write_errors": {
+        "resolve:CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.as_of is not allowed (closed spec)"
+        }
+      ],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 74485,
+      "embed_seconds": 36.5661,
+      "write_seconds": 2.8745,
+      "total_seconds": 1129.0096,
+      "extractor": "llm",
+      "pack": "conversational",
+      "scope_id": "hs-conv-50-llm",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 30,
+      "turns": 568
+    },
+    {
+      "haystack_id": "conv-50",
+      "drafts": 233,
+      "inserted": 35,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 197,
+      "confirm_band_rate": 0.8455,
+      "resolved_distinct": 195,
+      "resolved_merge": 0,
+      "resolved_to_insert": 195,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 231,
+      "edges_requested": 181,
+      "edges_attached": 170,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 2,
+      "write_errors": {
+        "resolve:CheckViolation": 2
+      },
+      "write_error_samples": [
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.occurred_on is required"
+        },
+        {
+          "error": "resolve:CheckViolation",
+          "detail": "attrs.occupation is not allowed (closed spec)"
+        }
+      ],
+      "ingest_input_tokens": 70,
+      "ingest_output_tokens": 104769,
+      "embed_seconds": 53.051,
+      "write_seconds": 4.6554,
+      "total_seconds": 1549.7779,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-50-llm-wide",
+      "space_id": "bench-locomo-settle-a-conversational",
+      "done": true,
+      "sessions": 30,
+      "turns": 568
+    }
+  ],
+  "extrapolation": "Projected from this run's measured rates, not from an estimate. Ingest is per-session and answering is per-question; neither has a term that grows with corpus size, so the projection is linear by construction rather than by simplification.\n\n| stage | measured here | full suite (×10 conversations) |\n|---|---|---|\n| ingest, `llm` extractor | 137 min for 209 sessions (39.4 s/session) | **3.0 h** for 272 sessions |\n| ingest, `llm_wide` extractor | 171 min for 209 sessions (49.2 s/session) | **3.7 h** for 272 sessions |\n| answering (2 arms) | 2972 reader calls, 8.7 s each | **3972 calls ≈ 3.2 h** at concurrency 3 |\n| judging | 2302 calls (adversarial graded without the judge) | **3080 calls** |\n\n**The judge ran on Claude (Max plan) and hit no rate limit across the entire 2302-call grading pass.** So unlike the Gemini route (whose per-model daily cap of 500/day is documented below as the fallback path), the constraint here is not a daily quota — it is plan headroom plus sequential wall-clock. Judging is one Claude CLI spawn per question, ~23.0s each, run sequentially: a full-suite 3080-call pass is **≈ 19.6 h** of grading wall-clock (and parallelises trivially — the calibration pass was cut from ~8 min sequential to ~2 min at 4 workers). Whether that many calls stays inside plan limits is the open question a full run would answer; this subset did, comfortably.\n\n**Fallback, for a published number.** design/09's cross-vendor posture puts the judge on Gemini, whose free tier is the real ceiling: measured at 500 requests/day for `gemini-flash-lite-latest` (and 20/day for `gemini-flash-latest`), a 3080-call full suite is **7 days** of budget. The checkpointing exists for exactly that route — designed to be stopped by quota and resumed.\n\n**Financial cost: nil.** Every role runs on the operator's existing subscriptions: extraction, reading and adjudication on the Claude CLI, and judging on either the Claude Max plan or the Gemini free tier (the cross-vendor default). No run in this configuration spends API credit.\n\nTwo caveats on the projection, both pointing the same way. The measured conversations are the smaller ones (63 of the suite's 272 sessions across 3 of 10 conversations, so ~23% of ingest for 30% of the conversations), so a full run is somewhat worse than ×10 of what is shown. And on the CLI route reader latency is dominated by subprocess spawn, which a deployed agent would not pay: it inflates the wall-clock projection but not the cost.",
+  "quota_stop": false,
+  "phases_requested": [
+    "answer",
+    "calibrate",
+    "diagnose",
+    "ingest",
+    "judge",
+    "report"
+  ],
+  "phases_completed": [
+    "answer",
+    "calibrate",
+    "diagnose",
+    "ingest",
+    "judge",
+    "report"
+  ],
+  "rows_graded": 2972,
+  "rows_answered_but_ungraded": 0,
+  "aggregate": {
+    "llm-conversational/search_only/always_distinct/k25": {
+      "overall": {
+        "n": 1486,
+        "correct": 1128,
+        "accuracy": 0.7591,
+        "wilson_95": [
+          0.7367,
+          0.7801
+        ],
+        "abstained": 423,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 22321,
+        "payload_bytes_p95": 24961,
+        "payload_bytes_mean": 22255,
+        "accuracy_per_1k_bytes": 0.0341,
+        "e2e_seconds_p50": 7.588,
+        "e2e_seconds_p95": 14.787,
+        "judge_seconds_p50": 14.926
+      },
+      "overall_excl_adversarial": {
+        "n": 1151,
+        "correct": 830,
+        "accuracy": 0.7211,
+        "wilson_95": [
+          0.6945,
+          0.7463
+        ],
+        "abstained": 125,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 22304,
+        "payload_bytes_p95": 25075,
+        "payload_bytes_mean": 22229,
+        "accuracy_per_1k_bytes": 0.0324,
+        "e2e_seconds_p50": 7.319,
+        "e2e_seconds_p95": 14.838,
+        "judge_seconds_p50": 15.743
+      },
+      "categories": {
+        "adversarial": {
+          "n": 335,
+          "correct": 298,
+          "accuracy": 0.8896,
+          "wilson_95": [
+            0.8515,
+            0.9188
+          ],
+          "abstained": 298,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 22495,
+          "payload_bytes_p95": 24925,
+          "payload_bytes_mean": 22346,
+          "accuracy_per_1k_bytes": 0.0398,
+          "e2e_seconds_p50": 8.248,
+          "e2e_seconds_p95": 14.3,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 202,
+          "correct": 112,
+          "accuracy": 0.5545,
+          "wilson_95": [
+            0.4855,
+            0.6213
+          ],
+          "abstained": 13,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 21899,
+          "payload_bytes_p95": 24375,
+          "payload_bytes_mean": 21725,
+          "accuracy_per_1k_bytes": 0.0255,
+          "e2e_seconds_p50": 8.428,
+          "e2e_seconds_p95": 15.866,
+          "judge_seconds_p50": 16.462
+        },
+        "open-domain-knowledge": {
+          "n": 70,
+          "correct": 36,
+          "accuracy": 0.5143,
+          "wilson_95": [
+            0.3995,
+            0.6275
+          ],
+          "abstained": 17,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 21968,
+          "payload_bytes_p95": 24660,
+          "payload_bytes_mean": 21627,
+          "accuracy_per_1k_bytes": 0.0238,
+          "e2e_seconds_p50": 8.735,
+          "e2e_seconds_p95": 16.128,
+          "judge_seconds_p50": 15.42
+        },
+        "single-hop": {
+          "n": 654,
+          "correct": 516,
+          "accuracy": 0.789,
+          "wilson_95": [
+            0.7561,
+            0.8185
+          ],
+          "abstained": 64,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 22416,
+          "payload_bytes_p95": 25353,
+          "payload_bytes_mean": 22402,
+          "accuracy_per_1k_bytes": 0.0352,
+          "e2e_seconds_p50": 6.949,
+          "e2e_seconds_p95": 14.307,
+          "judge_seconds_p50": 15.638
+        },
+        "temporal-reasoning": {
+          "n": 225,
+          "correct": 166,
+          "accuracy": 0.7378,
+          "wilson_95": [
+            0.6767,
+            0.7909
+          ],
+          "abstained": 31,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 22340,
+          "payload_bytes_p95": 24771,
+          "payload_bytes_mean": 22366,
+          "accuracy_per_1k_bytes": 0.033,
+          "e2e_seconds_p50": 7.268,
+          "e2e_seconds_p95": 14.974,
+          "judge_seconds_p50": 15.51
+        }
+      }
+    },
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "overall": {
+        "n": 1486,
+        "correct": 1162,
+        "accuracy": 0.782,
+        "wilson_95": [
+          0.7603,
+          0.8022
+        ],
+        "abstained": 398,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 20618,
+        "payload_bytes_p95": 22687,
+        "payload_bytes_mean": 20584,
+        "accuracy_per_1k_bytes": 0.038,
+        "e2e_seconds_p50": 7.465,
+        "e2e_seconds_p95": 14.936,
+        "judge_seconds_p50": 14.792
+      },
+      "overall_excl_adversarial": {
+        "n": 1151,
+        "correct": 861,
+        "accuracy": 0.748,
+        "wilson_95": [
+          0.7222,
+          0.7723
+        ],
+        "abstained": 97,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 20584,
+        "payload_bytes_p95": 22687,
+        "payload_bytes_mean": 20565,
+        "accuracy_per_1k_bytes": 0.0364,
+        "e2e_seconds_p50": 7.157,
+        "e2e_seconds_p95": 15.097,
+        "judge_seconds_p50": 15.594
+      },
+      "categories": {
+        "adversarial": {
+          "n": 335,
+          "correct": 301,
+          "accuracy": 0.8985,
+          "wilson_95": [
+            0.8615,
+            0.9265
+          ],
+          "abstained": 301,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20732,
+          "payload_bytes_p95": 22691,
+          "payload_bytes_mean": 20650,
+          "accuracy_per_1k_bytes": 0.0435,
+          "e2e_seconds_p50": 8.032,
+          "e2e_seconds_p95": 14.517,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 202,
+          "correct": 113,
+          "accuracy": 0.5594,
+          "wilson_95": [
+            0.4905,
+            0.6261
+          ],
+          "abstained": 8,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20230,
+          "payload_bytes_p95": 22514,
+          "payload_bytes_mean": 20350,
+          "accuracy_per_1k_bytes": 0.0275,
+          "e2e_seconds_p50": 8.286,
+          "e2e_seconds_p95": 17.101,
+          "judge_seconds_p50": 16.414
+        },
+        "open-domain-knowledge": {
+          "n": 70,
+          "correct": 37,
+          "accuracy": 0.5286,
+          "wilson_95": [
+            0.4132,
+            0.641
+          ],
+          "abstained": 18,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 19904,
+          "payload_bytes_p95": 22639,
+          "payload_bytes_mean": 20060,
+          "accuracy_per_1k_bytes": 0.0263,
+          "e2e_seconds_p50": 8.966,
+          "e2e_seconds_p95": 18.839,
+          "judge_seconds_p50": 15.369
+        },
+        "single-hop": {
+          "n": 654,
+          "correct": 543,
+          "accuracy": 0.8303,
+          "wilson_95": [
+            0.7996,
+            0.8571
+          ],
+          "abstained": 49,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20668,
+          "payload_bytes_p95": 22816,
+          "payload_bytes_mean": 20622,
+          "accuracy_per_1k_bytes": 0.0403,
+          "e2e_seconds_p50": 6.895,
+          "e2e_seconds_p95": 13.498,
+          "judge_seconds_p50": 15.417
+        },
+        "temporal-reasoning": {
+          "n": 225,
+          "correct": 168,
+          "accuracy": 0.7467,
+          "wilson_95": [
+            0.686,
+            0.799
+          ],
+          "abstained": 22,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20888,
+          "payload_bytes_p95": 22534,
+          "payload_bytes_mean": 20749,
+          "accuracy_per_1k_bytes": 0.036,
+          "e2e_seconds_p50": 6.912,
+          "e2e_seconds_p95": 16.264,
+          "judge_seconds_p50": 15.594
+        }
+      }
+    }
+  },
+  "failure_modes": {
+    "llm-conversational/search_only/always_distinct/k25": {
+      "correct": 1128,
+      "extraction-miss": 58,
+      "reader-miss": 213,
+      "reader-over-answered": 37,
+      "retrieval-miss": 27,
+      "unattributed": 23
+    },
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "correct": 1162,
+      "extraction-miss": 46,
+      "reader-miss": 193,
+      "reader-over-answered": 34,
+      "retrieval-miss": 32,
+      "unattributed": 19
+    }
+  },
+  "judge_calibration": {
+    "items_graded_twice": 40,
+    "disagreements": 2,
+    "instability": 0.05,
+    "judge_errors": 0,
+    "disagreeing_items": [
+      {
+        "question_id": "conv-50:q110",
+        "first": true,
+        "second": false
+      },
+      {
+        "question_id": "conv-42:q79",
+        "first": true,
+        "second": false
+      }
+    ],
+    "human_agreement": null,
+    "human_agreement_note": "design/09 also specifies agreement against a committed human-labelled subset. No such labels exist yet; this half of the calibration is outstanding and is recorded as absent rather than omitted."
+  }
+}

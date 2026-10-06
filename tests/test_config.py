@@ -43,12 +43,29 @@ def test_the_embedder_is_pinned_to_a_revision():
     assert CFG["embedder"]["profile"] == "onnx-fp32"
 
 
-def test_the_staged_next_run_is_pinned_and_held():
-    """The next-run config names its coverage, width and engine, and refuses to run
-    while it is held."""
+def test_the_settling_run_is_pinned_and_covers_the_whole_suite():
+    """The settling config pins a full commit, covers all ten conversations at the
+    agreed width, and asks for repeated runs. No `hold`, so it is runnable."""
     nxt = load_config(ROOT / "config" / "locomo-next.json")
-    assert nxt["hold"]
+    assert "hold" not in nxt
     assert re.fullmatch(r"[0-9a-f]{40}", nxt["engine"]["commit"])
     assert nxt["run"]["arm"].endswith(":k=25") and nxt["run"]["arm_id"].endswith("/k25")
-    assert len(nxt["run"]["haystacks"]) == 10 and nxt["run"]["runs"] >= 3
+    assert nxt["run"]["runs"] >= 2
+    # The headline runs on the split no lever was tuned on, and the two splits
+    # together are the whole suite with nothing counted twice.
+    held, seen = nxt["split"]["held_out"], nxt["split"]["seen"]
+    assert nxt["run"]["haystacks"] == held
+    assert not set(held) & set(seen) and len(held) + len(seen) == 10
     assert nxt["dataset"] == CFG["dataset"]
+
+
+def test_the_next_run_measures_the_promoted_extraction_prompt():
+    """The config must name the engine that is actually being measured. The
+    wider prompt entered the default on 2026-10-02, so a config still naming
+    `llm` would publish a configuration nobody ran."""
+    nxt = load_config(ROOT / "config" / "locomo-next.json")
+    assert nxt["run"]["arm"].startswith("llm_wide-")
+    assert nxt["run"]["arm_id"].startswith("llm_wide-")
+    # Run A also carries the shipped prompt, so the lever is measured out of sample.
+    assert any(a.startswith("llm-") for a in nxt["run"]["arms_in_run_a"])
+    assert nxt["run"]["arm"] in nxt["run"]["arms_in_run_a"]
