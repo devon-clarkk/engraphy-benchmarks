@@ -76,7 +76,7 @@ def main() -> int:
     turns = all_turns(args.dataset)
     report: dict = {"haystacks": wanted, "prefix_chars": PREFIX, "stores": {}}
 
-    for space, extractor in zip(args.space, args.extractor):
+    for space, extractor in zip(args.space, args.extractor, strict=True):
         store = bodies(args.dsn, space)
         held = total = 0
         per_conv = {}
