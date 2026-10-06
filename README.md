@@ -36,6 +36,21 @@ beside it. Brackets are 95% Wilson intervals.
 | 2026-09-16 | public `devon-clarkk/engraphy` at `67dd41a` | 60.2% [55 to 65] (234/389) | 63.2% [59 to 67] (316/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260916/PROVENANCE.md) |
 | 2026-08-09 | Engraphy development branch at `631e7be` | 67.1% [62 to 72] (261/389) | 71.6% [67 to 75] (358/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260809/PROVENANCE.md) |
 
+The current measurement is on the seven conversations held out from all tuning,
+`conv-41`, `conv-42`, `conv-43`, `conv-44`, `conv-47`, `conv-48` and `conv-50`:
+1,486 questions, 1,151 of them non-adversarial.
+
+| run | engine | strict, excluding adversarial | matched convention | provenance |
+|---|---|---|---|---|
+| **2026-10-03** | `devon-clarkk/engraphy` at `aa7daa2` (search width 25, wider extraction prompt) | **74.8% [72 to 77] (861/1,151)** | **91.0% [89 to 92] (1,047/1,151)** | [PROVENANCE.md](results/locomo/locomo-settle-a/PROVENANCE.md) |
+
+`python scripts/consolidate.py results/locomo/locomo-settle-a` recomputes both
+figures and the per-category standing against the published Mem0, Mem0-graph and
+Zep results. The
+[consolidated report](analysis/2026-10-06-locomo-run-a-consolidated-report.md)
+states the methodology, the category alignment and every caveat, including what a
+single run does and does not support.
+
 The 2026-09-17 run is also graded under the reference harness conventions, for
 comparability with published figures: 86.1% excluding adversarial, range 75.6% to
 88.9%, with its validity controls in `reference/`. `python scripts/verify_definitive.py`

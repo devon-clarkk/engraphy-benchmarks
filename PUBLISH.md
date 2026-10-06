@@ -4,12 +4,16 @@ Everything is committed and checked. Publishing is two decisions and one command
 
 ## State
 
-- Results: `results/locomo/locomo-definitive-20260917` (the figures in
-  WEBSITE-FIGURES.md), `results/locomo/fullrun-conv-20260916` (the public engine
-  before PR #23) and `results/locomo/fullrun-conv-20260809` (a development engine), each
-  with its provenance. `python scripts/verify_definitive.py` recomputes the definitive
-  figures from the committed files.
-- No LoCoMo text is committed; see `results/locomo/locomo-definitive-20260917/REDACTIONS.md`.
+- Results: `results/locomo/locomo-settle-a` (the figures in WEBSITE-FIGURES.md,
+  on the held-out split, recomputed by
+  `python scripts/consolidate.py results/locomo/locomo-settle-a`),
+  `results/locomo/locomo-extract-ab-20261002` (the seen-split extraction
+  comparison), `results/locomo/locomo-definitive-20260917` (the three-conversation
+  measurement at width 20, recomputed by `python scripts/verify_definitive.py`),
+  `results/locomo/fullrun-conv-20260916` and
+  `results/locomo/fullrun-conv-20260809`, each with its provenance.
+- No LoCoMo text is committed; see `results/locomo/locomo-settle-a/REDACTIONS.md`
+  and `results/locomo/locomo-definitive-20260917/REDACTIONS.md`.
   CI refuses a committed `locomo10.json`.
 - `config/locomo.json` pins the engine at `3df1a4d` on branch
   `bench/locomo-conventions-reader-width`, and `python reproduce.py` reproduces both

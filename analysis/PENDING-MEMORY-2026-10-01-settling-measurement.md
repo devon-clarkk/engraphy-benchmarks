@@ -123,3 +123,47 @@ prompt, not the object that loads it. The replacement asserts
 prompts differ. Worth generalising to any A/B in this harness: assert that the
 two arms differ in the thing under test, at the point where it is constructed,
 before paying for the comparison.
+
+## Node 6: run A settles the held-out LoCoMo number, both conventions
+
+Measured 2026-10-03 and 2026-10-06, engine `aa7daa2` on branch
+`bench/settle-20260930`, artifacts in
+`engraphy-benchmarks/results/locomo/locomo-settle-a`. One run over the seven
+LoCoMo conversations held out from all tuning: 1,486 questions, 1,151
+non-adversarial.
+
+Strict convention, which is Engraphy's own and the harder one: 74.8%
+non-adversarial, 78.2% across all five categories, 89.9% on adversarial. Matched
+convention, vendored verbatim from `mem0ai/memory-benchmarks` at `4b61c5d` and so
+the like-for-like comparison with published figures: 91.0%, Wilson [89.2, 92.5].
+Under the matched convention Engraphy holds the highest figure in every category,
+by margins of 16 to 33 points, multi-hop included. Under the strict convention it
+is level with Zep's self-reported 75.14% overall and behind all three on
+multi-hop.
+
+Multi-hop moves from 55.9% strict to 93.6% matched. That gap is a grading rule,
+not retrieval: multi-hop gold answers are multi-item, the strict judge requires
+every item and the matched judge accepts one.
+
+The wider extraction prompt, measured out of sample as a second arm on the same
+ingest, gains 2.69 points non-adversarial (p 0.016, discordant 62/93) with no
+adversarial cost, against 7.46 points on the seen split it was fitted to. The
+gain is almost all single-hop (+4.13), which is what the mechanism predicts.
+Keep.
+
+What one run supports: the exact figures, and leading every category under the
+matched convention, because the smallest margin is 15.8 points and the lower
+bound of the interval sits 14 points above the best competitor figure. What it
+does not support: anything averaged or stabilised, any lead drawn from the strict
+overall figure against Zep's 75.14%, and the lever's 2.69 points as an effect
+that clears run-to-run variation. Run B was frozen on cost grounds before it
+measured that spread.
+
+The paid accuracy replays of width 20 and roster-on were deliberately not run.
+Retrieval-level isolation on run A's store, model-free: width 20 recall 86.47%,
+width 25 87.49%, width 25 plus the entity roster 92.62%, the roster costing 72%
+more context. The roster stays default off.
+
+Canonical publishable figures and the safe wording, including what needs run B,
+are in `engraphy-benchmarks/WEBSITE-FIGURES.md`; the methodology is in
+`analysis/2026-10-06-locomo-run-a-consolidated-report.md`.
