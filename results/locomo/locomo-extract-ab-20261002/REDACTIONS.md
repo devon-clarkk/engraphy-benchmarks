@@ -51,8 +51,12 @@ every LoCoMo question: none is quoted.
 
 ## Recomputing the numbers
 
-    python scripts/arm_compare.py results/locomo/locomo-extract-ab-20261002/results.jsonl
-    python ../engraphy-bench-settle/scripts/extraction_gate.py \
+    # arm_compare.py and extraction_gate.py live in the engine repository, at the
+    # commit this run used
+    git clone https://github.com/devon-clarkk/engraphy.git ../engraphy
+    git -C ../engraphy checkout aa7daa2b9c5f190ee3f10de5b9bf4cbaee44e5a6
+    python ../engraphy/scripts/arm_compare.py results/locomo/locomo-extract-ab-20261002/results.jsonl
+    python ../engraphy/scripts/extraction_gate.py \
         results/locomo/locomo-extract-ab-20261002/coverage.json
 
 Coverage itself is recomputed from a store, not from this directory, so it needs

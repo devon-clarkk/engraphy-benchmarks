@@ -18,13 +18,17 @@ Engine `aa7daa2b9c5f190ee3f10de5b9bf4cbaee44e5a6`, branch `bench/settle-20260930
 | `retrieval-isolation.txt` | evidence recall, all-evidence-held and context size for seven retrieval arms over this run's store, with no model in the loop |
 | `ingest.jsonl` | per-conversation write statistics for all 14 ingests: memories extracted and stored, dedup band rates, edges, and every refusal by class with the engine's message |
 | `manifest.json` | engine commit, configuration, pack and prompt hashes including `extract_prompts`, which records the prompt each arm loaded by name and hash, thresholds, models and aggregates |
-| `PROVENANCE.md` | host, runtime and database versions |
+| `PROVENANCE.md` | engine commit and branch, dataset hash, models, prompt hashes and the matched-pass conventions |
 
 Every figure in `analysis/2026-10-06-locomo-run-a-consolidated-report.md` and in
 `WEBSITE-FIGURES.md` recomputes from these files alone:
 
     python scripts/consolidate.py results/locomo/locomo-settle-a
-    python ../engraphy-bench-settle/scripts/arm_compare.py \
+    # arm_compare.py and extraction_gate.py live in the engine repository, at the
+    # commit this run used
+    git clone https://github.com/devon-clarkk/engraphy.git ../engraphy
+    git -C ../engraphy checkout aa7daa2b9c5f190ee3f10de5b9bf4cbaee44e5a6
+    python ../engraphy/scripts/arm_compare.py \
         results/locomo/locomo-settle-a/results.jsonl
 
 ## Withheld, and why

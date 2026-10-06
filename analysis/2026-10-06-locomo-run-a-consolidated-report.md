@@ -22,12 +22,16 @@ and the command that reproduces it.
     python scripts/consolidate.py results/locomo/locomo-settle-a
 
     # the extraction lever, paired per question
-    python ../engraphy-bench-settle/scripts/arm_compare.py \
+    # arm_compare.py and extraction_gate.py live in the engine repository, at the
+    # commit this run used
+    git clone https://github.com/devon-clarkk/engraphy.git ../engraphy
+    git -C ../engraphy checkout aa7daa2b9c5f190ee3f10de5b9bf4cbaee44e5a6
+    python ../engraphy/scripts/arm_compare.py \
         results/locomo/locomo-settle-a/results.jsonl
 
 `results/locomo/locomo-settle-a/REDACTIONS.md` lists what is committed and what
-is withheld as dataset text, and `PROVENANCE.md` records host, runtime and
-database versions.
+is withheld as dataset text, and `PROVENANCE.md` records the engine commit and branch, the dataset hash, the
+models, the prompt hashes and the conventions of the matched pass.
 
 ## 1. The two conventions, and why both are here
 
