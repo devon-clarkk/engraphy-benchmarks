@@ -139,6 +139,15 @@ This repository is versioned separately from the engine, so that each result
 names the engine commit it measured and a new engine release never changes a
 committed result.
 
+## Releasing
+
+Nothing is released from this repository and nothing deploys from it. A result
+is committed with its provenance, pinned to the engine commit that produced it
+(`config/`), and the website copies its figures by hand (`WEBSITE-FIGURES.md`).
+The release process for the engine and the rest of the estate is documented
+in the engine repository's `RELEASING.md` and, in full, in the (private)
+`engraphy-control-plane` repository.
+
 ## Licence
 
 The code in this repository is Apache-2.0 ([LICENSE](LICENSE)). The Engraphy
