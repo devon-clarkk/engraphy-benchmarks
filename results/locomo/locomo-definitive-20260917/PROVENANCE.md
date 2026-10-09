@@ -1,6 +1,6 @@
 # Provenance: `locomo-definitive-20260917`
 
-Produced from `devon-clarkk/engraphy` at `3df1a4d` (branch `bench/locomo-conventions-reader-width`): PR #23 head `99b38a5` plus the reference-convention pass, the subject-and-occasion reader check with the `verify` reply contract, and search width 20, chosen by the rule in `analysis/2026-09-16-levers-preregistration.md` before it was measured. Clean checkout, schema 0028, configuration in `config.json`. The run crossed three usage caps and a machine restart and resumed from its checkpoints each time. The figure under the reference harness conventions and its validity controls are in `reference/`; `scripts/verify_definitive.py` recomputes every figure from the committed files. See `REDACTIONS.md` for what is not committed and why.
+Produced from `EngraphyLabs/engraphy` at `3df1a4d` (branch `bench/locomo-conventions-reader-width`): PR #23 head `99b38a5` plus the reference-convention pass, the subject-and-occasion reader check with the `verify` reply contract, and search width 20, chosen by the rule in `analysis/2026-09-16-levers-preregistration.md` before it was measured. Clean checkout, schema 0028, configuration in `config.json`. The run crossed three usage caps and a machine restart and resumed from its checkpoints each time. The figure under the reference harness conventions and its validity controls are in `reference/`; `scripts/verify_definitive.py` recomputes every figure from the committed files. See `REDACTIONS.md` for what is not committed and why.
 
 ## Result
 

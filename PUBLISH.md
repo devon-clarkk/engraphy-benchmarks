@@ -37,7 +37,7 @@ Everything is committed and checked. Publishing is two decisions and one command
 4. **Confirm Apache-2.0** for this repository's code.
 5. **Flip the repository public:**
 
-       gh repo edit devon-clarkk/engraphy-benchmarks --visibility public --accept-visibility-change-consequences
+       gh repo edit EngraphyLabs/engraphy-benchmarks --visibility public --accept-visibility-change-consequences
 
 For a reproduction without a Claude subscription, merge engine PR #8 (an
 OpenAI-compatible route) and move the engine pin to a commit carrying it.

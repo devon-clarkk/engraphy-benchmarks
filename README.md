@@ -1,6 +1,6 @@
 # Engraphy benchmarks
 
-Reproducible benchmarks for [Engraphy](https://github.com/devon-clarkk/engraphy),
+Reproducible benchmarks for [Engraphy](https://github.com/EngraphyLabs/engraphy),
 a memory engine for AI agents. One command runs the engine's LoCoMo harness at a
 pinned engine commit, and every committed result carries the provenance needed to
 check it.
@@ -32,8 +32,8 @@ beside it. Brackets are 95% Wilson intervals.
 
 | run | engine | excluding adversarial | all five categories | provenance |
 |---|---|---|---|---|
-| **2026-09-17** | `devon-clarkk/engraphy` at `3df1a4d` (PR #23, reader check, search width 20) | **66.8% [62 to 71] (260/389)** | 71.8% [68 to 76] (359/500) | [PROVENANCE.md](results/locomo/locomo-definitive-20260917/PROVENANCE.md) |
-| 2026-09-16 | public `devon-clarkk/engraphy` at `67dd41a` | 60.2% [55 to 65] (234/389) | 63.2% [59 to 67] (316/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260916/PROVENANCE.md) |
+| **2026-09-17** | `EngraphyLabs/engraphy` at `3df1a4d` (PR #23, reader check, search width 20) | **66.8% [62 to 71] (260/389)** | 71.8% [68 to 76] (359/500) | [PROVENANCE.md](results/locomo/locomo-definitive-20260917/PROVENANCE.md) |
+| 2026-09-16 | public `EngraphyLabs/engraphy` at `67dd41a` | 60.2% [55 to 65] (234/389) | 63.2% [59 to 67] (316/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260916/PROVENANCE.md) |
 | 2026-08-09 | Engraphy development branch at `631e7be` | 67.1% [62 to 72] (261/389) | 71.6% [67 to 75] (358/500) | [PROVENANCE.md](results/locomo/fullrun-conv-20260809/PROVENANCE.md) |
 
 The current measurement is two independent runs, each re-ingesting from scratch,
@@ -78,7 +78,7 @@ CLI, so a run draws on the signed-in account's usage. It pauses at a usage limit
 and resumes on its own.
 
 ```bash
-git clone https://github.com/devon-clarkk/engraphy-benchmarks
+git clone https://github.com/EngraphyLabs/engraphy-benchmarks
 cd engraphy-benchmarks
 python reproduce.py --smoke   # full setup, then one conversation ingested, no model called
 python reproduce.py           # the full run
