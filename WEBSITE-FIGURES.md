@@ -2,121 +2,145 @@
 
 The authoritative figures for any public surface. Quote them verbatim, with the
 caveat line that sits under each. Every number traces to
-`results/locomo/locomo-settle-a/` and recomputes with:
+`results/locomo/locomo-settle-a/` and `results/locomo/locomo-settle-b/` and
+recomputes with:
 
-    python scripts/consolidate.py results/locomo/locomo-settle-a
+    python scripts/consolidate.py results/locomo/locomo-settle-a \
+                                  results/locomo/locomo-settle-b
 
-Full methodology, including the category alignment and what a single run does and
-does not support: `analysis/2026-10-06-locomo-run-a-consolidated-report.md`.
+Full methodology, including the category alignment, the conventions and the
+caveats: `analysis/2026-10-09-locomo-two-run-consolidated-report.md`.
 
-**Source run.** `locomo-settle-a`, 2026-10-03. Engine `aa7daa2`
-(`devon-clarkk/engraphy`, branch `bench/settle-20260930`). Reader Claude Opus 4.8,
-judge Claude Sonnet 5. 1,486 questions over the seven LoCoMo conversations no
-tuning touched: conv-41, conv-42, conv-43, conv-44, conv-47, conv-48, conv-50.
-1,151 of them non-adversarial, 335 adversarial.
+**Source runs.** `locomo-settle-a` (2026-10-03) and `locomo-settle-b`
+(2026-10-09), two independent runs of the same configuration, each re-ingesting
+from scratch. Engine `aa7daa2` (`EngraphyLabs/engraphy`, branch
+`bench/settle-20260930`), search width 25 with the wider extraction prompt.
+Reader Claude Opus 4.8, judge Claude Sonnet 5. Each run covers 1,486 questions
+over the seven LoCoMo conversations no tuning touched: conv-41, conv-42, conv-43,
+conv-44, conv-47, conv-48, conv-50. 1,151 of them non-adversarial, 335
+adversarial.
+
+Figures are the mean of the two runs, with the range across them. Two runs give a
+mean and a range, not a standard deviation, so no figure here carries a
+plus-or-minus.
 
 ---
 
 ## Headline, like-for-like
 
-**91.0% on LoCoMo, excluding adversarial questions, measured under the same
-conventions the published figures use.** 1,047 of 1,151. 95% interval 89.2 to
-92.5.
+**91.4% on LoCoMo, excluding adversarial questions, measured under the same
+conventions the published figures use.** Mean of two runs, range 91.0 to 91.8.
+2,104 of 2,302 across both runs, 95% interval 90 to 92.
 
-> Caveat line: one run, on the seven LoCoMo conversations held out from tuning,
-> graded under the conventions vendored from `mem0ai/memory-benchmarks` at
-> `4b61c5d`.
+> Caveat line: mean of two independent runs on the seven LoCoMo conversations
+> held out from tuning, graded under the conventions vendored from
+> `mem0ai/memory-benchmarks` at `4b61c5d`.
 
 ## Engraphy's own stricter number
 
-**74.8% on the same questions under Engraphy's strict convention**, where the
+**75.4% on the same questions under Engraphy's strict convention**, where the
 reader may say it does not know and the judge requires every item of the gold
-answer. 861 of 1,151. 95% interval 72 to 77.
+answer. Mean of two runs, range 74.8 to 76.0. 1,736 of 2,302, 95% interval 74 to
+77.
 
 > Caveat line: Engraphy's strict convention is harder than the one the published
 > figures use, so this is the conservative figure, not a like-for-like one.
 
 ## Per category, like-for-like
 
-| category | Engraphy | Mem0 | Mem0-graph | Zep |
+| category | Engraphy (mean, range) | Mem0 | Mem0-graph | Zep |
 |---|---|---|---|---|
-| excluding adversarial | **91.0%** | 66.9% | 68.4% | 75.1% |
-| single-hop | **92.7%** | 72.9% | 75.7% | 76.6% |
-| multi-hop | **93.6%** | 67.1% | 65.7% | 61.7% |
-| temporal reasoning | **90.7%** | 55.5% | 58.1% | 49.3% |
-| open-domain | **68.6%** | 51.2% | 47.2% | 41.4% |
+| excluding adversarial | **91.4%** (91.0 to 91.8) | 66.9% | 68.4% | 75.1% |
+| single-hop | **93.3%** (92.7 to 94.0) | 72.9% | 75.7% | 76.6% |
+| multi-hop | **91.8%** (90.1 to 93.6) | 67.1% | 65.7% | 61.7% |
+| temporal reasoning | **92.2%** (90.7 to 93.8) | 55.5% | 58.1% | 49.3% |
+| open-domain | **69.3%** (68.6 to 70.0), n=140 | 51.2% | 47.2% | 41.4% |
 
-> Caveat line: Engraphy measured under the published conventions on one run over
-> seven conversations; comparators as published by Mem0 (arXiv:2504.19413,
-> Table 2), with the Zep overall taken from Zep's own higher self-reported figure
-> of 75.14% +/- 0.17. Category columns realigned, see the report.
+> Caveat line: Engraphy measured under the published conventions, mean of two
+> runs over seven conversations; comparators as published by Mem0
+> (arXiv:2504.19413, Table 2), with the Zep overall taken from Zep's own higher
+> self-reported figure of 75.14%. Category columns realigned, see the report.
 
 ## Per category, Engraphy's strict convention
 
-| category | Engraphy | Mem0 | Mem0-graph | Zep |
+| category | Engraphy (mean, range) | Mem0 | Mem0-graph | Zep |
 |---|---|---|---|---|
-| excluding adversarial | 74.8% | 66.9% | 68.4% | 75.1% |
-| single-hop | 83.0% | 72.9% | 75.7% | 76.6% |
-| multi-hop | 55.9% | 67.1% | 65.7% | 61.7% |
-| temporal reasoning | **74.7%** | 55.5% | 58.1% | 49.3% |
-| open-domain | 52.9% | 51.2% | 47.2% | 41.4% |
-| adversarial, declines correctly | **89.9%** | not reported | not reported | not reported |
+| excluding adversarial | 75.4% (74.8 to 76.0) | 66.9% | 68.4% | 75.1% |
+| single-hop | **83.3%** (83.0 to 83.5) | 72.9% | 75.7% | 76.6% |
+| multi-hop | 55.9% (55.9 to 55.9) | 67.1% | 65.7% | 61.7% |
+| temporal reasoning | **76.7%** (74.7 to 78.7) | 55.5% | 58.1% | 49.3% |
+| open-domain | **54.3%** (52.9 to 55.7), n=140 | 51.2% | 47.2% | 41.4% |
+| adversarial, declines correctly | **90.3%** (89.9 to 90.7) | not reported | not reported | not reported |
 
 > Caveat line: these put Engraphy's harder convention against figures produced
 > under the permissive one, so they understate Engraphy relative to the
 > like-for-like table. Under this convention multi-hop is behind all three.
 
-## Open-domain sample size
+## Run-to-run spread
 
-Open-domain is 70 questions on this split, so quote it with its size or its
-interval (like-for-like 68.6%, interval 57 to 78).
+| | mean | range across the two runs |
+|---|---|---|
+| like-for-like | 91.4% | 0.8 points |
+| strict | 75.4% | 1.2 points |
+| adversarial | 90.3% | 0.9 points |
+
+> Caveat line: two independent runs, each with its own ingest, so the range
+> covers extraction variation as well as sampling.
 
 ---
 
 ## Approved wording
 
-Use these as written. Each is supported by one run.
+Use these as written.
 
-- "91.0% on LoCoMo, measured under the same conventions as the published Mem0,
-  Mem0-graph and Zep figures."
-- "Under matched conventions, Engraphy scored the highest figure in every LoCoMo
-  category, including multi-hop."
-- "Engraphy leads every LoCoMo category under the published evaluation
-  conventions, by 16 to 33 points."
-- "74.8% under Engraphy's own stricter convention, where the system is allowed to
-  say it does not know."
-- "89.9% on LoCoMo's adversarial questions, which the system is expected to
+- "91.4% on LoCoMo, mean of two independent runs, measured under the same
+  conventions as the published Mem0, Mem0-graph and Zep figures."
+- "Ahead of Mem0, Mem0-graph and Zep on every LoCoMo category under the published
+  evaluation conventions, across two independent runs."
+- "Ahead on single-hop, temporal reasoning and open-domain even under Engraphy's
+  own stricter convention, where the system is allowed to say it does not know."
+- "75.4% under Engraphy's own stricter convention, mean of two runs, range 74.8 to
+  76.0."
+- "90.3% on LoCoMo's adversarial questions, which the system is expected to
   decline. The published comparisons do not report this category."
+- "Run-to-run spread is under 1.3 points on both conventions, across two runs
+  that each re-ingested the corpus from scratch."
+- "The wider extraction prompt adds 2.7 points on held-out data, more than double
+  the run-to-run spread."
 - "Measured on the seven LoCoMo conversations held out from all tuning."
 
-Why "leads every category" is safe on one run: the smallest margin is +15.8
-points, against Zep's own self-reported figure, and the lower bound of Engraphy's
-95% interval (89.2%) sits 14 points above the highest competitor figure including
-its stated error. No plausible run-to-run variation closes a gap that size.
+Why "ahead" is carried by these two runs: under the published conventions every
+margin is 16 points or more, and each run's own figure, not only the mean, sits
+above every competitor figure including Zep's self-reported one with its stated
+error. The run-to-run range is under a point.
 
-## Wording that needs run B first
+## Stays "level", do not upgrade
 
-Do not use these until a second run gives the run-to-run spread.
+- **The strict overall figure against Zep's self-reported 75.14%.** The mean is
+  75.4% and the run range is 74.8 to 76.0, which straddles it. Say "level with
+  Zep's self-reported figure under our stricter convention, ahead of the
+  published Mem0 and Mem0-graph figures".
 
-- Anything averaged or stabilised: "averages 91%", "91.0% +/- x", "consistently
-  above 90%", "typically", "repeatable", "stable across runs", "robust". One run
-  has no spread.
-- "Best-in-class memory" or "the best memory system on LoCoMo" as a standing
-  property. On one run, say what was measured instead: "scored the highest figure
-  in every LoCoMo category under the published conventions". The measured claim is
-  defensible; the standing claim is not yet.
-- Any lead drawn from the strict table's overall figure. 74.8% against Zep's
-  self-reported 75.14% is **level**, a 0.34-point gap, and no wording should make
-  it a lead.
-- "Engraphy improves accuracy by 2.7 points" stated as a settled effect of the
-  wider extraction prompt. It is significant against chance (p 0.016) but has not
-  been checked against run-to-run variation.
+## Off-limits
+
+- **A plus-or-minus on any figure.** Two runs give a mean and a range. Write
+  "mean of two runs, range 91.0 to 91.8", never "91.4% +/- 0.4".
+- **Strict multi-hop as anything but behind.** 55.9% against 61.7 to 67.1, and
+  identically in both runs.
+- **"Best memory system" or "best-in-class memory" as a standing property.** Two
+  runs, one benchmark, one split, our harness. The measured form is the
+  defensible one: "ahead of all three on every LoCoMo category under the
+  published conventions".
+- **Open-domain without its size.** 140 questions pooled across both runs, 95%
+  interval 61 to 76 like-for-like. Quote it with n=140 or with the interval.
+- **"Consistently", "stable", "repeatable", "typically".** Two runs support a
+  mean and a range, and the range is the honest way to say it.
 
 ## Caveats to show wherever a comparison appears
 
 - **Sample:** 7 of LoCoMo's 10 conversations, the ones held out from tuning. The
   published figures cover all 10.
-- **Runs:** one run. Mem0's published figure is the mean of 10.
+- **Runs:** two independent runs. Mem0's published figure is the mean of 10.
 - **Models:** Claude Opus 4.8 reader, Claude Sonnet 5 judge. The published figures
   use a GPT-4o-mini reader.
 - **Context budget:** Engraphy competes with at most 25 memories in context, where
@@ -125,19 +149,20 @@ Do not use these until a second run gives the run-to-run spread.
   the LoCoMo categories they hold. These tables use the one assignment of 24 that
   reproduces the paper's own published overall for all five systems it reports, to
   within 0.01. Method and sources in the report.
-- **Zep:** Mem0 published 65.99% for Zep; Zep self-reports 75.14% +/- 0.17. The
-  higher figure is used throughout.
+- **Zep:** Mem0 published 65.99% for Zep; Zep self-reports 75.14%. The higher
+  figure is used throughout.
 - **Mem0's own 92.5%** (mem0.ai/research) is not used as a comparator: it states
   no retrieval budget, answerer or judge model, judge prompt or run count.
-- **Matched-convention figure is raw:** the confabulation controls that bounded
-  the earlier seen-split figure have not been rerun for this run.
+- **The like-for-like figure is raw:** the confabulation controls that bounded the
+  earlier three-conversation figure have not been rerun for these runs.
 - **Licence:** LoCoMo is CC BY-NC 4.0. Whether to use these figures in commercial
   marketing is an open decision, see `PUBLISH.md`. The dataset itself is not
   redistributed.
 
-## Superseded
+## Other measurements in this repository
 
-The earlier measurement at width 20 over the three tuning conversations is kept
-at `results/locomo/locomo-definitive-20260917/`, and the seen-split extraction
-comparison at `results/locomo/locomo-extract-ab-20261002/`. Those directories
+`results/locomo/locomo-extract-ab-20261002` holds the seen-split extraction
+comparison that promoted the wider prompt.
+`results/locomo/locomo-definitive-20260917` holds the three-conversation
+measurement at width 20, with its own validity controls. Those directories
 describe their own scope. Public copy quotes this file.

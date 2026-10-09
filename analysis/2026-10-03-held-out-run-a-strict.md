@@ -1,5 +1,10 @@
 # Run A, strict, on the held-out split
 
+> The consolidated figures for the current engine are the two-run means in
+> `analysis/2026-10-09-locomo-two-run-consolidated-report.md`, and the
+> publishable set is `WEBSITE-FIGURES.md`. This document records run A on its
+> own.
+
 Engine `aa7daa2b9c5f190ee3f10de5b9bf4cbaee44e5a6` on branch
 `bench/settle-20260930`. The strict path (`bench/core/run.py`) last changed at
 `af6c96e`; the commits after it touch the offline and reporting tools only, so
