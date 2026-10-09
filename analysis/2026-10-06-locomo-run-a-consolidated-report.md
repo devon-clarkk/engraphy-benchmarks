@@ -1,5 +1,10 @@
 # LoCoMo, run A: the consolidated result
 
+> The consolidated figures for the current engine are the two-run means in
+> `analysis/2026-10-09-locomo-two-run-consolidated-report.md`, and the
+> publishable set is `WEBSITE-FIGURES.md`. This document records run A on its
+> own.
+
 One run of the current engine over the seven LoCoMo conversations that no lever
 was tuned on. Two conventions, both reported. Every figure below recomputes from
 files committed in this repository, and each table names the file it comes from

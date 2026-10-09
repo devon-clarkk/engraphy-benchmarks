@@ -62,17 +62,17 @@ Then, from `engraphy-bench-roster` (merged up to the measured engine):
         --arm llm_wide-conversational/search_only/always_distinct/k25 --out <envelope dir>
     python -m bench.replay --envelopes <envelope dir>/<arm>.jsonl ...
 
-### 3. The consolidated run A report
+### 3. The consolidated report
 
-Strict and matched-convention, per category, against Mem0, Mem0-graph and Zep
-under the corrected alignment, with the lever's held-out effect and the caveats.
-One run means no spread, so the wording is level-with, not ahead, wherever a
-single run cannot support ahead.
+Done for run A on 2026-10-06, and superseded as the canonical set by the two-run
+report of 2026-10-09 once run B landed:
+`analysis/2026-10-09-locomo-two-run-consolidated-report.md`.
 
 ### 4. Not scheduled, and not to be started without a decision
 
-- **Run B.** It is the only thing that would give the run-to-run spread, and it
-  needs a fresh ingest of seven conversations. Frozen.
+- **Run B.** Completed 2026-10-09, both conventions, giving the run-to-run
+  spread: under 1.3 points on both. Artifacts in
+  `results/locomo/locomo-settle-b/`.
 - A diagnostic fix held back so as not to edit the engine mid-measurement: a
   failed judge call leaves no record of which row failed or why, which is why 12
   rows of run A needed a second pass with nothing to explain them.

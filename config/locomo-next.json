@@ -3,11 +3,11 @@
   "config_version": 1,
   "description": "The configuration of the settling multi-run measurement: the combined engine at width 25 with the wider extraction prompt, the seven held-out LoCoMo conversations, repeated runs. reproduce.py --config config/locomo-next.json runs one of them.",
   "engine": {
-    "repository": "https://github.com/devon-clarkk/engraphy",
-    "commit": "b9a3afc10c42880614ff046b840dee221bd708a9",
+    "repository": "https://github.com/EngraphyLabs/engraphy",
+    "commit": "aa7daa2b9c5f190ee3f10de5b9bf4cbaee44e5a6",
     "ref": "bench/settle-20260930",
     "fetch_refspec": "+refs/pull/31/head:refs/remotes/origin/pr-31",
-    "note": "Engine main a2943842 (never-drop dates and attribute quarantine, the supersede downgrade, the subject-and-occasion reader check with the verify contract, per-arm width; schema 0028) plus PR #31, which carries the harness fixes the measurement needed: a usage cap or an expired session during ingest stops the run instead of recording an empty conversation, an arm's extractor name selects its extraction prompt, each arm's manifest records that prompt by name and hash, a run is judged complete by the phases it was asked for, and every entry point prints progress as UTF-8. The runs measure this commit."
+    "note": "The commit both held-out runs measured. Engine main a2943842 (never-drop dates and attribute quarantine, the supersede downgrade, the subject-and-occasion reader check with the verify contract, per-arm width; schema 0028) plus PR #31, which carries the harness work the measurement needed: a usage cap or an expired session during ingest stops the run instead of recording an empty conversation, an arm's extractor name selects its extraction prompt, each arm's manifest records that prompt by name and hash, a run is judged complete by the phases it was asked for, an offline pass names which arm it reads, and every entry point prints progress as UTF-8. The scoring path last changed at af6c96e."
   },
   "dataset": {
     "name": "LoCoMo (locomo10.json)",
@@ -41,7 +41,7 @@
     "calibration_sample": 40,
     "reader_contract": "verify",
     "runs": 2,
-    "runs_note": "Independent runs of the whole pipeline, ingest included, over the held-out split. The headline is the mean across completed runs with its spread and each run's own figure beside it. A third run is added if the usage budget allows.",
+    "runs_note": "Two independent runs of the whole pipeline, ingest included, over the held-out split: locomo-settle-a on 2026-10-03 and locomo-settle-b on 2026-10-09. The headline is the mean across them with the range beside it.",
     "k_note": "k=25 is the engine's result cap. It is an owner decision recorded on 2026-09-19, not the output of the pre-registered rule, which selected 20: evidence recall on the fullrun-conv-20260916 store was 68.3% at 20 and 69.2% at 25.",
     "extraction_note": "`llm_wide` is the wider extraction prompt (bench/prompts/extract-wide.md). It entered the default by the pre-registered rule, on the seen split only: store coverage 73.4% to 85.8% against a measured 0.8 point replicate floor (p < 0.0001), judged non-adversarial accuracy 69.15% to 76.61% (p 0.000025), adversarial unchanged at 88.29% (p 1.0), at 55% more memories stored. Measured in results/locomo/locomo-extract-ab-20261002.",
     "arms_in_run_a": [

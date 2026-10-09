@@ -1,0 +1,650 @@
+{
+  "run_id": "locomo-settle-b",
+  "benchmark": "locomo",
+  "space_config": {},
+  "generated_at": "2026-10-08T17:18:34.299978+00:00",
+  "engine_git_sha": "a1b7e736b20da3e1e60739064f4903226f04a5b0",
+  "harness_git_sha": "a1b7e736b20da3e1e60739064f4903226f04a5b0",
+  "git_tree_dirty": false,
+  "git_branch": "bench/settle-20260930",
+  "transport": "in-process (engraphy.core), per design/09 §in-process decision",
+  "principal": "bench",
+  "packs": {
+    "conversational": {
+      "space_id": "bench-locomo-settle-b-conversational",
+      "version": 1,
+      "file_hash": "sha256:5292819f0d09c92d2cb5d906916335c5cd34bc3e1d2792d29c55e6909fcef61d",
+      "ambient_scopes_stripped": true,
+      "node_types": [
+        "decision",
+        "event",
+        "fact",
+        "opinion",
+        "person",
+        "preference",
+        "thing"
+      ],
+      "note": "ambient_scopes removed for haystack isolation (symmetric across packs; recorded beside the untouched file hash)"
+    }
+  },
+  "band_thresholds": {
+    "source": "config table, per-space; code defaults where unset",
+    "code_defaults": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    },
+    "config_rows": {},
+    "effective": {
+      "t_high": 0.95,
+      "t_low": 0.8,
+      "resonance.floor": 0.75
+    }
+  },
+  "band_thresholds_note": "read back from one representative pack space; every pack space is provisioned identically with no override.",
+  "reader": {
+    "governing_skill": "skills/answer-discipline.md",
+    "governing_skill_sha256": "sha256:c3b00290fe684bcbf4a6c768f3596020e9feb21ae7bf6fd87ad05072a526bd4b",
+    "inference_stance": "grounded",
+    "output_format": "verify",
+    "output_contract": "## Output format for this evaluation\n\nYou are being evaluated, so you cannot ask the user or issue further tool calls -- answer only from the memory already provided in this message. Answer in one concise sentence, or a bare phrase where the question asks for a name, a date, a number, or a place. No preamble, no restating the question. If the memory neither states the answer nor supports a grounded inference, reply with exactly the single word INSUFFICIENT.\n\nLay out your reply as exactly two lines. The first line begins `CHECK:` and says, in a few words, who or what the question is about, the specific fact it asks for, and the title of the returned memory that states or supports that fact for that subject and occasion, or `none`. The second line begins `ANSWER:` and carries only your answer, in the form above; when you decline, it is exactly INSUFFICIENT. The grader sees only the text after `ANSWER:`.",
+    "reader_input_shape": "rendered_prose_v2",
+    "note": "The reader's governing instruction is the shipped skill file, loaded by path (sha256 verifiable against the committed file), applied under the 'grounded' inference stance the skill defines. A general output-format contract (INSUFFICIENT token + conciseness) is appended so answers are machine-scorable. skills/retrieval.md is not loaded: the reader issues no retrieval calls, so that guidance does not apply. The retrieval envelope is presented to the reader via render_envelope ('rendered_prose_v2': clean rank-ordered prose, scaffolding omitted, content faithful); envelope_bytes/sha256 still measure the canonical json envelope (the retrieval payload), of which the rendered input is a deterministic function.",
+    "effort": "medium",
+    "model": "claude-opus-4-8"
+  },
+  "dataset": {
+    "path": "locomo10.json",
+    "digest": "sha256:79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "questions_in_file": 1986
+  },
+  "haystacks": [
+    "conv-41",
+    "conv-42",
+    "conv-43",
+    "conv-44",
+    "conv-47",
+    "conv-48",
+    "conv-50"
+  ],
+  "corpus": {
+    "name": "locomo[conv-41,conv-42,conv-43,conv-44,conv-47,conv-48,conv-50]",
+    "haystacks": 7,
+    "sessions": 209,
+    "turns": 4585,
+    "questions": 1486,
+    "questions_per_category": {
+      "adversarial": 335,
+      "multi-hop": 202,
+      "open-domain-knowledge": 70,
+      "single-hop": 654,
+      "temporal-reasoning": 225
+    },
+    "abstain_questions": 335,
+    "notes": {
+      "source_file": "locomo10.json",
+      "dropped_image_only_turns": 0,
+      "coerced_non_string_answers": 6,
+      "category_mapping": {
+        "1": "multi-hop",
+        "2": "temporal-reasoning",
+        "3": "open-domain-knowledge",
+        "4": "single-hop",
+        "5": "adversarial"
+      },
+      "summaries_ingested": false,
+      "restricted_to_haystacks": [
+        "conv-41",
+        "conv-42",
+        "conv-43",
+        "conv-44",
+        "conv-47",
+        "conv-48",
+        "conv-50"
+      ]
+    }
+  },
+  "arms": [
+    {
+      "arm_id": "llm_wide-conversational/search_only/always_distinct/k25",
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "strategy": "search_only",
+      "confirm_policy": "always_distinct",
+      "categories": "all",
+      "k": 25
+    }
+  ],
+  "retrieval_configs": {
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "strategy": "search_only",
+      "limit": 25,
+      "detail": "full"
+    }
+  },
+  "extract_prompts": {
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "prompt": "extract-wide.md",
+      "sha256": "sha256:2f3fa4c9e6c1a457"
+    }
+  },
+  "provider": "claude-cli",
+  "role_models": {
+    "extractor": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "reader": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "adjudicator": {
+      "provider": "claude-cli",
+      "model": "claude-opus-4-8"
+    },
+    "judge": {
+      "provider": "claude-cli",
+      "model": "claude-sonnet-5",
+      "same_vendor": true
+    }
+  },
+  "provider_config": {},
+  "judge_provider": "claude",
+  "judge_neutrality": "THIS RUN'S JUDGE IS SAME-VENDOR (Claude), a deliberate deviation from design/09's cross-vendor rule. The rationale for that rule -- 'a harness that grades its own vendor's answers invites the marked-its-own-homework objection' -- still stands as the recommended posture for any eventual PUBLISHED number, and the Gemini judge path is retained for exactly that. It is set aside here for two reasons: (1) the task is binary answer-matching against a supplied gold answer, which is low bias-risk for same-vendor grading -- the judge is not scoring prose quality, only whether two short facts agree; and (2) the Gemini free tier's per-model daily cap (measured at 500/day for flash-lite, 20/day for flash) makes a complete same-day run impossible, and this is an internal baseline, not a publishable figure. The judge still sees only question, gold and candidate -- never the envelope, strategy or extractor -- so it cannot condition on the arm it grades. Judge instability is measured on this run regardless of vendor.",
+  "resolved_models": {
+    "reader": [
+      "claude-opus-4-8",
+      "claude-opus-5-5"
+    ],
+    "judge": [
+      "claude-sonnet-5"
+    ],
+    "reader_note": "A SET, not a single id, and it legitimately contains a Haiku model alongside the requested Sonnet. The CLI runs a second model for its own internal work, and ClaudeCLIClient._resolved_model reports whichever model emitted the most output tokens in that call -- for a one-line reader answer that is sometimes the internal model rather than the one that answered. So this field bounds which models were involved; it does not prove which produced a given answer. The requested alias is recorded verbatim under role_models. Recorded as a known imprecision rather than resolved by guessing."
+  },
+  "prompt_hashes": {
+    "extract.md": "sha256:b7fdf557f7f60a9c",
+    "extract-wide.md": "sha256:2f3fa4c9e6c1a457",
+    "judge.md": "sha256:947bebcd5375e93e",
+    "adjudicate.md": "sha256:740151c30787a630"
+  },
+  "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
+  "embedding_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "llm_extractor": {
+    "retain_source_text": true,
+    "note": "When true, the LLM extractor appends the verbatim text of the turns each memory cites (source_turn_ids) to the node body, so a typed node stays word-searchable. A general recall property, not a single-hop trick; the source is the cited turns copied exactly, never re-summarised. design/09 single-hop finding, 2026-07-22."
+  },
+  "retrieval_note": "search_then_traverse seeds with the SAME search(limit, detail) as the search_only baseline and walks every seed, so the two arms differ only in the graph walk -- the multi-hop comparison isolates the graph contribution rather than confounding it with search width.",
+  "token_counter": null,
+  "token_counter_note": "Absent by construction, not by oversight. Counting Claude tokens needs the count_tokens API and therefore an API key; this harness routes Claude through the CLI on a subscription so that no API credit is spent, and the CLI reports usage for its own injected system prompt rather than for the payload. Gemini's tokenizer would be a different vendor's tokenizer measuring a Claude payload -- the same objection that ruled out tiktoken. Payload is reported in bytes of the serialized envelope; byte ratios between arms are tokenizer-independent, absolute token claims are not made.",
+  "seeds": {
+    "question_order": "dataset order (no sampling within a conversation)"
+  },
+  "dataset_licence": "CC BY-NC 4.0 — internal measurement only; commercial publication is the project owner's open question",
+  "ingest": [
+    {
+      "haystack_id": "conv-41",
+      "drafts": 251,
+      "inserted": 77,
+      "merged": 0,
+      "merged_linked": 0,
+      "needs_confirmation": 174,
+      "confirm_band_rate": 0.6932,
+      "resolved_distinct": 174,
+      "resolved_merge": 0,
+      "resolved_to_insert": 174,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 251,
+      "edges_requested": 212,
+      "edges_attached": 181,
+      "supersede_attempted": 1,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 1,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 97611,
+      "embed_seconds": 53.8056,
+      "write_seconds": 4.8638,
+      "total_seconds": 1407.7986,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-41-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 32,
+      "turns": 663
+    },
+    {
+      "haystack_id": "conv-42",
+      "drafts": 297,
+      "inserted": 65,
+      "merged": 0,
+      "merged_linked": 3,
+      "needs_confirmation": 229,
+      "confirm_band_rate": 0.771,
+      "resolved_distinct": 229,
+      "resolved_merge": 0,
+      "resolved_to_insert": 229,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 297,
+      "edges_requested": 286,
+      "edges_attached": 274,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 3,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 70,
+      "ingest_output_tokens": 116693,
+      "embed_seconds": 59.9206,
+      "write_seconds": 5.662,
+      "total_seconds": 1648.458,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-42-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 29,
+      "turns": 629
+    },
+    {
+      "haystack_id": "conv-43",
+      "drafts": 227,
+      "inserted": 75,
+      "merged": 0,
+      "merged_linked": 1,
+      "needs_confirmation": 150,
+      "confirm_band_rate": 0.6608,
+      "resolved_distinct": 150,
+      "resolved_merge": 0,
+      "resolved_to_insert": 150,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 226,
+      "edges_requested": 158,
+      "edges_attached": 137,
+      "supersede_attempted": 2,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 1,
+      "write_errors": {
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.location is not allowed (closed spec)",
+          "node_type": "fact",
+          "title_len": 63,
+          "body_len": 304,
+          "attr_keys": [
+            "location"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 66,
+      "ingest_output_tokens": 90976,
+      "embed_seconds": 48.4119,
+      "write_seconds": 4.5416,
+      "total_seconds": 1284.9201,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-43-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 29,
+      "turns": 680
+    },
+    {
+      "haystack_id": "conv-44",
+      "drafts": 219,
+      "inserted": 41,
+      "merged": 0,
+      "merged_linked": 0,
+      "needs_confirmation": 178,
+      "confirm_band_rate": 0.8128,
+      "resolved_distinct": 178,
+      "resolved_merge": 0,
+      "resolved_to_insert": 177,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 1,
+      "nodes_written": 219,
+      "edges_requested": 127,
+      "edges_attached": 109,
+      "supersede_attempted": 7,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 7,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 64,
+      "ingest_output_tokens": 93049,
+      "embed_seconds": 51.5128,
+      "write_seconds": 4.1815,
+      "total_seconds": 1312.4105,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-44-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 28,
+      "turns": 675
+    },
+    {
+      "haystack_id": "conv-47",
+      "drafts": 290,
+      "inserted": 101,
+      "merged": 1,
+      "merged_linked": 1,
+      "needs_confirmation": 187,
+      "confirm_band_rate": 0.6448,
+      "resolved_distinct": 187,
+      "resolved_merge": 0,
+      "resolved_to_insert": 187,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 289,
+      "edges_requested": 240,
+      "edges_attached": 212,
+      "supersede_attempted": 3,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 3,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 68,
+      "ingest_output_tokens": 110052,
+      "embed_seconds": 60.3139,
+      "write_seconds": 5.98,
+      "total_seconds": 1468.1654,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-47-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 31,
+      "turns": 689
+    },
+    {
+      "haystack_id": "conv-48",
+      "drafts": 282,
+      "inserted": 75,
+      "merged": 1,
+      "merged_linked": 2,
+      "needs_confirmation": 204,
+      "confirm_band_rate": 0.7234,
+      "resolved_distinct": 204,
+      "resolved_merge": 0,
+      "resolved_to_insert": 204,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 281,
+      "edges_requested": 181,
+      "edges_attached": 161,
+      "supersede_attempted": 2,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 2,
+      "write_errors": {},
+      "write_error_samples": [],
+      "ingest_input_tokens": 74,
+      "ingest_output_tokens": 108698,
+      "embed_seconds": 57.5694,
+      "write_seconds": 5.5301,
+      "total_seconds": 1610.0916,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-48-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 30,
+      "turns": 681
+    },
+    {
+      "haystack_id": "conv-50",
+      "drafts": 216,
+      "inserted": 30,
+      "merged": 0,
+      "merged_linked": 0,
+      "needs_confirmation": 185,
+      "confirm_band_rate": 0.8565,
+      "resolved_distinct": 185,
+      "resolved_merge": 0,
+      "resolved_to_insert": 185,
+      "resolved_to_merge": 0,
+      "resolved_to_merge_linked": 0,
+      "nodes_written": 215,
+      "edges_requested": 132,
+      "edges_attached": 116,
+      "supersede_attempted": 2,
+      "supersede_target_unresolved": 0,
+      "attrs_quarantined_nodes": 0,
+      "attrs_quarantined_total": 0,
+      "dropped_attr_samples": 0,
+      "supersede_downgraded": 2,
+      "write_errors": {
+        "CheckViolation": 1
+      },
+      "write_error_samples": [
+        {
+          "error": "CheckViolation",
+          "detail": "attrs.as_of is not allowed (closed spec)",
+          "node_type": "preference",
+          "title_len": 46,
+          "body_len": 274,
+          "attr_keys": [
+            "as_of",
+            "domain",
+            "sentiment"
+          ]
+        }
+      ],
+      "ingest_input_tokens": 70,
+      "ingest_output_tokens": 97035,
+      "embed_seconds": 50.3901,
+      "write_seconds": 4.0978,
+      "total_seconds": 1398.9628,
+      "extractor": "llm_wide",
+      "pack": "conversational",
+      "scope_id": "hs-conv-50-llm-wide",
+      "space_id": "bench-locomo-settle-b-conversational",
+      "done": true,
+      "sessions": 30,
+      "turns": 568
+    }
+  ],
+  "extrapolation": "Projected from this run's measured rates, not from an estimate. Ingest is per-session and answering is per-question; neither has a term that grows with corpus size, so the projection is linear by construction rather than by simplification.\n\n| stage | measured here | full suite (×10 conversations) |\n|---|---|---|\n| ingest, `llm_wide` extractor | 169 min for 209 sessions (48.5 s/session) | **3.7 h** for 272 sessions |\n| answering (1 arms) | 1486 reader calls, 9.2 s each | **1986 calls ≈ 1.7 h** at concurrency 3 |\n| judging | 1151 calls (adversarial graded without the judge) | **1540 calls** |\n\n**The judge ran on Claude (Max plan) and hit no rate limit across the entire 1151-call grading pass.** So unlike the Gemini route (whose per-model daily cap of 500/day is documented below as the fallback path), the constraint here is not a daily quota — it is plan headroom plus sequential wall-clock. Judging is one Claude CLI spawn per question, ~22.5s each, run sequentially: a full-suite 1540-call pass is **≈ 9.6 h** of grading wall-clock (and parallelises trivially — the calibration pass was cut from ~8 min sequential to ~2 min at 4 workers). Whether that many calls stays inside plan limits is the open question a full run would answer; this subset did, comfortably.\n\n**Fallback, for a published number.** design/09's cross-vendor posture puts the judge on Gemini, whose free tier is the real ceiling: measured at 500 requests/day for `gemini-flash-lite-latest` (and 20/day for `gemini-flash-latest`), a 1540-call full suite is **4 days** of budget. The checkpointing exists for exactly that route — designed to be stopped by quota and resumed.\n\n**Financial cost: nil.** Every role runs on the operator's existing subscriptions: extraction, reading and adjudication on the Claude CLI, and judging on either the Claude Max plan or the Gemini free tier (the cross-vendor default). No run in this configuration spends API credit.\n\nTwo caveats on the projection, both pointing the same way. The measured conversations are the smaller ones (63 of the suite's 272 sessions across 3 of 10 conversations, so ~23% of ingest for 30% of the conversations), so a full run is somewhat worse than ×10 of what is shown. And on the CLI route reader latency is dominated by subprocess spawn, which a deployed agent would not pay: it inflates the wall-clock projection but not the cost.",
+  "quota_stop": false,
+  "phases_requested": [
+    "answer",
+    "calibrate",
+    "diagnose",
+    "ingest",
+    "judge",
+    "report"
+  ],
+  "phases_completed": [
+    "answer",
+    "calibrate",
+    "diagnose",
+    "ingest",
+    "judge",
+    "report"
+  ],
+  "rows_graded": 1486,
+  "rows_answered_but_ungraded": 0,
+  "aggregate": {
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "overall": {
+        "n": 1486,
+        "correct": 1179,
+        "accuracy": 0.7934,
+        "wilson_95": [
+          0.7721,
+          0.8132
+        ],
+        "abstained": 394,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 20688,
+        "payload_bytes_p95": 23019,
+        "payload_bytes_mean": 20645,
+        "accuracy_per_1k_bytes": 0.0384,
+        "e2e_seconds_p50": 7.82,
+        "e2e_seconds_p95": 16.574,
+        "judge_seconds_p50": 19.532
+      },
+      "overall_excl_adversarial": {
+        "n": 1151,
+        "correct": 875,
+        "accuracy": 0.7602,
+        "wilson_95": [
+          0.7347,
+          0.784
+        ],
+        "abstained": 90,
+        "reader_errors": 0,
+        "judge_errors": 0,
+        "payload_bytes_p50": 20708,
+        "payload_bytes_p95": 23022,
+        "payload_bytes_mean": 20645,
+        "accuracy_per_1k_bytes": 0.0368,
+        "e2e_seconds_p50": 7.616,
+        "e2e_seconds_p95": 16.516,
+        "judge_seconds_p50": 20.932
+      },
+      "categories": {
+        "adversarial": {
+          "n": 335,
+          "correct": 304,
+          "accuracy": 0.9075,
+          "wilson_95": [
+            0.8716,
+            0.934
+          ],
+          "abstained": 304,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20670,
+          "payload_bytes_p95": 22927,
+          "payload_bytes_mean": 20646,
+          "accuracy_per_1k_bytes": 0.044,
+          "e2e_seconds_p50": 8.477,
+          "e2e_seconds_p95": 17.472,
+          "judge_seconds_p50": 0.0
+        },
+        "multi-hop": {
+          "n": 202,
+          "correct": 113,
+          "accuracy": 0.5594,
+          "wilson_95": [
+            0.4905,
+            0.6261
+          ],
+          "abstained": 9,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20481,
+          "payload_bytes_p95": 23088,
+          "payload_bytes_mean": 20439,
+          "accuracy_per_1k_bytes": 0.0274,
+          "e2e_seconds_p50": 9.443,
+          "e2e_seconds_p95": 20.257,
+          "judge_seconds_p50": 21.448
+        },
+        "open-domain-knowledge": {
+          "n": 70,
+          "correct": 39,
+          "accuracy": 0.5571,
+          "wilson_95": [
+            0.4408,
+            0.6675
+          ],
+          "abstained": 16,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20017,
+          "payload_bytes_p95": 22293,
+          "payload_bytes_mean": 20056,
+          "accuracy_per_1k_bytes": 0.0278,
+          "e2e_seconds_p50": 9.43,
+          "e2e_seconds_p95": 14.367,
+          "judge_seconds_p50": 19.908
+        },
+        "single-hop": {
+          "n": 654,
+          "correct": 546,
+          "accuracy": 0.8349,
+          "wilson_95": [
+            0.8045,
+            0.8613
+          ],
+          "abstained": 45,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20742,
+          "payload_bytes_p95": 23118,
+          "payload_bytes_mean": 20721,
+          "accuracy_per_1k_bytes": 0.0403,
+          "e2e_seconds_p50": 7.154,
+          "e2e_seconds_p95": 16.453,
+          "judge_seconds_p50": 20.902
+        },
+        "temporal-reasoning": {
+          "n": 225,
+          "correct": 177,
+          "accuracy": 0.7867,
+          "wilson_95": [
+            0.7286,
+            0.8351
+          ],
+          "abstained": 20,
+          "reader_errors": 0,
+          "judge_errors": 0,
+          "payload_bytes_p50": 20941,
+          "payload_bytes_p95": 22916,
+          "payload_bytes_mean": 20793,
+          "accuracy_per_1k_bytes": 0.0378,
+          "e2e_seconds_p50": 7.566,
+          "e2e_seconds_p95": 15.614,
+          "judge_seconds_p50": 20.98
+        }
+      }
+    }
+  },
+  "failure_modes": {
+    "llm_wide-conversational/search_only/always_distinct/k25": {
+      "correct": 1179,
+      "extraction-miss": 48,
+      "reader-miss": 189,
+      "reader-over-answered": 31,
+      "retrieval-miss": 24,
+      "unattributed": 15
+    }
+  },
+  "judge_calibration": {
+    "items_graded_twice": 40,
+    "disagreements": 0,
+    "instability": 0.0,
+    "judge_errors": 0,
+    "disagreeing_items": [],
+    "human_agreement": null,
+    "human_agreement_note": "design/09 also specifies agreement against a committed human-labelled subset. No such labels exist yet; this half of the calibration is outstanding and is recorded as absent rather than omitted."
+  }
+}
